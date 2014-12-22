@@ -1,2 +1,25 @@
-FFT-Ocean
+Project : FFT-Ocean
+Author : DEISS Olivier
+Last update : 12/22/2014
+
+This project is a basic implementation of J. Tessendorf's paper :
+http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf
+
+Language : C++
+Libraries : OpenGL, Glut
+
+The project is only available for MacOS users AT THE MOMENT. Some changes will come
+to make it run on both Linux and Windows platforms.
+
+I wrote the project in french, so you may not understand some directories names or
+file names. I'm working on the translation of the whole sourcecode.
+
+
+-----------------------------------------------------------------------------------
+
+You can find the following directories :
+   - Affichage : GUI of the project, creates a window, deals with the keyboard etc
+   - FFT : my own implementation of the Cooley-Tuckey algorithm, for scientific 
+           purposes. This can be replaced by using CUDA library.
+   - Ocean : classes that are specific to the project
 
