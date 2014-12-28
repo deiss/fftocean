@@ -24,7 +24,10 @@ Camera::Camera(float X, float Y, float Z, float theta, float psi, float rotation
 	_translationSpeed(translationSpeed),
 	_X(X),
 	_Y(Y),
-	_Z(Z) {																																		
+	_Z(Z) {
+        
+    for(int i=0 ; i<255 ; i++) { _keyboard[i] = false; }
+        
 }
 
 void Camera::rotation(int x, int y) {
