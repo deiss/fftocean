@@ -6,6 +6,7 @@
 
 #include <cmath>
 #include <ctime>
+#include <algorithm>
 
 /* operator overloading to use Height as a fonctor */
 double Height::operator()() {
@@ -26,7 +27,7 @@ void Height::generatePhilipps(Philipps *p) {
 		
 		itx->resize(_ny+1);
 		p->init(std::distance(_philipps.begin(), itx));
-		generate(itx->begin(), itx->end(), *p);
+		std::generate(itx->begin(), itx->end(), *p);
 		
 	}
 	

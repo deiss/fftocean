@@ -5,10 +5,15 @@
 #include "Height.hpp"
 #include "Ocean.hpp"
 
+#ifdef __linux__
+#include <GL/glut.h>
+#else
 #include <GLUT/glut.h>
+#endif
 
 #include <cmath>
 #include <iostream>
+#include <algorithm>
 
 Ocean::Ocean(const double lx, const double ly, const int nx, const int ny, const double windSpeed, const int windAlignment, const double minWaveSize, const double A) :
     _lx(lx),
@@ -44,7 +49,7 @@ void Ocean::generateHeight0() {
 		
 		itx->resize(_ny+1);
 		_height.init(std::distance(_height0R.begin(), itx));
-		generate(itx->begin(), itx->end(), _height);
+		std::generate(itx->begin(), itx->end(), _height);
 		
 	}
 	
@@ -53,7 +58,7 @@ void Ocean::generateHeight0() {
 		
 		itx->resize(_ny+1);
 		_height.init(std::distance(_height0I.begin(), itx));
-		generate(itx->begin(), itx->end(), _height);
+		std::generate(itx->begin(), itx->end(), _height);
 		
 	}
 	

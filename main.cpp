@@ -3,6 +3,7 @@
 
 #include <ctime>
 #include <iostream>
+#include <cstdlib>
 
 Ocean *ocean = new Ocean(170, 350, 64, 128, 60, 1, 0, 0.000002);
 
