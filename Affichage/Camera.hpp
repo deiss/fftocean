@@ -1,3 +1,9 @@
+/* DEISS Olivier                                                                           */
+/* Class : Camera                                                                          */
+/* Last Update : 12/28/2014                                                                */
+
+/* This class is a Camera. It provides all the information needed by gluLookAt() function. */
+
 #include <cmath>
 
 class Camera {
@@ -35,22 +41,3 @@ class Camera {
 		float _Z;
 	
 };
-
-/*  La caméra est un repère sphérique qui peut translater. 
-	La cible d'observation se trouve sur la sphère de centre l'origine du repère sphérique */
-
-
-/*	Utilisation (GLUT/OpenGL) :
- 
-		Fonction draw() :
- 			camera.translation();
- 			gluLookAt(camera.getX(), camera.getY(), camera.getZ(), camera.getSightX(), camera.getSightY(), camera.getSightZ(), 0, 1, 0);
- 
- 		Fonction keyboard() :
-			camera.setKeyboard(key, true);
-		
- 		Fonction keyboardUp() :
-			camera.setKeyboard(key, false);
- 
-		Fonction mouseMove() :
-			camera.rotation(x, y); */
