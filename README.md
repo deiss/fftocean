@@ -40,6 +40,11 @@ Feel free to leave any comment about the project, or if you want to improve it.
 
 -----------------------------------------------------------------------------------
 
+Compilation :
+   - MacOS : add GLUT, OpenGL and ApplicationServices frameworks
+
+-----------------------------------------------------------------------------------
+
 To do :
     - comment files in Affichage and FFT directories
     - add Windows and Linux versions and informations to compile the project (libs etc)
