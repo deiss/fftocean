@@ -6,14 +6,14 @@
 #include "Ocean.hpp"
 
 #ifdef __linux__
-#include <GL/glut.h>
+    #include <GL/glut.h>
 #else
-#include <GLUT/glut.h>
+    #include <GLUT/glut.h>
 #endif
 
+#include <algorithm>
 #include <cmath>
 #include <iostream>
-#include <algorithm>
 
 Ocean::Ocean(const double lx, const double ly, const int nx, const int ny, const double windSpeed, const int windAlignment, const double minWaveSize, const double A) :
     _lx(lx),
@@ -24,9 +24,9 @@ Ocean::Ocean(const double lx, const double ly, const int nx, const int ny, const
 	_height0I.resize(_nx+1);
 	_height0R.resize(_nx+1);
 
-	_hRf.resize(_nx+1);   // to be used in the FFT - Real part - frequency domain
-	_hIf.resize(_nx+1);   // to be used in the FFT - Imaginary part - frequency domain
-	_hRt.resize(_ny+1);   // to be used in the FFT - Real part - time domain
+	_hRf.resize(_nx+1);
+	_hIf.resize(_nx+1);
+	_hRt.resize(_ny+1);
 	_hIt.resize(_ny+1); 
 
 	for(std::vector<std::vector<double> >::iterator it = _hRf.begin() ; it != _hRf.end() ; it++) it->resize(_ny+1);
