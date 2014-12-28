@@ -1,3 +1,7 @@
+/* DEISS Olivier             */
+/* Class : Camera            */
+/* Last Update : 12/28/2014  */
+
 #ifndef CAMERAHPP
 #define CAMERAHPP
 
@@ -20,8 +24,7 @@ Camera::Camera(float X, float Y, float Z, float theta, float psi, float rotation
 	_translationSpeed(translationSpeed),
 	_X(X),
 	_Y(Y),
-	_Z(Z) {
-																																		
+	_Z(Z) {																																		
 }
 
 void Camera::rotation(int x, int y) {
