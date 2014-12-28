@@ -28,8 +28,8 @@ class Height {
 		int								  _nx;        // nb of x points - must be a power of 2
 		int								  _ny;        // nb of y points - must be a power of 2
 		std::vector<std::vector<double> > _philipps;  // Philips spectrum _philipps[y][x]
-		int								  _x;         // real width
-		int								  _y;         // real height
+		int								  _x;
+		int								  _y;
 	
 };
 
