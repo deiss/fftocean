@@ -18,6 +18,7 @@ class Height {
 	public :
 	
 		double operator()();
+    
 		void   generatePhilipps(Philipps*);
 		void   init(int i)					 { _x = i - _nx/2; _y = -_ny/2; }
 		double nbGauss();
