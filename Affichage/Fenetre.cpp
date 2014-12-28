@@ -81,7 +81,7 @@ namespace Fenetre {
 	
 	void draw_ocean() {
 		
-		ocean->mainCalcul();
+		ocean->mainComputation();
 		
 		glColor3ub(82, 184, 255);
 		
