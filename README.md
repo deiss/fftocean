@@ -38,4 +38,12 @@ keys) and Affichage (to provide the GUI) in my repositories.
 
 Feel free to leave any comment about the project, or if you want to improve it.
 
+-----------------------------------------------------------------------------------
 
+To do :
+    - comment files in Affichage and FFT directories
+    - add Windows and Linux versions and informations to compile the project (libs etc)
+    - use another library instead of GLUT which is deprecated
+    - add Perlin noise to compute further waves at a lower cost
+    - add textures to the waves
+    - keyboard control to switch parameters while running the program
