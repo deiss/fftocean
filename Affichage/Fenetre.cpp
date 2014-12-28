@@ -4,7 +4,10 @@
 #include "Camera.hpp"
 #include "Fenetre.hpp"
 
-#include <ApplicationServices/ApplicationServices.h>
+
+#ifdef __APPLE__
+    #include <ApplicationServices/ApplicationServices.h>
+#endif
 #include <GLUT/glut.h>
 
 #include <cmath>
