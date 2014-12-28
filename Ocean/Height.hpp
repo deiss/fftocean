@@ -1,6 +1,6 @@
 /* DEISS Olivier                                                                                  */
 /* Class : Height                                                                                 */
-/* Last Update : 28/12/2014                                                                       */
+/* Last Update : 12/28/2014                                                                       */
 
 /* This class defines a fonctor that will generate the initial random ocean wave height field h0. */
 /* The fonctor is to be used in std generate() function.                                          */
