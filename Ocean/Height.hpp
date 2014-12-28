@@ -1,3 +1,10 @@
+/* DEISS Olivier                                                                                  */
+/* Class : Height                                                                                 */
+/* Last Update : 28/12/2014                                                                       */
+
+/* This class defines a fonctor that will generate the initial random ocean wave height field h0. */
+/* The fonctor is to be used in std generate() function.                                          */
+
 #ifndef HEIGHTHPP
 #define HEIGHTHPP
 
@@ -18,14 +25,12 @@ class Height {
 	 
 	private :
 	
-		int								  _nx;
-		int								  _ny;
-		std::vector<std::vector<double> > _philipps;
-		int								  _x;
-		int								  _y;
+		int								  _nx;        // nb of x points - must be a power of 2
+		int								  _ny;        // nb of y points - must be a power of 2
+		std::vector<std::vector<double> > _philipps;  // Philips spectrum _philipps[y][x]
+		int								  _x;         // real width
+		int								  _y;         // real height
 	
 };
 
 #endif
-
-/* foncteur qui calcule les ~h0 nécessaires */

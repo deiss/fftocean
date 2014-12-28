@@ -1,16 +1,23 @@
+/* DEISS Olivier            */
+/* Class : Height           */
+/* Last Update : 28/12/2014 */
+
 #include "Height.hpp"
 
 #include <cmath>
 #include <ctime>
 
+/* operator overloading to use Height as a fonctor */
 double Height::operator()() {
 	
 	_y++;
 	
+    // computes the initial random h0
 	return sqrt(_philipps[_x+(_nx/2)][_y+(_ny/2)]/2) * nbGauss();
 	
 }
 
+/* generates the Philips spectrum */
 void Height::generatePhilipps(Philipps *p) {
 	
 	_philipps.resize(_nx+1);
@@ -25,6 +32,8 @@ void Height::generatePhilipps(Philipps *p) {
 	
 }
 
+/* Gaussian random generator */
+/* Box-Muller method */
 double Height::nbGauss() {
 	
 	double var1, var2, s;
