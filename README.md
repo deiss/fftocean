@@ -1,6 +1,6 @@
-Project : FFT-Ocean<br/>
-Author : DEISS Olivier<br/>
-Last update : 12/28/2014
+# Project : FFT-Ocean<br/>
+# Author : DEISS Olivier<br/>
+# Last update : 12/28/2014
 
 This project is a basic implementation of J. Tessendorf's paper :
 http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf
@@ -46,9 +46,12 @@ Compilation :
 -----------------------------------------------------------------------------------
 
 To do :
-    - comment files in Affichage and FFT directories
-    - add Windows and Linux versions and informations to compile the project (libs etc)
-    - use another library instead of GLUT which is deprecated
-    - add Perlin noise to compute further waves at a lower cost
-    - add textures to the waves
-    - keyboard control to switch parameters while running the program
+   - comment files in Affichage and FFT directories
+   - add Windows and Linux versions and informations to compile the project (libs etc)
+   - use another library instead of GLUT which is deprecated
+   - add Perlin noise to compute further waves at a lower cost
+   - add textures to the waves
+   - keyboard control to switch parameters while running the program
+
+
+
