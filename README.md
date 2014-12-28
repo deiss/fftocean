@@ -1,6 +1,6 @@
-# Project : FFT-Ocean<br/>
-# Author : DEISS Olivier<br/>
-# Last update : 12/28/2014
+## Project : FFT-Ocean<br/>
+## Author : DEISS Olivier<br/>
+## Last update : 12/28/2014
 
 This project is a basic implementation of J. Tessendorf's paper :
 http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf
