@@ -27,7 +27,7 @@ void Height::generatePhilipps(Philipps *p) {
 		
 		itx->resize(_ny+1);
 		p->init(std::distance(_philipps.begin(), itx));
-        std::generate(itx->begin(), itx->end(), *p);
+		std::generate(itx->begin(), itx->end(), *p);
 		
 	}
 	

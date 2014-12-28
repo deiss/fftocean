@@ -49,7 +49,7 @@ void Ocean::generateHeight0() {
 		
 		itx->resize(_ny+1);
 		_height.init(std::distance(_height0R.begin(), itx));
-        std::generate(itx->begin(), itx->end(), _height);
+		std::generate(itx->begin(), itx->end(), _height);
 		
 	}
 	
@@ -58,7 +58,7 @@ void Ocean::generateHeight0() {
 		
 		itx->resize(_ny+1);
 		_height.init(std::distance(_height0I.begin(), itx));
-        std::generate(itx->begin(), itx->end(), _height);
+		std::generate(itx->begin(), itx->end(), _height);
 		
 	}
 	
