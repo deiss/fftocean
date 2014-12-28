@@ -7,10 +7,11 @@
 #include <iostream>
 #include <vector>
 
-FFT::FFT(int n, std::vector<double> vectR, std::vector<double> vectI) : _n(n),
-																		_p(0),
-																		_xR(vectR),
-																		_xI(vectI) {
+FFT::FFT(int n, std::vector<double> vectR, std::vector<double> vectI) :
+    _n(n),
+    _p(0),
+    _xR(vectR),
+    _xI(vectI) {
 
 	while(n != 1) {
 																		

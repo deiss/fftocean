@@ -4,9 +4,9 @@
 
 #include "Height.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <ctime>
-#include <algorithm>
 
 /* operator overloading to use Height as a fonctor */
 double Height::operator()() {
