@@ -1,6 +1,6 @@
 Project : FFT-Ocean<br/>
 Author : DEISS Olivier<br/>
-Last update : 12/22/2014
+Last update : 12/28/2014
 
 This project is a basic implementation of J. Tessendorf's paper :
 http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf
@@ -22,6 +22,8 @@ to make it run on both Linux and Windows platforms.
 
 I wrote the project in french, so you may not understand some directories names or
 file names. I'm working on the translation of the whole sourcecode.
+All the files in the directory Ocean are now translated, excepted the functions that
+belongs to other files. Translation still in progress.
 
 -----------------------------------------------------------------------------------
 
