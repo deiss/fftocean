@@ -1,3 +1,7 @@
+/* DEISS Olivier            */
+/* Class : Philipps         */
+/* Last Update : 28/12/2014 */
+
 #include "Height.hpp"
 #include "Ocean.hpp"
 
@@ -6,24 +10,26 @@
 #include <cmath>
 #include <iostream>
 
-Ocean::Ocean(const double lx, const double ly, const int nx, const int ny, const double vitesseVent, const int alignementVent, const double tailleMinVague, const double A) : _lx(lx),
-																																											  _ly(ly),
-																																											  _nx(nx),
-																																											  _ny(ny) {
+Ocean::Ocean(const double lx, const double ly, const int nx, const int ny, const double windSpeed, const int windAlignment, const double minWaveSize, const double A) :
+    _lx(lx),
+	_ly(ly),
+	_nx(nx),
+	_ny(ny) {
 
 	_height0I.resize(_nx+1);
 	_height0R.resize(_nx+1);
-	_hRf.resize(_nx+1);
-	_hIf.resize(_nx+1);
-	_hRt.resize(_ny+1);
-	_hIt.resize(_ny+1);
-																																  
+
+	_hRf.resize(_nx+1);   // to be used in the FFT - Real part - frequency domain
+	_hIf.resize(_nx+1);   // to be used in the FFT - Imaginary part - frequency domain
+	_hRt.resize(_ny+1);   // to be used in the FFT - Real part - time domain
+	_hIt.resize(_ny+1); 
+
 	for(std::vector<std::vector<double> >::iterator it = _hRf.begin() ; it != _hRf.end() ; it++) it->resize(_ny+1);
 	for(std::vector<std::vector<double> >::iterator it = _hIf.begin() ; it != _hIf.end() ; it++) it->resize(_ny+1);
 	for(std::vector<std::vector<double> >::iterator it = _hRt.begin() ; it != _hRt.end() ; it++) it->resize(_nx+1);
 	for(std::vector<std::vector<double> >::iterator it = _hIt.begin() ; it != _hIt.end() ; it++) it->resize(_nx+1);
-																																  
-    _philipps = new Philipps(vitesseVent, alignementVent, tailleMinVague, A);														 
+
+    _philipps = new Philipps(windSpeed, windAlignment, minWaveSize, A);
 	_height.setSize(_nx, _ny);							 
 	_philipps->setSize(_lx, _ly, _nx, _ny);
 														 
@@ -33,6 +39,7 @@ void Ocean::generateHeight0() {
 	
 	_height.generatePhilipps(_philipps);
 	
+    // real part
 	for(std::vector<std::vector<double> >::iterator itx = _height0R.begin() ; itx != _height0R.end() ; itx++) {
 		
 		itx->resize(_ny+1);
@@ -41,6 +48,7 @@ void Ocean::generateHeight0() {
 		
 	}
 	
+    // imaginary part
 	for(std::vector<std::vector<double> >::iterator itx = _height0I.begin() ; itx != _height0I.end() ; itx++) {
 		
 		itx->resize(_ny+1);
@@ -51,6 +59,7 @@ void Ocean::generateHeight0() {
 	
 }
 
+// computes the height field at a given time
 void Ocean::getSineAmp(int x, double time, std::vector<double> *hRf, std::vector<double> *hIf) {
 	
 	double A, L(0.1);
@@ -70,6 +79,7 @@ void Ocean::getSineAmp(int x, double time, std::vector<double> *hRf, std::vector
 	
 }
 
+// creates an array that OpenGL can directly use - X
 void Ocean::glVertexArrayX(int y, double *vectVertex, int offsetX, int offsetY) {
 	
 	for(int x = 0 ; x < _nx ; x++) {
@@ -86,6 +96,7 @@ void Ocean::glVertexArrayX(int y, double *vectVertex, int offsetX, int offsetY) 
 	
 }
 
+// creates an array that OpenGL can directly use - Y
 void Ocean::glVertexArrayY(int x, double *vectVertex, int offsetX, int offsetY) {
 	
 	for(int y = 0 ; y < _ny ; y++) {
@@ -102,12 +113,12 @@ void Ocean::glVertexArrayY(int x, double *vectVertex, int offsetX, int offsetY) 
 	
 }
 
-void Ocean::mainCalcul() {
+void Ocean::mainComputation() {
 	
-	/* première FFT */
-	
+	// first FFT
 	for(int n = 0 ; n < _nx ; n++) { 
 		
+        // puts heights in _hRf and _hIf
 		getSineAmp(n, (double)glutGet(GLUT_ELAPSED_TIME)/1000, &_hRf[n], &_hIf[n]);
 		
 		_fft = FFT(_ny, _hRf[n], _hIf[n]);
@@ -116,13 +127,13 @@ void Ocean::mainCalcul() {
 		
 	}
 	
-	/* seconde FFT */
-	
+	// second one, since it is a 2D FFT
 	for(int y = 0 ; y < _ny ; y++) {
 		
 		int n;
 		std::vector<double>::iterator it;
 		
+        // puts heights in _hRf and _hIf
 		for(it = _hRt[y].begin(), n = 0 ; it != _hRt[y].end() ; it++, n++) *it = _hRf[n][y];
 		for(it = _hIt[y].begin(), n = 0 ; it != _hIt[y].end() ; it++, n++) *it = _hIf[n][y];
 		
