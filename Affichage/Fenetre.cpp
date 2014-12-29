@@ -14,11 +14,11 @@
 #endif
 
 #include <cmath>
+#include <cstring>
 #include <ctime>
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <cstring>
 
 namespace Fenetre {
 	
@@ -27,12 +27,10 @@ namespace Fenetre {
 	int				frames(-1);
 	int				fps;
 	int				fps_goal;                    // fps souhaité
-	std::string		fps_str;
+    std::string		fps_str;
 	time_t			sleep_avant(0);
 	int				t;
 	struct timespec tim1, tim2;
-
-	int				mainwindow;
 
 	/* variables projet particulier */
 	int		height = 1;
@@ -158,10 +156,6 @@ namespace Fenetre {
 	}
 	
 	void keyboard(unsigned char key, int x, int y) {
-		
-		if (key == 27) {	// Escape
-			glutDestroyWindow ( mainwindow );
-		}
 
 		camera.setKeyboard(key, true);
 		

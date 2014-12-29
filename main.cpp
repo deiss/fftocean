@@ -13,6 +13,9 @@
 // See Philipps.hpp for more details about these parameters
 Ocean *ocean = new Ocean(170, 350, 64, 128, 60, 1, 0, 0.000002);
 
+// handle for the window
+int mainwindow;
+
 int main (int argc, char **argv) {
 	
     // random generator for gaussian numbers

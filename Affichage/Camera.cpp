@@ -1,11 +1,12 @@
 /* DEISS Olivier             */
 /* Class : Camera            */
-/* Last Update : 12/28/2014  */
+/* Last Update : 12/29/2014  */
 
 #ifndef CAMERAHPP
 #define CAMERAHPP
 
-#include "Camera.hpp" 
+#include "Camera.hpp"
+#include "Fenetre.hpp"
 
 #ifdef __linux__
     #include <GL/glut.h>
@@ -48,6 +49,13 @@ void Camera::translation() {
 	
 	float t = (float)(glutGet(GLUT_ELAPSED_TIME) - _time);
 	_time   = glutGet(GLUT_ELAPSED_TIME);
+    
+    
+    if(_keyboard[27]) { // escape
+        
+        glutDestroyWindow(mainwindow);
+        
+    }
 	
 	if(_keyboard[100]) { // d
 		

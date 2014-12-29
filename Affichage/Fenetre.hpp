@@ -4,6 +4,7 @@
 #include "Ocean.hpp"
 
 extern Ocean *ocean;
+extern int    mainwindow;
 
 namespace Fenetre {
 

@@ -1,6 +1,6 @@
 /* DEISS Olivier                                                                           */
 /* Class : Camera                                                                          */
-/* Last Update : 12/28/2014                                                                */
+/* Last Update : 12/29/2014                                                                */
 
 /* This class is a Camera. It provides all the information needed by gluLookAt() function. */
 
