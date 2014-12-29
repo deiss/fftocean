@@ -149,9 +149,10 @@ namespace Fenetre {
 	void init(int width, int height, std::string titre, int argc, char **argv) {
 		
 		glutInit(&argc, argv);
-		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
 		glutInitWindowSize(width, height);
 		glutCreateWindow(titre.c_str());
+		glEnable(GL_MULTISAMPLE);
 		
 	}
 	
