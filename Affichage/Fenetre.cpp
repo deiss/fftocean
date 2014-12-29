@@ -7,13 +7,18 @@
 #ifdef __APPLE__
     #include <ApplicationServices/ApplicationServices.h>
 #endif
-#include <GLUT/glut.h>
+#ifdef __linux__
+    #include <GL/glut.h>
+#else
+    #include <GLUT/glut.h>
+#endif
 
 #include <cmath>
 #include <ctime>
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <cstring>
 
 namespace Fenetre {
 	
@@ -26,6 +31,8 @@ namespace Fenetre {
 	time_t			sleep_avant(0);
 	int				t;
 	struct timespec tim1, tim2;
+
+	int				mainwindow;
 
 	/* variables projet particulier */
 	int		height = 1;
@@ -143,14 +150,19 @@ namespace Fenetre {
 	void init(int width, int height, std::string titre, int argc, char **argv) {
 		
 		glutInit(&argc, argv);
-		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
 		glutInitWindowSize(width, height);
-		glutCreateWindow(titre.c_str());
+		mainwindow = glutCreateWindow(titre.c_str());
+		glEnable(GL_MULTISAMPLE);
 		
 	}
 	
 	void keyboard(unsigned char key, int x, int y) {
 		
+		if (key == 27) {	// Escape
+			glutDestroyWindow ( mainwindow );
+		}
+
 		camera.setKeyboard(key, true);
 		
 	}
