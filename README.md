@@ -10,6 +10,10 @@ Libraries : OpenGL, Glut
 
 -----------------------------------------------------------------------------------
 
+Youtube video :
+
+http://youtu.be/JSNyfPAvYbg
+
 Images :
 
 ![Screenshot 1](https://cloud.githubusercontent.com/assets/10271778/5538979/e1742ff8-8abb-11e4-9a9f-cd6412c0bbc8.png)
