@@ -4,7 +4,6 @@
 #include "Camera.hpp"
 #include "Fenetre.hpp"
 
-
 #ifdef __APPLE__
     #include <ApplicationServices/ApplicationServices.h>
 #endif
