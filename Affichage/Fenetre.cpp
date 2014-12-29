@@ -8,13 +8,18 @@
 #ifdef __APPLE__
     #include <ApplicationServices/ApplicationServices.h>
 #endif
-#include <GLUT/glut.h>
+#ifdef __linux__
+    #include <GL/glut.h>
+#else
+    #include <GLUT/glut.h>
+#endif
 
 #include <cmath>
 #include <ctime>
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <cstring>
 
 namespace Fenetre {
 	
