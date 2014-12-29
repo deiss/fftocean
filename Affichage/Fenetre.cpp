@@ -33,12 +33,14 @@ namespace Fenetre {
 	struct timespec tim1, tim2;
 
 	/* variables projet particulier */
-	int		height = 1;
 	int		nxOcean;
 	int		nyOcean;
-	double *vertexOceanX;
-	double *vertexOceanY;
-	int     width = 1;
+	double *vertexOceanX; // to call glVertexPointer
+    double *vertexOceanY; // to call glVertexPointer
+    
+    // to duplicate the waves
+    int	height = 1;
+	int width = 3;
 
 	void draw() {
 		
