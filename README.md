@@ -48,6 +48,10 @@ Compilation :
    - MacOS : add GLUT, OpenGL and ApplicationServices frameworks
    - Linux : $ make && make clean
 
+To close the application :
+   - MacOS : cmd+Q
+   - Linux : alt+f4 or escape key
+
 -----------------------------------------------------------------------------------
 
 To do :
