@@ -1,6 +1,6 @@
 /* DEISS Olivier             */
 /* Class : Camera            */
-/* Last Update : 12/29/2014  */
+/* Last Update : 01/02/2014  */
 
 #ifndef CAMERAHPP
 #define CAMERAHPP
@@ -50,28 +50,30 @@ void Camera::translation() {
 	float t = (float)(glutGet(GLUT_ELAPSED_TIME) - _time);
 	_time   = glutGet(GLUT_ELAPSED_TIME);
     
-    
     if(_keyboard[27]) { // escape
         
         glutDestroyWindow(mainwindow);
         
     }
+    
+    // previous configuration : z(122), q(113), s(115), d(100)
+    // switched to e, s, d, f to fit both AZERTYand QWERTY configurations
 	
-	if(_keyboard[100]) { // d
+	if(_keyboard[102]) { // f = right
 		
 		_X -= sin(_theta + M_PI/2)*sin(_psi) * _translationSpeed * t;
 		_Z -= cos(_theta + M_PI/2)*sin(_psi) * _translationSpeed * t;
 		
 	}
 	
-	if(_keyboard[113]) { // q
+	if(_keyboard[115]) { // s = left
 
 		_X -= sin(_theta - M_PI/2)*sin(_psi) * _translationSpeed * t;
 		_Z -= cos(_theta - M_PI/2)*sin(_psi) * _translationSpeed * t;
 		
 	}
  
-	if(_keyboard[115]) { // s
+	if(_keyboard[100]) { // d = backward
 	 
 		_X -= sin(_theta)*sin(_psi) * _translationSpeed * t;
 		_Y -= cos(_psi)			    * _translationSpeed * t;
@@ -79,7 +81,7 @@ void Camera::translation() {
 	 
 	}
 	 
-	if(_keyboard[122]) { // z
+	if(_keyboard[101]) { // e = forward
 	 
 		_X += sin(_theta)*sin(_psi) * _translationSpeed * t;
 		_Y += cos(_psi)			    * _translationSpeed * t;
