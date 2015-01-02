@@ -1,6 +1,6 @@
 #### Project : FFT-Ocean<br/>
 #### Author : DEISS Olivier<br/>
-#### Last update : 12/28/2014
+#### Last update : 02/01/2015
 
 This project is a basic implementation of J. Tessendorf's paper :
 http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf
@@ -21,8 +21,8 @@ Images :
 
 -----------------------------------------------------------------------------------
 
-The project is only available for MacOS users AT THE MOMENT. Some changes will come
-to make it run on both Linux and Windows platforms.
+The project is only available for MacOS and Linux users AT THE MOMENT. Some changes will come
+to make it also run on Windows platforms.
 
 I wrote the project in french, so you may not understand some directories names or
 file names. I'm working on the translation of the whole sourcecode.
@@ -46,12 +46,13 @@ Feel free to leave any comment about the project, or if you want to improve it.
 
 Compilation :
    - MacOS : add GLUT, OpenGL and ApplicationServices frameworks
+   - Linux : $ make && make clean
 
 -----------------------------------------------------------------------------------
 
 To do :
    - comment files in Affichage and FFT directories
-   - add Windows and Linux versions and informations to compile the project (libs etc)
+   - add Windows version and information to compile the project (libs etc)
    - use another library instead of GLUT which is deprecated
    - add Perlin noise to compute further waves at a lower cost
    - add textures to the waves
