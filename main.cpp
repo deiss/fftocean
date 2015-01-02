@@ -11,7 +11,7 @@
 
 // Ocean(lx, ly, nx, ny, windSpeed,  windAlignment, minWaveSize, A)
 // See Philipps.hpp for more details about these parameters
-Ocean *ocean = new Ocean(170, 350, 64, 128, 20, 2, 0, 0.000002);
+Ocean *ocean = new Ocean(170, 350, 64, 128, 50, 2, 0, 0.000003);
 
 // handle for the window
 int mainwindow;
