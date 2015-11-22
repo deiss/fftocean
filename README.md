@@ -21,13 +21,10 @@ Images :
 
 -----------------------------------------------------------------------------------
 
-The project is only available for MacOS and Linux users AT THE MOMENT. Some changes will come
-to make it also run on Windows platforms.
+The project is only available for MacOS and Linux users.
 
 I wrote the project in french, so you may not understand some directories names or
 file names. I'm working on the translation of the whole sourcecode.
-All the files in the directory Ocean are now translated, excepted the functions that
-belongs to other files. Translation still in progress.
 
 -----------------------------------------------------------------------------------
 
