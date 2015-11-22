@@ -2,7 +2,7 @@
 #### Author : DEISS Olivier<br/>
 #### Last update : 02/01/2015
 
-This project is a basic implementation of J. Tessendorf's paper :
+This project is an implementation of J. Tessendorf's paper :
 http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf
 
 Language : C++<br/>
