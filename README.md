@@ -16,8 +16,8 @@ http://youtu.be/JSNyfPAvYbg
 
 Images :
 
-![Screenshot 1](https://cloud.githubusercontent.com/assets/10271778/5538979/e1742ff8-8abb-11e4-9a9f-cd6412c0bbc8.png)
-![Screenshot 2](https://cloud.githubusercontent.com/assets/10271778/5538981/e377b522-8abb-11e4-9ffc-8a8670934b12.png)
+![Screenshot 1](Screenshot%201.png)
+![Screenshot 2](Screenshot%202.png)
 
 -----------------------------------------------------------------------------------
 
