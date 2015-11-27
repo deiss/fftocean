@@ -13,7 +13,7 @@ Youtube video:
 
 http://youtu.be/JSNyfPAvYbg
 
-Images:
+Screenshots:
 
 ![Screenshot 1](Screenshot%201.png)
 ![Screenshot 2](Screenshot%202.png)
