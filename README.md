@@ -23,7 +23,7 @@ Screenshots:
 The project is only available for MacOS and Linux users.
 
 The model allows to choose the wind speed and direction, the depth and choppiness.
-I originally wrote the project in french, so classes and folders still have french names.
+I originally wrote the project in french, so some classes and folders still have french names.
 
 -----------------------------------------------------------------------------------
 
