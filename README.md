@@ -9,14 +9,9 @@ Libraries: OpenGL, Glut
 
 -----------------------------------------------------------------------------------
 
-Youtube video:
+Youtube: http://youtu.be/JSNyfPAvYbg
 
-http://youtu.be/JSNyfPAvYbg
-
-Screenshots:
-
-![Screenshot 1](Screenshot%201.png)
-![Screenshot 2](Screenshot%202.png)
+![Screenshot](Screenshot.png)
 
 -----------------------------------------------------------------------------------
 
