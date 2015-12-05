@@ -9,21 +9,16 @@ Libraries: OpenGL, Glut
 
 -----------------------------------------------------------------------------------
 
-Youtube video:
+Youtube: http://youtu.be/JSNyfPAvYbg
 
-http://youtu.be/JSNyfPAvYbg
-
-Screenshots:
-
-![Screenshot 1](Screenshot%201.png)
-![Screenshot 2](Screenshot%202.png)
+![Screenshot](Screenshot.png)
 
 -----------------------------------------------------------------------------------
 
 The project is only available for MacOS and Linux users.
 
-I wrote the project in french, so you may not understand some directories names or
-file names. I'm working on the translation of the whole sourcecode.
+The model allows to choose the wind speed and direction, the depth and choppiness.
+I originally wrote the project in french, so some classes and folders still have french names.
 
 -----------------------------------------------------------------------------------
 
