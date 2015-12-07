@@ -28,7 +28,7 @@ class Camera {
 	
 	private :
 	
-		bool  _keyboard[255];      // to know if one specific key is up or down. UP = false
+		bool  _keyboard[255];
 		int	  _mouseX;
 		int	  _mouseY;
 		float _psi;

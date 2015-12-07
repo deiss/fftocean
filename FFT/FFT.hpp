@@ -7,15 +7,15 @@ class FFT {
 	
 		FFT()															 { }
 		FFT(int, std::vector<double>, std::vector<double>);
-		void calculD()													 { tri(); radixDirect(); }
-		void calculR()													 { tri(); radixReverse(); }
+		void calculD()													 { sort(); radixDirect(); }
+		void calculR()													 { sort(); radixReverse(); }
 		void getResult(std::vector<double> *xR, std::vector<double> *xI) { *xR = _xR; *xI = _xI; }
 	
 	private :
 	
 		void radixDirect();
 		void radixReverse();
-		void tri();
+		void sort();
 
 		double				_cos;
 		int					_index1;

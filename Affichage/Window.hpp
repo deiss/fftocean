@@ -6,7 +6,7 @@
 extern Ocean *ocean;
 extern int    mainwindow;
 
-namespace Fenetre {
+namespace Window {
 
 	void draw();
 	void draw_fps();
