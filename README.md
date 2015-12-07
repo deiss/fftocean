@@ -4,7 +4,7 @@
 This project is an implementation of researcher J. Tessendorf's paper "Simulating Ocean Water":
 http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf
 
-The FFT is used to compute the wave height field. In the paper, the Philips spectrum is introduced and used in the computation. It has parameters like wind speed, direction and strength, wave choppiness, and sea depth. 
+The FFT is used to compute the wave height field. In the paper, the Philips spectrum is used for the computation. It has parameters like wind speed, direction and strength, wave choppiness, and sea depth. 
 
 Language: C++<br/>
 Libraries: OpenGL, Glut
