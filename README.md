@@ -1,6 +1,6 @@
 ##### Project: FFT-Ocean
 ##### Author: DEISS Olivier
-##### Started: July 2014
+##### Started: July 2013
 
 This project is an implementation of researcher J. Tessendorf's paper "Simulating Ocean Water":
 http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf
