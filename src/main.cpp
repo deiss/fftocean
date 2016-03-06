@@ -1,5 +1,5 @@
-#include "Window.hpp"
-#include "Ocean.hpp"
+#include "Affichage/Window.hpp"
+#include "Ocean/Ocean.hpp"
 
 #include <cstdlib>
 #include <ctime>

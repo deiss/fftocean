@@ -6,7 +6,7 @@
 #ifndef OCEANHPP
 #define OCEANHPP
 
-#include "FFT.hpp"
+#include "../FFT/FFT.hpp"
 #include "Height.hpp"
 #include "Philipps.hpp"
 

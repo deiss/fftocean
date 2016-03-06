@@ -1,22 +1,55 @@
-CC=g++
-INC=-I./Affichage -I./FFT -I./Ocean
-LXFLAGS=-lglut -lGL -lGLU
-CFLAGS=-O3 -funroll-loops
-all: affichage fft ocean main.cpp
-	$(CC) $(INC) $(CFLAGS) main.cpp -o FFT-Ocean Camera.o Fenetre.o FFT.o Height.o Ocean.o Philipps.o $(LXFLAGS)
+# compilator and liker flags
+CC       = g++
+LD_FLAGS = -lglut -lGL -lGLU32
+CC_FLAGS = -Wall -O3 -funroll-loops
+EXEC     = Ocean
 
-affichage: Affichage/Camera.cpp Affichage/Camera.hpp Affichage/Fenetre.cpp Affichage/Fenetre.hpp
-	$(CC) $(INC) $(CFLAGS) -c Affichage/Camera.cpp
-	$(CC) $(INC) $(CFLAGS) -c Affichage/Fenetre.cpp
+# project configuration
+MODULES   = Ocean FFT Affichage
+BUILD_DIR = build
+BIN_DIR   = bin
+SRC_DIR   = $(addprefix src/, $(MODULES))
 
-fft: FFT/FFT.cpp FFT/FFT.hpp
-	$(CC) $(INC) $(CFLAGS) -c FFT/FFT.cpp
+SRC     = $(foreach sdir, $(SRC_DIR), $(wildcard $(sdir)/*.cpp))
+OBJ     = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRC))
 
-ocean: Ocean/Height.cpp Ocean/Height.hpp Ocean/Ocean.cpp Ocean/Ocean.hpp Ocean/Philipps.cpp Ocean/Philipps.hpp
-	$(CC) $(INC) $(CFLAGS) -c Ocean/Height.cpp
-	$(CC) $(INC) $(CFLAGS) -c Ocean/Ocean.cpp
-	$(CC) $(INC) $(CFLAGS) -c Ocean/Philipps.cpp
+VPATH = $(SRC_DIR)/
 
+# entry point
+all: make_dir $(BIN_DIR)/$(EXEC) clean
+
+# directory 'build'
+make_dir:
+	@mkdir -p $(BUILD_DIR)
+	@mkdir -p $(BIN_DIR)
+
+# create binary
+$(BIN_DIR)/$(EXEC): $(OBJ)
+	$(CC) -o $@ $^ $(LD_FLAGS)
+
+# remove *.o and 'build' directory
 clean:
-	rm -f *.o
+	rm $(BUILD_DIR)/*.o
+	rm -r $(BUILD_DIR)
 
+# objects
+$(BUILD_DIR)/main.o: main.cpp Window.hpp Ocean.hpp
+	$(CC) $(CC_FLAGS) -o $@ -c $<
+
+$(BUILD_DIR)/Camera.o: Camera.cpp Camera.hpp Window.hpp
+	$(CC) $(CC_FLAGS) -o $@ -c $<
+
+$(BUILD_DIR)/Window.o: Window.cpp Window.hpp
+	$(CC) $(CC_FLAGS) -o $@ -c $<
+
+$(BUILD_DIR)/FFT.o: FFT.cpp FFT.hpp
+	$(CC) $(CC_FLAGS) -o $@ -c $<
+
+$(BUILD_DIR)/Height.o: Height.cpp Height.hpp
+	$(CC) $(CC_FLAGS) -o $@ -c $<
+
+$(BUILD_DIR)/Ocean.o: Ocean.cpp Ocean.hpp Height.hpp
+	$(CC) $(CC_FLAGS) -o $@ -c $<
+
+$(BUILD_DIR)/Philipps.o: Philipps.cpp Philipps.hpp
+	$(CC) $(CC_FLAGS) -o $@ -c $<
