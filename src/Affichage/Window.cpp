@@ -23,7 +23,7 @@
 namespace Window {
 	
 	/* For every GLUT project */
-	Camera			camera(-100, 100, -100, M_PI/4, 4*M_PI/7, 0.01, 0.1, WIDTH, HEIGHT);
+	Camera			camera(-100, 100, -100, M_PI/4, 4*M_PI/7, 0.01, 0.2, WIDTH, HEIGHT);
 	int				frames(-1);
 	int				fps;
     int				fps_goal;  // expected FPS

@@ -1,7 +1,3 @@
-/* DEISS Olivier            */
-/* Class : Height           */
-/* Last Update : 12/28/2014 */
-
 #include "Height.hpp"
 
 #include <algorithm>

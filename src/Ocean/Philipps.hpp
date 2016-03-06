@@ -1,7 +1,3 @@
-/* DEISS Olivier                                                                  */
-/* Class : Philipps                                                               */
-/* Last Update : 12/28/2014                                                       */
-
 /* This class defines a fonctor that will generate the initial Philipps spectrum. */
 /* The fonctor is to be used in std generate() function.                          */
 

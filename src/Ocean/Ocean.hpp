@@ -1,7 +1,3 @@
-/* DEISS Olivier                                                                                   */
-/* Class : Ocean                                                                                   */
-/* Last Update : 12/28/2014                                                                        */
-
 /* This class defines a an ocean. It contains all the data required to its computation.            */
 /* First a philipps spectrum is created. It is used to create the initial ocean wave height field. */
 /* From this initial wave height field, it is possible to compute the next ones.                   */
