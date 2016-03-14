@@ -1,20 +1,21 @@
-/* DEISS Olivier             */
-/* Class : Camera            */
-/* Last Update : 01/02/2014  */
+/*
+
+Project: Ocean
+Author: DEISS Olivier
+
+This software is offered under the GPL license. See COPYING for more information.
+
+*/
 
 #ifndef CAMERAHPP
 #define CAMERAHPP
 
+#include <iostream>
+
+#include "GLUT/glut.h"
+
 #include "Camera.hpp"
 #include "Window.hpp"
-
-#ifdef __linux__
-    #include <GL/glut.h>
-#else
-    #include <GLUT/glut.h>
-#endif
-
-#include <iostream>
 
 /* Camera constructor */
 Camera::Camera(float X, float Y, float Z, float theta, float psi, float rotationSpeed, float translationSpeed, int width, int height) : 

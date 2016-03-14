@@ -1,13 +1,19 @@
-/* This class defines a fonctor that will generate the initial random ocean wave height field h0. */
-/* The fonctor is to be used in std generate() function.                                          */
+/*
+
+Project: Ocean
+Author: DEISS Olivier
+
+This software is offered under the GPL license. See COPYING for more information.
+
+*/
 
 #ifndef HEIGHTHPP
 #define HEIGHTHPP
 
-#include "Philipps.hpp"
-
 #include <iostream>
 #include <vector>
+
+#include "Philipps.hpp"
 
 class Height {
 	

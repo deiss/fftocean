@@ -1,3 +1,12 @@
+/*
+
+Project: Ocean
+Author: DEISS Olivier
+
+This software is offered under the GPL license. See COPYING for more information.
+
+*/
+
 #include <iostream>
 #include <vector>
 
@@ -38,5 +47,3 @@ class FFT {
 		std::vector<double> _xI;
 	
 };
-
-/* Implémente l'algorithme de FFT de Cooley-Tukey */

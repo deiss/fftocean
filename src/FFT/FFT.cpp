@@ -1,11 +1,20 @@
+/*
+
+Project: Ocean
+Author: DEISS Olivier
+
+This software is offered under the GPL license. See COPYING for more information.
+
+*/
+
 #ifndef FFTHPP
 #define FFTHPP
-
-#include "FFT.hpp"
 
 #include <cmath>
 #include <iostream>
 #include <vector>
+
+#include "FFT.hpp"
 
 /* FFT constructor */
 FFT::FFT(int n, std::vector<double> vectR, std::vector<double> vectI) :

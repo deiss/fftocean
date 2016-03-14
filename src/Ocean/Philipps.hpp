@@ -1,5 +1,11 @@
-/* This class defines a fonctor that will generate the initial Philipps spectrum. */
-/* The fonctor is to be used in std generate() function.                          */
+/*
+
+Project: Ocean
+Author: DEISS Olivier
+
+This software is offered under the GPL license. See COPYING for more information.
+
+*/
 
 #ifndef PHILIPPSHPP
 #define PHILIPPSHPP

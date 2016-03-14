@@ -1,7 +1,16 @@
-#include "Philipps.hpp"
+/*
+
+Project: Ocean
+Author: DEISS Olivier
+
+This software is offered under the GPL license. See COPYING for more information.
+
+*/
 
 #include <cmath>
 #include <iostream>
+
+#include "Philipps.hpp"
 
 /* Philips constructor */
 Philipps::Philipps(const double windSpeed, const int windAlignment, const double minWaveSize, const double A) :

@@ -1,8 +1,17 @@
-#include "Height.hpp"
+/*
+
+Project: Ocean
+Author: DEISS Olivier
+
+This software is offered under the GPL license. See COPYING for more information.
+
+*/
 
 #include <algorithm>
 #include <cmath>
 #include <ctime>
+
+#include "Height.hpp"
 
 /* Operator overloading to use Height as a fonctor */
 double Height::operator()() {

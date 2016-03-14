@@ -1,16 +1,20 @@
-/* This class defines a an ocean. It contains all the data required to its computation.            */
-/* First a philipps spectrum is created. It is used to create the initial ocean wave height field. */
-/* From this initial wave height field, it is possible to compute the next ones.                   */
-/* To render, FFT is used to obtain time-domain data drom these wave height field.  (FFT-1)        */
+/*
+
+Project: Ocean
+Author: DEISS Olivier
+
+This software is offered under the GPL license. See COPYING for more information.
+
+*/
 
 #ifndef OCEANHPP
 #define OCEANHPP
 
+#include <vector>
+
 #include "../FFT/FFT.hpp"
 #include "Height.hpp"
 #include "Philipps.hpp"
-
-#include <vector>
 
 class Ocean {
 	

@@ -1,9 +1,18 @@
-#include "Affichage/Window.hpp"
-#include "Ocean/Ocean.hpp"
+/*
+
+Project: Ocean
+Author: DEISS Olivier
+
+This software is offered under the GPL license. See COPYING for more information.
+
+*/
 
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+
+#include "Affichage/Window.hpp"
+#include "Ocean/Ocean.hpp"
 
 /* Ocean(lx, ly, nx, ny, windSpeed,  windAlignment, minWaveSize, A) */
 // See Philipps.hpp for more details about these parameters

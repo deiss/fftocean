@@ -1,17 +1,14 @@
+/*
+
+Project: Ocean
+Author: DEISS Olivier
+
+This software is offered under the GPL license. See COPYING for more information.
+
+*/
+
 #ifndef FENETREHPP
 #define FENETREHPP
-
-#include "Camera.hpp"
-#include "Window.hpp"
-
-#ifdef __APPLE__
-    #include <ApplicationServices/ApplicationServices.h>
-#endif
-#ifdef __linux__
-    #include <GL/glut.h>
-#else
-    #include <GLUT/glut.h>
-#endif
 
 #include <cmath>
 #include <cstring>
@@ -19,6 +16,11 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+
+#include "GLUT/glut.h"
+
+#include "Camera.hpp"
+#include "Window.hpp"
 
 namespace Window {
 	
@@ -136,9 +138,6 @@ namespace Window {
 
     /* Starts the rendering */
 	void launch() {
-#ifdef __APPLE__
-		CGSetLocalEventsSuppressionInterval(0.0);
-#endif
 		tim1.tv_sec  = 0;
 		tim1.tv_nsec = 0;
 		t = glutGet(GLUT_ELAPSED_TIME);

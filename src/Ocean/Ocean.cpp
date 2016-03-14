@@ -1,15 +1,20 @@
-#include "Height.hpp"
-#include "Ocean.hpp"
+/*
 
-#ifdef __linux__
-    #include <GL/glut.h>
-#else
-    #include <GLUT/glut.h>
-#endif
+Project: Ocean
+Author: DEISS Olivier
+
+This software is offered under the GPL license. See COPYING for more information.
+
+*/
 
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+
+#include "GLUT/glut.h"
+
+#include "Height.hpp"
+#include "Ocean.hpp"
 
 /* Ocean constructor */
 Ocean::Ocean(const double lx, const double ly, const int nx, const int ny, const double windSpeed, const int windAlignment, const double minWaveSize, const double A) :
