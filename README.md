@@ -32,4 +32,4 @@ To close the application:
 
 ### Contact
 
-##### olivier . deiss [at] gmail . com
+olivier . deiss [at] gmail . com
