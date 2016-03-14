@@ -1,6 +1,6 @@
 # FFT-Ocean
 
-![Screenshot](Screenshot.png)
+![Screenshot](media/Screenshot.png)
 Youtube: http://youtu.be/JSNyfPAvYbg
 
 ## PROJECT
