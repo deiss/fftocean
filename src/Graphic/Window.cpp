@@ -19,13 +19,13 @@ License: This software is offered under the GPL license. See COPYING for more in
 namespace Window {
     
     /* For every GLUT project */
-    Camera            camera(-100, 100, -100, M_PI/4, 4*M_PI/7, 0.01, 0.2, WIDTH, HEIGHT);
-    int                frames(-1);
-    int                fps;
-    int                fps_goal;  // expected FPS
-    std::string        fps_str;
-    time_t            sleep_avant(0);
-    int                t;
+    Camera          camera(Camera::AZERTY, -100, 100, -100, 4*M_PI/7, M_PI/4, 0.01, 0.2, WIDTH, HEIGHT);
+    int             frames(-1);
+    int             fps;
+    int             fps_goal;  // expected FPS
+    std::string     fps_str;
+    time_t          sleep_avant(0);
+    int             t;
     struct timespec tim1, tim2;
 
     /* For FFT-Ocean */

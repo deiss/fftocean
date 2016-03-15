@@ -10,7 +10,8 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 #include "Camera.hpp"
 
-Camera::Camera(float p_X, float p_Y, float p_Z, float p_psi, float p_theta, float p_rotation_speed, float p_translation_speed, int p_window_width, int p_window_height) :
+Camera::Camera(KEYBOARD p_keyboard, float p_X, float p_Y, float p_Z, float p_psi, float p_theta, float p_rotation_speed, float p_translation_speed, int p_window_width, int p_window_height) :
+    keyboard(p_keyboard),
     X(p_X),
     Y(p_Y),
     Z(p_Z),
@@ -21,7 +22,21 @@ Camera::Camera(float p_X, float p_Y, float p_Z, float p_psi, float p_theta, floa
     rotation_speed(p_rotation_speed),
     translation_speed(p_translation_speed),
     time(0) {
-    for(int i=0 ; i<255 ; i++) { keyboard[i] = false; }
+    for(int i=0 ; i<255 ; i++) { keys[i] = false; }
+    switch(keyboard) {
+        case AZERTY:
+            key_map[FORWARD]  = static_cast<int>('z');
+            key_map[BACKWARD] = static_cast<int>('s');
+            key_map[LEFT]     = static_cast<int>('q');
+            key_map[RIGHT]    = static_cast<int>('d');
+            break;
+        case QWERTY:
+            key_map[FORWARD]  = static_cast<int>('w');
+            key_map[BACKWARD] = static_cast<int>('s');
+            key_map[LEFT]     = static_cast<int>('q');
+            key_map[RIGHT]    = static_cast<int>('d');
+            break;
+    }
 }
 
 void Camera::rotation(int x, int y) {
@@ -33,26 +48,30 @@ void Camera::rotation(int x, int y) {
     mouse_y = y;
 }
 
+/*
+Computes the new sphere center given the speed and direction. The direction
+depends on the current angles values and the keys being pushed.
+*/
 void Camera::translation() {
     float t = static_cast<float>(glutGet(GLUT_ELAPSED_TIME) - time);
     time    = glutGet(GLUT_ELAPSED_TIME);
-    if(keyboard[102]) { // f
-        X -= sin(theta + M_PI/2)*sin(psi) * translation_speed * t;
-        Z -= cos(
-        theta + M_PI/2)*sin(psi) * translation_speed * t;
+    if(keys[key_map[FORWARD]]) {
+        X += sin(theta)*sin(psi) * translation_speed * t;
+        Y += cos(psi)            * translation_speed * t;
+        Z += cos(theta)*sin(psi) * translation_speed * t;
     }
-    if(keyboard[115]) { // s
-        X -= sin(theta - M_PI/2)*sin(psi) * translation_speed * t;
-        Z -= cos(theta - M_PI/2)*sin(psi) * translation_speed * t;
-    }
-    if(keyboard[100]) { // d
+    if(keys[key_map[BACKWARD]]) {
         X -= sin(theta)*sin(psi) * translation_speed * t;
         Y -= cos(psi)            * translation_speed * t;
         Z -= cos(theta)*sin(psi) * translation_speed * t;
     }
-    if(keyboard[101]) { // e
-        X += sin(theta)*sin(psi) * translation_speed * t;
-        Y += cos(psi)            * translation_speed * t;
-        Z += cos(theta)*sin(psi) * translation_speed * t;
+    if(keys[key_map[LEFT]]) {
+        X -= sin(theta - M_PI/2)*sin(psi) * translation_speed * t;
+        Z -= cos(theta - M_PI/2)*sin(psi) * translation_speed * t;
+    }
+    if(keys[key_map[RIGHT]]) {
+        X -= sin(theta + M_PI/2)*sin(psi) * translation_speed * t;
+        Z -= cos(
+        theta + M_PI/2)*sin(psi) * translation_speed * t;
     }
 }
