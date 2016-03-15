@@ -1,4 +1,4 @@
-# FFT-Ocean
+# FFTOcean
 
 ![Screenshot](media/Screenshot.png)
 
