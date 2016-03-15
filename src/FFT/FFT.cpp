@@ -10,7 +10,9 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 #include "FFT.hpp"
 
-/* FFT constructor */
+/*
+Initializes the variables and computes p so that n = 2^p.
+*/
 FFT::FFT(int p_n, std::vector<double> p_real, std::vector<double> p_imag) :
     n(p_n),
     p(0),
@@ -22,14 +24,20 @@ FFT::FFT(int p_n, std::vector<double> p_real, std::vector<double> p_imag) :
     }
 }
 
-/* FFT */
+/*
+Direct FFT transform. The algorithm computes the spectrum for
+the time-domain signal in the real and imag vectors, and stores
+the result in these same vectors.
+*/
 void FFT::radix_direct() {
     int                 n_copy = n;
     std::vector<double> real_copy; real_copy.resize(n);
     std::vector<double> imag_copy; imag_copy.resize(n);
-    for(int i=0 ; i<p ; i++) {                   // processus à faire _p fois
-        for(int j=0 ; j<n_copy/2 ; j++) {              // calculer pour n/2 sous parties
-            for(int k=0 ; k<pow(2, i) ; k++) {    // calcul
+    /* repeat the process p times */
+    for(int i=0 ; i<p ; i++) {
+        /* compute n/2 values and use them twice */
+        for(int j=0 ; j<n_copy/2 ; j++) {
+            for(int k=0 ; k<pow(2, i) ; k++) {
                 int    index1     = k+j*pow(2, i+1);
                 int    index2     = index1 + pow(2, i);
                 double var        = static_cast<double>(-(2*M_PI)/pow(2, i+1))*index1;
@@ -51,14 +59,20 @@ void FFT::radix_direct() {
     }
 }
 
-/* FFT-1 */
+/*
+Reverse FFT transform using the radix algorithm. The algorithm computes the
+time-domain signal from the spectrum in the real and imag vectors, and stores
+the result in these same vectors.
+*/
 void FFT::radix_reverse() {
     int                 n_copy = n;
     std::vector<double> real_copy; real_copy.resize(n);
     std::vector<double> imag_copy; imag_copy.resize(n);
-    for(int i=0 ; i<p ; i++) {                    // processus à faire _p fois
-        for(int j=0 ; j<n_copy/2 ; j++) {         // calculer pour n/2 sous parties
-            for(int k=0 ; k<pow(2, i) ; k++) {    // calcul
+    /* repeat the process p times */
+    for(int i=0 ; i<p ; i++) {
+        /* compute n/2 values and use them twice */
+        for(int j=0 ; j<n_copy/2 ; j++) {
+            for(int k=0 ; k<pow(2, i) ; k++) {
                 int    index1     = k+j*pow(2, i+1);
                 int    index2     = index1 + pow(2, i);
                 double var        = static_cast<double>((2*M_PI)/pow(2, i+1))*index1;
@@ -80,10 +94,17 @@ void FFT::radix_reverse() {
     }
 }
 
-/* Sorts the data before applying the radix algorithm */
+/*
+Sorts the data so that the radix algorithm can be applied. In the first step,
+the sorting puts all the evenly indexed values first and the oddly indexed
+values second in the array. For the following steps, the same process is applied
+to arrays of length l/2 with l the length of the previous array. At the end all
+the values are interleaved.
+*/
 void FFT::sort() {
     int n_copy = n;
-    for(int i=0 ; i<p-1 ; i++) {        // processus à répéter _p - 1 fois
+    /* repeat the process p-1 times */
+    for(int i=0 ; i<p-1 ; i++) {
         std::vector<double> sorted_R; sorted_R.reserve(n);
         std::vector<double> sorted_I; sorted_I.reserve(n);
         std::vector<double> vectRp;   vectRp.resize(n_copy/2);
@@ -92,13 +113,14 @@ void FFT::sort() {
         std::vector<double> vectIi;   vectIi.resize(n_copy/2);
         std::vector<double>::iterator itR(sorted_R.begin());
         std::vector<double>::iterator itI(sorted_I.begin());
-        for(int j=0 ; j<n/n_copy ; j++) {       // réorganiser -n/n sous parties
-            for(int k=0 ; k<n_copy/2 ; k++) {   // réorganisation
+        for(int j=0 ; j<n/n_copy ; j++) {
+            /* reorganize sub array */
+            for(int k=0 ; k<n_copy/2 ; k++) {
                 double index = 2*k+j*n_copy;
-                vectRp[k] = real[index];
-                vectIp[k] = imag[index];
-                vectRi[k] = real[index+1];
-                vectIi[k] = imag[index+1];
+                vectRp[k]    = real[index];
+                vectIp[k]    = imag[index];
+                vectRi[k]    = real[index+1];
+                vectIi[k]    = imag[index+1];
             }
             sorted_R.insert(itR, vectRp.begin(), vectRp.end());
             sorted_I.insert(itI, vectIp.begin(), vectIp.end());
