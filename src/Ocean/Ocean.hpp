@@ -21,32 +21,39 @@ class Ocean {
     public :
     
         Ocean(const double, const double, const int, const int, const double, const int, const double, const double);
-        ~Ocean()     { delete _philipps; }
+        ~Ocean();
+    
+        int  getNx() { return nx; }
+        int  getNy() { return ny; }
+        void generate_height_0();
+        void gl_vertex_array_x(int, double*, int, int);
+        void gl_vertex_array_y(int, double*, int, int);
+        void main_computation();
+    
+    private :
+
+        typedef std::vector<double>::iterator               vec_d_it;
+        typedef std::vector<std::vector<double> >           vec_vec_d;
+        typedef std::vector<std::vector<double> >::iterator vec_vec_d_it;
+    
+        void get_sine_amp(int, double, std::vector<double>*, std::vector<double>*);
         
-        void generateHeight0();
-        int  getNx() { return _nx; }
-        int  getNy() { return _ny; }
-        void glVertexArrayX(int, double*, int, int);
-        void glVertexArrayY(int, double*, int, int);
-        void mainComputation();
+        Philipps* philipps;  // philips spectrum
+        FFT       fft;       // fft structure to computes the transformation
     
-    private : 
+  const double    lx;        // real width
+  const double    ly;        // real height
+  const int       nx;        // nb of x points - must be a power of 2
+  const int       ny;        // nb of y points - must be a power of 2
+  
+        Height    height;    // initial random ocean wave height field - [x][y]
+        vec_vec_d height0I;  // tmp wave height field
+        vec_vec_d height0R;  // I : imaginary - R : real
     
-        void getSineAmp(int, double, std::vector<double>*, std::vector<double>*);
-    
-        FFT                                                _fft;       // fft structure to computes the transformation
-        Height                                            _height;    // initial random ocean wave height field - [x][y]
-        std::vector<std::vector<double> >                _height0I;  // tmp wave height field
-        std::vector<std::vector<double> >                _height0R;  // I : imaginary - R : real
-        std::vector<std::vector<double> >                _hRf;       // real part - frequency domain - [y][x]
-        std::vector<std::vector<double> >                _hIf;       // imaginary part - time domain - [y][x]
-        std::vector<std::vector<double> >                _hRt;       // real part - frequency domain - [y][x]
-        std::vector<std::vector<double> >                _hIt;       // imaginary part - time domain - [y][x]
-  const double                                            _lx;        // real width
-  const double                                            _ly;        // real height
-  const int                                                _nx;        // nb of x points - must be a power of 2
-  const int                                                _ny;        // nb of y points - must be a power of 2
-        Philipps                                       *_philipps;  // philips spectrum
+        vec_vec_d HR;        // real part - frequency domain - [y][x]
+        vec_vec_d HI;        // imaginary part - time domain - [y][x]
+        vec_vec_d hr;        // real part - frequency domain - [y][x]
+        vec_vec_d hi;        // imaginary part - time domain - [y][x]
     
 };
 

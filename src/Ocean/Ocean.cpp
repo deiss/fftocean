@@ -17,99 +17,104 @@ This software is offered under the GPL license. See COPYING for more information
 #include "Ocean.hpp"
 
 /* Ocean constructor */
-Ocean::Ocean(const double lx, const double ly, const int nx, const int ny, const double windSpeed, const int windAlignment, const double minWaveSize, const double A) :
-    _lx(lx),
-    _ly(ly),
-    _nx(nx),
-    _ny(ny) {
-    _height0I.resize(_nx+1);
-    _height0R.resize(_nx+1);
-    _hRf.resize(_nx+1);
-    _hIf.resize(_nx+1);
-    _hRt.resize(_ny+1);
-    _hIt.resize(_ny+1);
-    for(std::vector<std::vector<double> >::iterator it = _hRf.begin() ; it != _hRf.end() ; it++) it->resize(_ny+1);
-    for(std::vector<std::vector<double> >::iterator it = _hIf.begin() ; it != _hIf.end() ; it++) it->resize(_ny+1);
-    for(std::vector<std::vector<double> >::iterator it = _hRt.begin() ; it != _hRt.end() ; it++) it->resize(_nx+1);
-    for(std::vector<std::vector<double> >::iterator it = _hIt.begin() ; it != _hIt.end() ; it++) it->resize(_nx+1);
-    _philipps = new Philipps(windSpeed, windAlignment, minWaveSize, A);
-    _height.setSize(_nx, _ny);                             
-    _philipps->setSize(_lx, _ly, _nx, _ny);
+Ocean::Ocean(const double p_lx, const double p_ly, const int p_nx, const int p_ny, const double p_wind_speed, const int p_wind_alignment, const double p_min_wave_size, const double p_A) :
+    philipps(new Philipps(p_wind_speed, p_wind_alignment, p_min_wave_size, p_A)),
+    lx(p_lx),
+    ly(p_ly),
+    nx(p_nx),
+    ny(p_ny) {
+    height0I.resize(nx+1);
+    height0R.resize(nx+1);
+    HR.resize(nx+1);
+    HI.resize(nx+1);
+    hr.resize(ny+1);
+    hi.resize(ny+1);
+    for(vec_vec_d_it it=HR.begin() ; it!=HR.end() ; it++) it->resize(ny+1);
+    for(vec_vec_d_it it=HI.begin() ; it!=HI.end() ; it++) it->resize(ny+1);
+    for(vec_vec_d_it it=hr.begin() ; it!=hr.end() ; it++) it->resize(nx+1);
+    for(vec_vec_d_it it=hi.begin() ; it!=hi.end() ; it++) it->resize(nx+1);
+    height.set_size(nx, ny);
+    philipps->set_size(lx, ly, nx, ny);
+}
+
+Ocean::~Ocean() {
+    delete philipps;
 }
 
 /* Initial random height field */
-void Ocean::generateHeight0() {
-    _height.generatePhilipps(_philipps);
-    // real part
-    for(std::vector<std::vector<double> >::iterator itx = _height0R.begin() ; itx != _height0R.end() ; itx++) {
-        itx->resize(_ny+1);
-        _height.init(std::distance(_height0R.begin(), itx));
-        std::generate(itx->begin(), itx->end(), _height);
+void Ocean::generate_height_0() {
+    height.generate_philipps(philipps);
+    /* real part */
+    for(vec_vec_d_it itx=height0R.begin() ; itx!=height0R.end() ; itx++) {
+        itx->resize(ny+1);
+        height.init_fonctor(std::distance(height0R.begin(), itx));
+        std::generate(itx->begin(), itx->end(), height);
     }
-    // imaginary part
-    for(std::vector<std::vector<double> >::iterator itx = _height0I.begin() ; itx != _height0I.end() ; itx++) {
-        itx->resize(_ny+1);
-        _height.init(std::distance(_height0I.begin(), itx));
-        std::generate(itx->begin(), itx->end(), _height);
+    /* imaginary part */
+    for(vec_vec_d_it itx=height0I.begin() ; itx!=height0I.end() ; itx++) {
+        itx->resize(ny+1);
+        height.init_fonctor(std::distance(height0I.begin(), itx));
+        std::generate(itx->begin(), itx->end(), height);
     }
 }
 
 /* Computes the height field at a given time */
-void Ocean::getSineAmp(int x, double time, std::vector<double> *hRf, std::vector<double> *hIf) {
-    double A, L(0.1);
-    std::vector<double>::iterator itR;
-    std::vector<double>::iterator itI;
-    int y;
-    for(itR = hRf->begin(), itI = hIf->begin(), y = 0 ; itR != hRf->end() ; itR++, itI++, y++) {
-        A = time * sqrt(9.81 * sqrt(pow((2*M_PI*x)/_lx, 2)+pow((2*M_PI*y)/_ly, 2))*(1+(pow((2*M_PI*x)/_lx, 2)+pow((2*M_PI*y)/_ly, 2))*pow(L, 2)));
-        *itR = _height0R[x][y] * cos(A) - _height0I[x][y] * sin(A) + _height0R[_nx-x][_ny-y] * cos(-A) + _height0I[_nx-x][_ny-y] * sin(-A);
-        *itI = _height0I[x][y] * cos(A) + _height0R[x][y] * sin(A) - _height0I[_nx-x][_ny-y] * cos(-A) + _height0R[_nx-x][_ny-y] * sin(-A);
+void Ocean::get_sine_amp(int x, double time, std::vector<double> *p_HR, std::vector<double> *p_HI) {
+    double   A;
+    double   L = 0.1;
+    int      y;
+    vec_d_it itR;
+    vec_d_it itI;
+    for(itR=p_HR->begin(), itI=p_HI->begin(), y=0 ; itR!=p_HR->end() ; itR++, itI++, y++) {
+        A = time*sqrt(9.81 * sqrt(pow((2*M_PI*x)/lx, 2)+pow((2*M_PI*y)/ly, 2)) * (1+(pow((2*M_PI*x)/lx, 2)+pow((2*M_PI*y)/ly, 2))*pow(L, 2)));
+        *itR = height0R[x][y]*cos(A) - height0I[x][y]*sin(A) + height0R[nx-x][ny-y]*cos(-A) + height0I[nx-x][ny-y]*sin(-A);
+        *itI = height0I[x][y]*cos(A) + height0R[x][y]*sin(A) - height0I[nx-x][ny-y]*cos(-A) + height0R[nx-x][ny-y]*sin(-A);
     }
 }
 
 /* Creates an array that OpenGL can directly use - X */
-void Ocean::glVertexArrayX(int y, double *vectVertex, int offsetX, int offsetY) {
-    for(int x = 0 ; x < _nx ; x++) {
-        vectVertex[3*x]   = (_lx/_nx)*x + offsetX*_lx;
-        vectVertex[3*x+1] = pow(-1, x+y)*_hRt[y][x];
-        vectVertex[3*x+2] = (_ly/_ny)*y + offsetY*_ly;
+void Ocean::gl_vertex_array_x(int y, double *vertices, int offset_x, int offset_y) {
+    for(int x=0 ; x<nx ; x++) {
+        vertices[3*x]   = (lx/nx)*x + offset_x*lx;
+        vertices[3*x+1] = pow(-1, x+y)*hr[y][x];
+        vertices[3*x+2] = (ly/ny)*y + offset_y*ly;
     }
-    vectVertex[3*_nx]   = (1 + offsetX)*_lx;
-    vectVertex[3*_nx+1] = pow(-1, _nx+y)*_hRt[y][0]; 
-    vectVertex[3*_nx+2] = (_ly/_ny)*y + offsetY*_ly;
+    vertices[3*nx]   = (1 + offset_x)*lx;
+    vertices[3*nx+1] = pow(-1, nx+y)*hr[y][0];
+    vertices[3*nx+2] = (ly/ny)*y + offset_y*ly;
 }
 
 /* Creates an array that OpenGL can directly use - Y */
-void Ocean::glVertexArrayY(int x, double *vectVertex, int offsetX, int offsetY) {
-    for(int y = 0 ; y < _ny ; y++) {
-        vectVertex[3*y]   = (_lx/_nx)*x + offsetX*_lx;
-        vectVertex[3*y+1] = pow(-1, x+y)*_hRt[y][x];
-        vectVertex[3*y+2] = (_ly/_ny)*y + offsetY*_ly;
+void Ocean::gl_vertex_array_y(int x, double *vertices, int offset_x, int offset_y) {
+    for(int y=0 ; y<ny ; y++) {
+        vertices[3*y]   = (lx/nx)*x + offset_x*lx;
+        vertices[3*y+1] = pow(-1, x+y)*hr[y][x];
+        vertices[3*y+2] = (ly/ny)*y + offset_y*ly;
     }
-    vectVertex[3*_ny]   = (_lx/_nx)*x + offsetX*_lx;
-    vectVertex[3*_ny+1] = pow(-1, x+_ny)*_hRt[0][x]; 
-    vectVertex[3*_ny+2] = (1 + offsetY)*_ly;
+    vertices[3*ny]   = (lx/nx)*x + offset_x*lx;
+    vertices[3*ny+1] = pow(-1, x+ny)*hr[0][x];
+    vertices[3*ny+2] = (1 + offset_y)*ly;
 }
 
 /* Does all the calculus needed for the ocean */
-void Ocean::mainComputation() {
+void Ocean::main_computation() {
     // first FFT
-    for(int n = 0 ; n < _nx ; n++) {
+    for(int x=0 ; x<nx ; x++) {
         // puts heights in _hRf and _hIf
-        getSineAmp(n, (double)glutGet(GLUT_ELAPSED_TIME)/1000, &_hRf[n], &_hIf[n]);
-        _fft = FFT(_ny, _hRf[n], _hIf[n]);
-        _fft.calculR();
-        _fft.getResult(&_hRf[n], &_hIf[n]);
+        get_sine_amp(x, (double)glutGet(GLUT_ELAPSED_TIME)/1000, &HR[x], &HI[x]);
+        fft = FFT(ny, HR[x], HI[x]);
+        fft.reverse();
+        fft.get_result(&HR[x], &HI[x]);
     }
     // second one, since it is a 2D FFT
-    for(int y = 0 ; y < _ny ; y++) {
-        int n;
-        std::vector<double>::iterator it;
+    for(int y=0 ; y<ny ; y++) {
+        int      x;
+        vec_d_it it;
         // puts heights in _hRf and _hIf
-        for(it = _hRt[y].begin(), n = 0 ; it != _hRt[y].end() ; it++, n++) *it = _hRf[n][y];
-        for(it = _hIt[y].begin(), n = 0 ; it != _hIt[y].end() ; it++, n++) *it = _hIf[n][y];
-        _fft = FFT(_nx, _hRt[y], _hIt[y]);
-        _fft.calculR();
-        _fft.getResult(&_hRt[y], &_hIt[y]);
+        for(it=hr[y].begin(), x=0 ; it!=hr[y].end() ; it++, x++) *it = HR[x][y];
+        for(it=hi[y].begin(), x=0 ; it!=hi[y].end() ; it++, x++) *it = HI[x][y];
+        fft = FFT(nx, hr[y], hi[y]);
+        fft.reverse();
+        fft.get_result(&hr[y], &hi[y]);
     }
 }

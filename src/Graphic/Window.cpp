@@ -7,9 +7,6 @@ This software is offered under the GPL license. See COPYING for more information
 
 */
 
-#ifndef FENETREHPP
-#define FENETREHPP
-
 #include <cmath>
 #include <cstring>
 #include <ctime>
@@ -82,19 +79,19 @@ namespace Window {
     
     /* Draws the ocean */
     void draw_ocean() {
-        ocean->mainComputation();
+        ocean->main_computation();
         glColor3ub(82, 184, 255);
         for(int offsetX = 0 ; offsetX <= width ; offsetX++) {
             for(int offsetY = 0 ; offsetY <= height ; offsetY++) {
                 for(int x = 0 ; x < nxOcean ; x++) {
-                    ocean->glVertexArrayY(x, vertexOceanY, offsetX, offsetY);
+                    ocean->gl_vertex_array_y(x, vertexOceanY, offsetX, offsetY);
                     glEnableClientState(GL_VERTEX_ARRAY);
                     glVertexPointer(3, GL_DOUBLE, 0, vertexOceanY);
                     glDrawArrays(GL_LINE_STRIP, 0, nyOcean+1);
                     glDisableClientState(GL_VERTEX_ARRAY);
                 }
                 for(int y = 0 ; y < nyOcean ; y++) {
-                    ocean->glVertexArrayX(y, vertexOceanX, offsetX, offsetY);
+                    ocean->gl_vertex_array_x(y, vertexOceanX, offsetX, offsetY);
                     glEnableClientState(GL_VERTEX_ARRAY);
                     glVertexPointer(3, GL_DOUBLE, 0, vertexOceanX);
                     glDrawArrays(GL_LINE_STRIP, 0, nxOcean+1);
@@ -184,5 +181,3 @@ namespace Window {
     }
     
 }
-
-#endif

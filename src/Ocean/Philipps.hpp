@@ -18,21 +18,23 @@ class Philipps {
     
         double operator()();
     
-        void   init(int i)                                           { _x = i - _nx/2; _y = -_ny/2; }
-        void   setSize(double lx, double ly, double nx, double ny) { _lx = lx; _ly = ly; _nx = nx; _ny = ny; }
+        void set_size(double p_lx, double p_ly, double p_nx, double p_ny) { lx = p_lx; ly = p_ly; nx = p_nx; ny = p_ny; }
+        void init_fonctor(int i)                                          { x = i - nx/2; y = -ny/2; }
     
     private :
     
-  const double _A;                  // numeric constant to adjust
-  const int       _windAlignment;      // the greater it is, the better waves are in the wind's direction
-        double _lx;                 // real width
-        double _ly;                 // real height
-        int    _nx;                 // nb of x points - must be a power of 2
-        int    _ny;                 // nb of x points - must be a power of 2
-  const double _minWaveSize;        // waves are deleted if below this size
-  const double _windSpeed;          // wind speed
-        int    _x;
-        int    _y;
+  const double wind_speed;         // wind speed
+  const int    wind_alignment;     // the greater it is, the better waves are in the wind's direction
+  const double min_wave_size;      // waves are deleted if below this size
+  const double A;                  // numeric constant to adjust
+  
+        double lx;                 // real width
+        double ly;                 // real height
+        int    nx;                 // nb of x points - must be a power of 2
+        int    ny;                 // nb of x points - must be a power of 2
+        
+        int    x;
+        int    y;
     
 };
 

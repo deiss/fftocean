@@ -15,28 +15,30 @@ This software is offered under the GPL license. See COPYING for more information
 
 /* Operator overloading to use Height as a fonctor */
 double Height::operator()() {
-    _y++;
+    y++;
     // computes the initial random h0
-    return sqrt(_philipps[_x+(_nx/2)][_y+(_ny/2)]/2) * nbGauss();
+    return sqrt(philipps[x+(nx/2)][y+(ny/2)]/2) * gaussian();
 }
 
 /* Generates the Philips spectrum */
-void Height::generatePhilipps(Philipps *p) {
-    _philipps.resize(_nx+1);
-    for(std::vector<std::vector<double> >::iterator itx = _philipps.begin() ; itx != _philipps.end() ; itx++) {
-        itx->resize(_ny+1);
-        p->init(std::distance(_philipps.begin(), itx));
+void Height::generate_philipps(Philipps *p) {
+    philipps.resize(nx+1);
+    for(std::vector<std::vector<double> >::iterator itx=philipps.begin() ; itx!=philipps.end() ; itx++) {
+        itx->resize(ny+1);
+        p->init_fonctor(std::distance(philipps.begin(), itx));
         std::generate(itx->begin(), itx->end(), *p);
     }
 }
 
 /* Gaussian random generator - Box-Muller method */
-double Height::nbGauss() {
-    double var1, var2, s;
+double Height::gaussian() {
+    double var1;
+    double var2;
+    double s;
     do {
-        var1 = (rand() % 201 - 100)/(double)100;
-        var2 = (rand() % 201 - 100)/(double)100;
-        s = var1*var1 + var2*var2;
-    } while(s >= 1 || s == 0);
-    return var1*sqrt((-log(s))/s);
+        var1 = (rand() % 201 - 100)/static_cast<double>(100);
+        var2 = (rand() % 201 - 100)/static_cast<double>(100);
+        s    = var1*var1 + var2*var2;
+    } while(s>=1 || s==0);
+    return var1*sqrt(-log(s)/s);
 }

@@ -7,9 +7,6 @@ This software is offered under the GPL license. See COPYING for more information
 
 */
 
-#ifndef FFTHPP
-#define FFTHPP
-
 #include <cmath>
 #include <iostream>
 #include <vector>
@@ -17,108 +14,104 @@ This software is offered under the GPL license. See COPYING for more information
 #include "FFT.hpp"
 
 /* FFT constructor */
-FFT::FFT(int n, std::vector<double> vectR, std::vector<double> vectI) :
-    _n(n),
-    _p(0),
-    _xR(vectR),
-    _xI(vectI) {
-    while(n != 1) {
-        n /= 2;
-        _p++;
+FFT::FFT(int p_n, std::vector<double> p_real, std::vector<double> p_imag) :
+    n(p_n),
+    p(0),
+    real(p_real),
+    imag(p_imag) {
+    while(p_n!=1) {
+        p_n/=2;
+        p++;
     }
-    _vectR.resize(_n);
-    _vectI.resize(_n);
 }
 
 /* FFT */
-void FFT::radixDirect() {
-    int    n(_n);
-    std::vector<double> vectR(_n);
-    std::vector<double> vectI(_n);
-    for(int i = 0 ; i < _p ; i++) {                   // processus à faire _p fois
-        for(int j = 0 ; j < n/2 ; j++) {              // calculer pour n/2 sous parties
-            for(int k = 0 ; k < pow(2, i) ; k++) {    // calcul
-                _index1 = k+j*pow(2, i+1);
-                _index2 = _index1 + pow(2, i);
-                _var1 = (double)(-(2*M_PI)/pow(2, i+1))*_index1;
-                _cos = cos(_var1);
-                _sin = sin(_var1);
-                _var2 = _xI[_index2];
-                _var3 = _xR[_index2];
-                _var4 = _xR[_index1];
-                _var5 = _xI[_index1];
-                _vectR[_index1] = _var4 + _cos*_var3 - _sin*_var2;
-                _vectR[_index2] = _var4 - _cos*_var3 + _sin*_var2;
-                _vectI[_index1] = _var5 + _cos*_var2 + _sin*_var3;
-                _vectI[_index2] = _var5 - _cos*_var2 - _sin*_var3;
+void FFT::radix_direct() {
+    int                 n_copy = n;
+    std::vector<double> real_copy; real_copy.resize(n);
+    std::vector<double> imag_copy; imag_copy.resize(n);
+    for(int i=0 ; i<p ; i++) {                   // processus à faire _p fois
+        for(int j=0 ; j<n_copy/2 ; j++) {              // calculer pour n/2 sous parties
+            for(int k=0 ; k<pow(2, i) ; k++) {    // calcul
+                int    index1     = k+j*pow(2, i+1);
+                int    index2     = index1 + pow(2, i);
+                double var        = static_cast<double>(-(2*M_PI)/pow(2, i+1))*index1;
+                double v_cos      = cos(var);
+                double v_sin      = sin(var);
+                double imag2      = imag[index2];
+                double real2      = real[index2];
+                double real1      = real[index1];
+                double imag1      = imag[index1];
+                real_copy[index1] = real1 + v_cos*real2 - v_sin*imag2;
+                real_copy[index2] = real1 - v_cos*real2 + v_sin*imag2;
+                imag_copy[index1] = imag1 + v_cos*imag2 + v_sin*real2;
+                imag_copy[index2] = imag1 - v_cos*imag2 - v_sin*real2;
             }
         }
-        swap(_vectR, _xR);
-        swap(_vectI, _xI);
-        n /= 2;
+        swap(real_copy, real);
+        swap(imag_copy, imag);
+        n_copy /= 2;
     }
 }
 
 /* FFT-1 */
-void FFT::radixReverse() {
-    int    n(_n);
-    for(int i = 0 ; i < _p ; i++) {                   // processus à faire _p - 1 fois
-        for(int j = 0 ; j < n/2 ; j++) {              // calculer pour n/2 sous parties
-            for(int k = 0 ; k < pow(2, i) ; k++) {    // calcul
-                _index1 = k+j*pow(2, i+1);
-                _index2 = _index1 + pow(2, i);
-                _var1 = (double)((2*M_PI)/pow(2, i+1))*_index1;
-                _cos = cos(_var1);
-                _sin = sin(_var1);
-                _var2 = _xI[_index2];
-                _var3 = _xR[_index2];
-                _var4 = _xR[_index1];
-                _var5 = _xI[_index1];
-                _vectR[_index1] = _var4 + _cos*_var3 - _sin*_var2;
-                _vectR[_index2] = _var4 - _cos*_var3 + _sin*_var2;
-                _vectI[_index1] = _var5 + _cos*_var2 + _sin*_var3;
-                _vectI[_index2] = _var5 - _cos*_var2 - _sin*_var3;
+void FFT::radix_reverse() {
+    int                 n_copy = n;
+    std::vector<double> real_copy; real_copy.resize(n);
+    std::vector<double> imag_copy; imag_copy.resize(n);
+    for(int i=0 ; i<p ; i++) {                    // processus à faire _p fois
+        for(int j=0 ; j<n_copy/2 ; j++) {         // calculer pour n/2 sous parties
+            for(int k=0 ; k<pow(2, i) ; k++) {    // calcul
+                int    index1     = k+j*pow(2, i+1);
+                int    index2     = index1 + pow(2, i);
+                double var        = static_cast<double>((2*M_PI)/pow(2, i+1))*index1;
+                double v_cos      = cos(var);
+                double v_sin      = sin(var);
+                double imag2      = imag[index2];
+                double real2      = real[index2];
+                double real1      = real[index1];
+                double imag1      = imag[index1];
+                real_copy[index1] = real1 + v_cos*real2 - v_sin*imag2;
+                real_copy[index2] = real1 - v_cos*real2 + v_sin*imag2;
+                imag_copy[index1] = imag1 + v_cos*imag2 + v_sin*real2;
+                imag_copy[index2] = imag1 - v_cos*imag2 - v_sin*real2;
             }
         }
-        swap(_vectR, _xR);
-        swap(_vectI, _xI);
-        n /= 2;
+        swap(real_copy, real);
+        swap(imag_copy, imag);
+        n_copy /= 2;
     }
 }
 
 /* Sorts the data before applying the radix algorithm */
 void FFT::sort() {
-    int n(_n);
-    for(int i = 0 ; i < _p - 1 ; i++) {        // processus à répéter _p - 1 fois
-         std::vector<double> XR;
-         XR.reserve(_n);
-         std::vector<double> XI;
-         XI.reserve(_n);
-         _vectRp.resize(n/2);
-         _vectIp.resize(n/2);                                                    
-         _vectRi.resize(n/2);
-         _vectIi.resize(n/2);
-         std::vector<double>::iterator itR(XR.begin());
-         std::vector<double>::iterator itI(XI.begin());
-         for(int j = 0 ; j < _n/n ; j++) {      // réorganiser -n/n sous parties
-             for(int k = 0 ; k < n/2 ; k++) {   // réorganisation
-                 _index1 = 2*k+j*n;
-                 _vectRp[k] = _xR[_index1];
-                 _vectIp[k] = _xI[_index1];
-                 _vectRi[k] = _xR[_index1+1];
-                 _vectIi[k] = _xI[_index1+1];
-             }
-             XR.insert(itR, _vectRp.begin(), _vectRp.end());
-             XR.insert(XR.end(), _vectRi.begin(), _vectRi.end());
-             XI.insert(itI, _vectIp.begin(), _vectIp.end());
-             XI.insert(XI.end(), _vectIi.begin(), _vectIi.end());
-             itR = XR.end();
-             itI = XI.end();
-         }
-         swap(XR, _xR);
-         swap(XI, _xI);
-         n /= 2;
-     }
+    int n_copy = n;
+    for(int i=0 ; i<p-1 ; i++) {        // processus à répéter _p - 1 fois
+        std::vector<double> sorted_R; sorted_R.reserve(n);
+        std::vector<double> sorted_I; sorted_I.reserve(n);
+        std::vector<double> vectRp;   vectRp.resize(n_copy/2);
+        std::vector<double> vectIp;   vectIp.resize(n_copy/2);
+        std::vector<double> vectRi;   vectRi.resize(n_copy/2);
+        std::vector<double> vectIi;   vectIi.resize(n_copy/2);
+        std::vector<double>::iterator itR(sorted_R.begin());
+        std::vector<double>::iterator itI(sorted_I.begin());
+        for(int j=0 ; j<n/n_copy ; j++) {       // réorganiser -n/n sous parties
+            for(int k=0 ; k<n_copy/2 ; k++) {   // réorganisation
+                double index = 2*k+j*n_copy;
+                vectRp[k] = real[index];
+                vectIp[k] = imag[index];
+                vectRi[k] = real[index+1];
+                vectIi[k] = imag[index+1];
+            }
+            sorted_R.insert(itR, vectRp.begin(), vectRp.end());
+            sorted_I.insert(itI, vectIp.begin(), vectIp.end());
+            sorted_R.insert(sorted_R.end(), vectRi.begin(), vectRi.end());
+            sorted_I.insert(sorted_I.end(), vectIi.begin(), vectIi.end());
+            itR = sorted_R.end();
+            itI = sorted_I.end();
+        }
+        swap(sorted_R, real);
+        swap(sorted_I, imag);
+        n_copy /= 2;
+    }
 }
-
-#endif

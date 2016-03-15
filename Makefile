@@ -10,7 +10,7 @@ CC_FLAGS = -Wall -Wno-deprecated-declarations -std=c++11 -Ofast -funroll-loops
 EXEC     = ocean
 
 # project structure
-MODULES     = ./ Ocean FFT Affichage
+MODULES     = ./ Ocean FFT Graphic
 BUILD_DIR   = build
 BIN_DIR     = bin
 SRC_DIR     = $(addprefix src/, $(MODULES))

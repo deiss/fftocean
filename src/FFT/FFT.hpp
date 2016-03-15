@@ -7,6 +7,9 @@ This software is offered under the GPL license. See COPYING for more information
 
 */
 
+#ifndef FFTHPP
+#define FFTHPP
+
 #include <iostream>
 #include <vector>
 
@@ -14,36 +17,24 @@ class FFT {
 
     public :
     
-        FFT()                                                             { }
+        FFT() { }
         FFT(int, std::vector<double>, std::vector<double>);
-        void calculD()                                                     { sort(); radixDirect(); }
-        void calculR()                                                     { sort(); radixReverse(); }
-        void getResult(std::vector<double> *xR, std::vector<double> *xI) { *xR = _xR; *xI = _xI; }
+    
+        void direct()                                                             { sort(); radix_direct(); }
+        void reverse()                                                            { sort(); radix_reverse(); }
+        void get_result(std::vector<double>* p_real, std::vector<double>* p_imag) { *p_real = real; *p_imag = imag; }
     
     private :
     
-        void radixDirect();
-        void radixReverse();
+        void radix_direct();
+        void radix_reverse();
         void sort();
 
-        double                _cos;
-        int                    _index1;
-        int                    _index2;
-        int                    _n;
-        int                    _p;
-        double                _sin;
-        double                _var1;
-        double                _var2;
-        double                _var3;
-        double                _var4;
-        double                _var5;
-        std::vector<double> _vectR;
-        std::vector<double> _vectI;
-        std::vector<double> _vectRp;
-        std::vector<double> _vectIp;
-        std::vector<double> _vectRi;
-        std::vector<double> _vectIi;
-        std::vector<double> _xR;
-        std::vector<double> _xI;
+        int                 n;
+        int                 p;
+        std::vector<double> real;
+        std::vector<double> imag;
     
 };
+
+#endif

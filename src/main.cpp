@@ -11,7 +11,7 @@ This software is offered under the GPL license. See COPYING for more information
 #include <ctime>
 #include <iostream>
 
-#include "Affichage/Window.hpp"
+#include "Graphic/Window.hpp"
 #include "Ocean/Ocean.hpp"
 
 /* Ocean(lx, ly, nx, ny, windSpeed,  windAlignment, minWaveSize, A) */
@@ -27,7 +27,7 @@ int main (int argc, char** argv) {
     srand(time(NULL));
     
     /* initial ocean wave height field */
-    ocean->generateHeight0();
+    ocean->generate_height_0();
     
     /* set up of the window */
     Window::init(WIDTH, HEIGHT, "Ocean Simulation", argc, argv);

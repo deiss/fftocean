@@ -7,7 +7,10 @@ This software is offered under the GPL license. See COPYING for more information
 
 */
 
-#define WIDTH 640
+#ifndef WINDOWHPP
+#define WINDOWHPP
+
+#define WIDTH  640
 #define HEIGHT 480
 
 #include "../Ocean/Ocean.hpp"
@@ -31,3 +34,5 @@ namespace Window {
     void setFPS(int);
 
 }
+
+#endif

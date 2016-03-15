@@ -7,9 +7,6 @@ This software is offered under the GPL license. See COPYING for more information
 
 */
 
-#ifndef CAMERAHPP
-#define CAMERAHPP
-
 #include <iostream>
 
 #include "GLUT/glut.h"
@@ -71,5 +68,3 @@ void Camera::translation() {
         _Z += cos(_theta)*sin(_psi) * _translationSpeed * t;
     }
 }
-                                                                                          
-#endif
