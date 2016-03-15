@@ -1,10 +1,7 @@
 /*
-
 Project: Ocean
-Author: DEISS Olivier
-
-This software is offered under the GPL license. See COPYING for more information.
-
+Author:  DEISS Olivier
+License: This software is offered under the GPL license. See COPYING for more information.
 */
 
 #ifndef CAMERAHPP
@@ -14,38 +11,44 @@ This software is offered under the GPL license. See COPYING for more information
 
 class Camera {
 
-    public :
+	public :
+	
+		Camera(float, float, float, float, float, float, float, int, int);
+        ~Camera() {}
     
-        Camera(float, float, float, float, float, float, float, int, int);
-        int      getMouseX()                    { return _mouseX; }
-        float getSightX()                    { return _X + sin(_theta)*sin(_psi); }
-        float getSightY()                    { return _Y + cos(_psi); }
-        float getSightZ()                    { return _Z + cos(_theta)*sin(_psi); }
-        float getX()                        { return _X; }
-        float getY()                        { return _Y; }
-        float getZ()                        { return _Z; }
-        void  rotation(int, int);
-        void  setKeyboard(int i, bool etat) { _keyboard[i] = etat; }
-        void  setMouse(int x, int y)        { _mouseX = x; _mouseY = y; }
-        void  setX(float X)                    { _X = X; }
-        void  setY(float Y)                    { _Y = Y; }
-        void  setZ(float Z)                    { _Z = Z; }
-        void  translation();    
-    
-    private :
-    
-        bool  _keyboard[255];
-        int      _mouseX;
-        int      _mouseY;
-        float _psi;
-        float _rotationSpeed;
-        int   _time;
-        float _theta;
-        float _translationSpeed;
-        float _X;
-        float _Y;
-        float _Z;
-    
+		int	  getMouseX() { return mouse_x; }
+		int	  getMouseY() { return mouse_y; }
+		float getSightX() { return X + sin(theta)*sin(psi); }
+		float getSightY() { return Y + cos(psi); }
+		float getSightZ() { return Z + cos(theta)*sin(psi); }
+		float getX()      { return X; }
+		float getY()      { return Y; }
+		float getZ()      { return Z; }
+
+		void setKeyboard(int i, bool state) { keyboard[i] = state; }
+		void setMouse(int x, int y)		    { mouse_x = x; mouse_y = y; }
+		void setX(float X)					{ X = X; }
+		void setY(float Y)					{ Y = Y; }
+		void setZ(float Z)					{ Z = Z; }
+		
+        void rotation(int, int);
+        void translation();
+	
+	private :
+	
+		bool  keyboard[255];      // to know if one specific key is up or down. UP = false
+		
+		float X;
+		float Y;
+		float Z;
+        int	  mouse_x;
+		int	  mouse_y;
+		float psi;
+		float theta;
+		float rotation_speed;
+		float translation_speed;
+		int   time;
+	
 };
-                                                                                          
+                                                                                 
 #endif
