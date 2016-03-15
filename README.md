@@ -26,7 +26,7 @@ To launch the simulation, call `bin/ocean`:
     bin/ocean
 
 To close the application:
-* MacOS: `cmd+Q`
+* Mac: `cmd+Q`
 * Linux: `alt+f4` or `esc`
 
 ***
