@@ -10,7 +10,8 @@ The camera is implemented as a sphere. Its center defines the position of the ca
 and one point on the sphere surface defines the sight. The calculus involves psi and
 theta angles, which represent the spherical coordinates system.
 To look around, call rotation() from the mouse event function, and to move, call
-translation() from the keyboard event function. Then, using the get*() functions,
+the setKeyboard() function from the keyboard event function. Then, in the drawing
+function, call translation() to update the position, and using the get*() functions,
 call the gluLookAt() function with the matching parameters.
 */
 
