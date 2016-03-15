@@ -10,14 +10,18 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 #include "Height.hpp"
 
-/* Operator overloading to use Height as a fonctor */
+/*
+Computes the original spectrum. This uses the Philipps spectrum
+and a gaussian number so that the scene is different every time.
+*/
 double Height::operator()() {
     y++;
-    // computes the initial random h0
     return sqrt(philipps[x+(nx/2)][y+(ny/2)]/2) * gaussian();
 }
 
-/* Generates the Philips spectrum */
+/*
+Generates the Philips spectrum using the Philipps fonctor.
+*/
 void Height::generate_philipps(Philipps *p) {
     philipps.resize(nx+1);
     for(std::vector<std::vector<double> >::iterator itx=philipps.begin() ; itx!=philipps.end() ; itx++) {
@@ -27,7 +31,10 @@ void Height::generate_philipps(Philipps *p) {
     }
 }
 
-/* Gaussian random generator - Box-Muller method */
+/*
+Gaussian random generator. The numbers are generated
+using the Box-Muller method.
+*/
 double Height::gaussian() {
     double var1;
     double var2;
