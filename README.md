@@ -29,6 +29,8 @@ To close the application:
 * *MacOS*: `cmd+Q`
 * *Linux*: `alt+f4` or `esc`
 
+***
+
 ### Contact
 
 olivier . deiss [at] gmail . com
