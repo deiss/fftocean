@@ -1,11 +1,12 @@
 # FFT-Ocean
 
 ![Screenshot](media/Screenshot.png)
-[See on Youtube](http://youtu.be/JSNyfPAvYbg)
 
 ## PROJECT
 
 FFT-Ocean is a C++ implementation of researcher [J. Tessendorf's paper](http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf) *"Simulating Ocean Water"*. The (reverse) FFT is used to compute the 2D wave height field from the Philips spectrum. It is possible to adjusts parameters such as wind speed, direction and strength, wave choppiness, and sea depth.
+
+[See on Youtube](http://youtu.be/JSNyfPAvYbg)
 
 ## LICENSE
 
