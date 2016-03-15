@@ -24,18 +24,18 @@ int mainwindow;
 
 int main (int argc, char** argv) {
     /* random for gaussian numbers */
-	srand(time(NULL));
-	
+    srand(time(NULL));
+    
     /* initial ocean wave height field */
-	ocean->generateHeight0();
-	
+    ocean->generateHeight0();
+    
     /* set up of the window */
-	Window::init(WIDTH, HEIGHT, "Ocean Simulation", argc, argv);
-	Window::setFPS(35);
-	Window::launch();
-	
-	Window::quit();
-	delete ocean;
-	
+    Window::init(WIDTH, HEIGHT, "Ocean Simulation", argc, argv);
+    Window::setFPS(35);
+    Window::launch();
+    
+    Window::quit();
+    delete ocean;
+    
     return 0;
 }
