@@ -41,7 +41,7 @@ Camera::Camera(KEYBOARD p_keyboard, float p_X, float p_Y, float p_Z, float p_psi
         case QWERTY:
             key_map[FORWARD]  = static_cast<int>('w');
             key_map[BACKWARD] = static_cast<int>('s');
-            key_map[LEFT]     = static_cast<int>('q');
+            key_map[LEFT]     = static_cast<int>('a');
             key_map[RIGHT]    = static_cast<int>('d');
             break;
     }
