@@ -9,7 +9,9 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 #include "Philipps.hpp"
 
-/* Philips constructor */
+/*
+Initializes the variables.
+*/
 Philipps::Philipps(const double p_wind_speed, const int p_wind_alignment, const double p_min_wave_size, const double p_A) :
     wind_speed(p_wind_speed),
     wind_alignment(p_wind_alignment),
@@ -17,7 +19,10 @@ Philipps::Philipps(const double p_wind_speed, const int p_wind_alignment, const 
     A(p_A) {
 }
 
-/* Philips spectrum fonctor */
+/*
+Philipps spectrum fonctor. See J. Tessendorf's paper for more information
+and the mathematical formula.
+*/
 double Philipps::operator()() {
     double g    = 9.81;
     double kx   = (2*M_PI*x)/lx;
