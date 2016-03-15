@@ -1,7 +1,7 @@
 # FFT-Ocean
 
 ![Screenshot](media/Screenshot.png)
-[Youtube video](http://youtu.be/JSNyfPAvYbg)
+[See the project on Youtube](http://youtu.be/JSNyfPAvYbg)
 
 ## PROJECT
 
