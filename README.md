@@ -10,7 +10,7 @@ FFT-Ocean is a C++ implementation of researcher [J. Tessendorf's paper](http://g
 
 ## LICENSE
 
-This project is licensed under the GPL License. See COPYING for more information.
+This project is licensed under the GPL License. See [COPYING](COPYING) for more information.
 
 ***
 
