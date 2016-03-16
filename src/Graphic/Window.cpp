@@ -18,8 +18,10 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 namespace Window {
     
-    /* For every GLUT project */
-    Camera          camera(Camera::AZERTY, -100, 100, -100, 4*M_PI/7, M_PI/4, 0.01, 0.2, WIDTH, HEIGHT);
+    /* allows to move in the 3D scene */
+    Camera camera(Camera::AZERTY, -100, 100, -100, 4*M_PI/7, M_PI/4, 0.01, 0.2, WIDTH, HEIGHT);
+    
+    /* keeps a constant FPS */
     int             frames(-1);
     int             fps;
     int             fps_goal;  // expected FPS
@@ -28,17 +30,14 @@ namespace Window {
     int             t;
     struct timespec tim1, tim2;
 
-    /* For FFT-Ocean */
-    int        nxOcean;
-    int        nyOcean;
-    double *vertexOceanX; // to call glVertexPointer
-    double *vertexOceanY; // to call glVertexPointer
-    
-    /* To duplicate the waves */
-    int    height = 1;
-    int width = 1;
+    /* Ocean vertices and parameters */
+    int     nxOcean;
+    int     nyOcean;
+    double* vertexOceanX;
+    double* vertexOceanY;
+    int     height = 1; /* for waves squares dupplication */
+    int     width  = 1; /* for waves squares dupplication */
 
-    /* Main draw function */
     void draw() {
         if(glutGet(GLUT_ELAPSED_TIME) - t >= 1000) fps_action();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -54,7 +53,6 @@ namespace Window {
         frames++;
     }
     
-    /* Draws the FPS in the top right corner */
     void draw_fps() {
         glMatrixMode(GL_PROJECTION);
         glPushMatrix();
@@ -74,7 +72,6 @@ namespace Window {
         glPopMatrix();
     }
     
-    /* Draws the ocean */
     void draw_ocean() {
         ocean->main_computation();
         glColor3ub(82, 184, 255);
@@ -99,7 +96,6 @@ namespace Window {
         glColor3ub(0, 0, 0);
     }
     
-    /* Maintains a stable FPS */
     void fps_action() {
         t      = glutGet(GLUT_ELAPSED_TIME);
         fps    = frames;
@@ -111,7 +107,6 @@ namespace Window {
         tim1.tv_nsec = (int)(((double)(1.0/fps_goal) - (double)(1.0/fps))*pow(10, 9) + sleep_avant) % 1000000000;
     }
     
-    /* OpenGL init function */
     void init(int width, int height, std::string titre, int argc, char **argv) {
         glutInit(&argc, argv);
         glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
@@ -120,17 +115,14 @@ namespace Window {
         glEnable(GL_MULTISAMPLE);
     }
     
-    /* Keyboard function */
     void keyboard(unsigned char key, int x, int y) {
         camera.setKeyboard(key, true);
     }
     
-    /* Keyboard function */
     void keyboardUp(unsigned char key, int x, int y) {
         camera.setKeyboard(key, false);
     }
 
-    /* Starts the rendering */
     void launch() {
         tim1.tv_sec  = 0;
         tim1.tv_nsec = 0;
@@ -145,11 +137,10 @@ namespace Window {
         glutPassiveMotionFunc(mouseMove);
         glutKeyboardFunc(keyboard);
         glutKeyboardUpFunc(keyboardUp);
-        glutWarpPointer(WIDTH/2, HEIGHT/2+40);     // +40 for mac
+        glutWarpPointer(WIDTH/2, HEIGHT/2+40);   /* +40 for mac bar */
         glutMainLoop();
     }
     
-    /* Mouse function */
     void mouseMove(int x, int y) {
         camera.rotation(x, y);
         if(x >= WIDTH || x <= 0 || y >= HEIGHT || y <= 0) {
@@ -158,21 +149,18 @@ namespace Window {
         }
     }
     
-    /* Memory freeing */
     void quit() {
         delete[] vertexOceanX;
         delete[] vertexOceanY;
     }
 
-    /* Reshape function */
     void reshape(int width, int height) {
         glViewport(0, 0, width, height);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(45, float(width)/float(height), 1, 100*ocean->get_ny());    // (near, .., .., far)
+        gluPerspective(45, float(width)/float(height), 1, 100*ocean->get_ny());
     }
     
-    /* fps accessor */
     void setFPS(int f) {
         fps_goal = f;
     }

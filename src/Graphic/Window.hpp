@@ -4,6 +4,11 @@ Author:  DEISS Olivier
 License: This software is offered under the GPL license. See COPYING for more information.
 */
 
+/*
+This namespace deals with the rendering of the application. It receives the
+events (mouse, keyboard) and prints the ocean, fps to screen.
+*/
+
 #ifndef WINDOWHPP
 #define WINDOWHPP
 
@@ -17,18 +22,21 @@ extern int    mainwindow;
 
 namespace Window {
 
-    void draw();
-    void draw_fps();
-    void draw_ocean();
-    void fps_action();
-    void init(int, int, std::string, int, char**);
-    void keyboard(unsigned char, int, int);
-    void keyboardUp(unsigned char, int, int);
-    void launch();
-    void mouseMove(int, int);
-    void quit();
-    void reshape(int, int);
+    void draw();                                     /* main drawing function, calls the above ones */
+    void draw_fps();                                 /* draws the FPS (Frames Per Second) in the top right corner */
+    void draw_ocean();                               /* draws the ocean, don't forget to call that one... */
+    
     void setFPS(int);
+    void fps_action();                               /* given the current FPS and the target FPS, computes the needed sleeping time */
+    void init(int, int, std::string, int, char**);
+    
+    void keyboard(unsigned char, int, int);          /* keyboard (key is pushed) event function */
+    void keyboardUp(unsigned char, int, int);        /* keyboard (key is released) event function */
+    void mouseMove(int, int);                        /* mouse event function */
+
+    void launch();                                   /* creates the window, initializes the variables and start the drawing */
+    void quit();                                     /* clean exit - actually never executed */
+    void reshape(int, int);                          /* sets the viewport and perspective */
 
 }
 
