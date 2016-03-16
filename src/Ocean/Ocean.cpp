@@ -60,18 +60,16 @@ is useless in our application.
 void Ocean::main_computation() {
     for(int x=0 ; x<nx ; x++) {
         get_sine_amp(x, static_cast<double>(glutGet(GLUT_ELAPSED_TIME))/1000, &HR[x], &HI[x]);
-        fft = FFT(ny, HR[x], HI[x]);
+        fft = FFT(ny, &HR[x], &HI[x]);
         fft.reverse();
-        fft.get_result(&HR[x], &HI[x]);
     }
     for(int y=0 ; y<ny ; y++) {
         int      x;
         vec_d_it it;
         for(it=hr[y].begin(), x=0 ; it!=hr[y].end() ; it++, x++) *it = HR[x][y];
         for(it=hi[y].begin(), x=0 ; it!=hi[y].end() ; it++, x++) *it = HI[x][y];
-        fft = FFT(nx, hr[y], hi[y]);
+        fft = FFT(nx, &hr[y], &hi[y]);
         fft.reverse();
-        fft.get_result(&hr[y], &hi[y]);
     }
 }
 

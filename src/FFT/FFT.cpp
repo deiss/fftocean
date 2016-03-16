@@ -13,7 +13,7 @@ License: This software is offered under the GPL license. See COPYING for more in
 /*
 Initializes the variables and computes p so that n = 2^p.
 */
-FFT::FFT(int p_n, std::vector<double> p_real, std::vector<double> p_imag) :
+FFT::FFT(int p_n, std::vector<double>* p_real, std::vector<double>* p_imag) :
     n(p_n),
     p(0),
     real(p_real),
@@ -43,18 +43,18 @@ void FFT::radix_direct() {
                 double var        = static_cast<double>(-(2*M_PI)/pow(2, i+1))*index1;
                 double v_cos      = cos(var);
                 double v_sin      = sin(var);
-                double imag2      = imag[index2];
-                double real2      = real[index2];
-                double real1      = real[index1];
-                double imag1      = imag[index1];
+                double imag2      = imag->at(index2);
+                double real2      = real->at(index2);
+                double real1      = real->at(index1);
+                double imag1      = imag->at(index1);
                 real_copy[index1] = real1 + v_cos*real2 - v_sin*imag2;
                 real_copy[index2] = real1 - v_cos*real2 + v_sin*imag2;
                 imag_copy[index1] = imag1 + v_cos*imag2 + v_sin*real2;
                 imag_copy[index2] = imag1 - v_cos*imag2 - v_sin*real2;
             }
         }
-        swap(real_copy, real);
-        swap(imag_copy, imag);
+        swap(real_copy, *real);
+        swap(imag_copy, *imag);
         n_copy /= 2;
     }
 }
@@ -78,18 +78,18 @@ void FFT::radix_reverse() {
                 double var        = static_cast<double>((2*M_PI)/pow(2, i+1))*index1;
                 double v_cos      = cos(var);
                 double v_sin      = sin(var);
-                double imag2      = imag[index2];
-                double real2      = real[index2];
-                double real1      = real[index1];
-                double imag1      = imag[index1];
+                double imag2      = imag->at(index2);
+                double real2      = real->at(index2);
+                double real1      = real->at(index1);
+                double imag1      = imag->at(index1);
                 real_copy[index1] = real1 + v_cos*real2 - v_sin*imag2;
                 real_copy[index2] = real1 - v_cos*real2 + v_sin*imag2;
                 imag_copy[index1] = imag1 + v_cos*imag2 + v_sin*real2;
                 imag_copy[index2] = imag1 - v_cos*imag2 - v_sin*real2;
             }
         }
-        swap(real_copy, real);
-        swap(imag_copy, imag);
+        swap(real_copy, *real);
+        swap(imag_copy, *imag);
         n_copy /= 2;
     }
 }
@@ -117,10 +117,10 @@ void FFT::sort() {
             /* reorganize sub array */
             for(int k=0 ; k<n_copy/2 ; k++) {
                 double index = 2*k+j*n_copy;
-                vectRp[k]    = real[index];
-                vectIp[k]    = imag[index];
-                vectRi[k]    = real[index+1];
-                vectIi[k]    = imag[index+1];
+                vectRp[k]    = real->at(index);
+                vectIp[k]    = imag->at(index);
+                vectRi[k]    = real->at(index+1);
+                vectIi[k]    = imag->at(index+1);
             }
             sorted_R.insert(itR, vectRp.begin(), vectRp.end());
             sorted_I.insert(itI, vectIp.begin(), vectIp.end());
@@ -129,8 +129,8 @@ void FFT::sort() {
             itR = sorted_R.end();
             itI = sorted_I.end();
         }
-        swap(sorted_R, real);
-        swap(sorted_I, imag);
+        swap(sorted_R, *real);
+        swap(sorted_I, *imag);
         n_copy /= 2;
     }
 }
