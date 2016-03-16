@@ -15,11 +15,12 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 /* Ocean constructor */
 Ocean::Ocean(const double p_lx, const double p_ly, const int p_nx, const int p_ny, const double p_wind_speed, const int p_wind_alignment, const double p_min_wave_size, const double p_A) :
-    philipps(new Philipps(p_wind_speed, p_wind_alignment, p_min_wave_size, p_A)),
     lx(p_lx),
     ly(p_ly),
     nx(p_nx),
-    ny(p_ny) {
+    ny(p_ny),
+    philipps(new Philipps(p_wind_speed, p_wind_alignment, p_min_wave_size, p_A, p_lx, p_ly, p_nx, p_ny)),
+    height(nx, ny) {
     height0I.resize(nx+1);
     height0R.resize(nx+1);
     HR.resize(nx+1);
@@ -30,8 +31,6 @@ Ocean::Ocean(const double p_lx, const double p_ly, const int p_nx, const int p_n
     for(vec_vec_d_it it=HI.begin() ; it!=HI.end() ; it++) it->resize(ny+1);
     for(vec_vec_d_it it=hr.begin() ; it!=hr.end() ; it++) it->resize(nx+1);
     for(vec_vec_d_it it=hi.begin() ; it!=hi.end() ; it++) it->resize(nx+1);
-    height.set_size(nx, ny);
-    philipps->set_size(lx, ly, nx, ny);
 }
 
 Ocean::~Ocean() {

@@ -34,8 +34,7 @@ class Ocean {
         typedef std::vector<std::vector<double> >::iterator vec_vec_d_it;
     
         void get_sine_amp(int, double, std::vector<double>*, std::vector<double>*);
-        
-        Philipps* philipps;  // philips spectrum
+    
         FFT       fft;       // fft structure to computes the transformation
     
   const double    lx;        // real width
@@ -43,6 +42,7 @@ class Ocean {
   const int       nx;        // nb of x points - must be a power of 2
   const int       ny;        // nb of y points - must be a power of 2
   
+        Philipps* philipps;  // philips spectrum
         Height    height;    // initial random ocean wave height field - [x][y]
         vec_vec_d height0I;  // tmp wave height field
         vec_vec_d height0R;  // I : imaginary - R : real

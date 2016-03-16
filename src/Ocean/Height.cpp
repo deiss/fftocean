@@ -10,6 +10,20 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 #include "Height.hpp"
 
+Height::Height(const int p_nx, const int p_ny) :
+    nx(p_nx),
+    ny(p_ny) {
+}
+
+/*
+This function initializes the variables to the right values before
+a series of calls to the functor.
+*/
+void Height::init_fonctor(int i) {
+    x = i - nx/2;
+    y = -ny/2;
+}
+
 /*
 Computes the original spectrum. This uses the Philipps spectrum
 and a gaussian number so that the scene is different every time.

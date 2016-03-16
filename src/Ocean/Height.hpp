@@ -23,17 +23,19 @@ class Height {
     
     public :
     
+        Height(const int, const int);
+        ~Height() {}
+    
         double operator()();
     
-        void   set_size(double p_nx, double p_ny) { nx = p_nx; ny = p_ny; }
-        void   init_fonctor(int i)                { x = i - nx/2; y = -ny/2; }
+        void   init_fonctor(int);
         void   generate_philipps(Philipps*);
         double gaussian();
      
     private :
     
-        int                               nx;        /* nb of x points - must be a power of 2 */
-        int                               ny;        /* nb of y points - must be a power of 2 */
+        const int                         nx;        /* nb of x points - must be a power of 2 */
+        const int                         ny;        /* nb of y points - must be a power of 2 */
         std::vector<std::vector<double> > philipps;  /* Philips spectrum _philipps[y][x] */
         int                               x;
         int                               y;
