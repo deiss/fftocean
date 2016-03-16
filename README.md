@@ -34,7 +34,7 @@ To close the application:
 * Mac: `cmd+Q`
 * Linux: `alt+f4` or `esc`
 
-Using the mouse, you can look around you. To move, the keys depend on the keyboard.
+Using the mouse, you can look around you. To move, the keys depend on the keyboard, and you can specify the type of keyboard you are using with the option `--keyboard` (default: "azerty").
 
 ##### AZERTY
 

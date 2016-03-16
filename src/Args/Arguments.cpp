@@ -45,7 +45,7 @@ void Arguments::print_help() {
     std::cout << "   --nx <value>               Number of subdivision of the ocean. The higher it is, the mode precise the waves are. This needs to be a power of 2. Default: 256." << std::endl;
     std::cout << "   --motion_factor <value>    Allows to slow down or speed up the simulation. Default: 0.6." << std::endl;
     std::cout << "   --wind_speed <value>       Speed of the wind. Default: 50." << std::endl;
-    std::cout << "   --wind_alignment <value>   Defines how the waves should stay in the wind's direction This parameter is an integer. Default: 2." << std::endl;
+    std::cout << "   --wind_alignment <value>   Defines how the waves should stay in the wind's direction. This parameter is an integer. Default: 2." << std::endl;
     std::cout << "   --min_wave_size <value>    Defines the minimum wave height and makes the simulation smoother. Default: 0.1." << std::endl;
     std::cout << "   --A <value>                Adjustment parameter, to increase or decrease wave depth. Default: 0.0000038." << std::endl;
 }
