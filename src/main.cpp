@@ -12,27 +12,43 @@ License: This software is offered under the GPL license. See COPYING for more in
 #include "Ocean/Ocean.hpp"
 
 /* Ocean(lx, ly, nx, ny, windSpeed,  windAlignment, minWaveSize, A) */
-// See Philipps.hpp for more details about these parameters
-Ocean* ocean = new Ocean(170, 350, 64, 128, 50, 2, 0, 0.000003);
-//Ocean *ocean = new Ocean(128, 128, 128, 128, 10, 2, 0, 0.00005);
+Ocean* ocean;
 
 /* handle for the window */
 int mainwindow;
 
 int main (int argc, char** argv) {
+
     /* random for gaussian numbers */
     srand(time(NULL));
     
-    /* initial ocean wave height field */
-    ocean->generate_height_0();
+    /* ocean parameters */
+    const double lx             = 170;
+    const double ly             = 350;
+    const int    nx             = 64;
+    const int    ny             = 128;
+    const double wind_speed     = 50;
+    const int    wind_alignment = 2;
+    const double min_wave_size  = 0;
+    const double A              = 0.000003;
     
-    /* set up of the window */
-    Window::init(WIDTH, HEIGHT, "Ocean Simulation", argc, argv);
+    /* spectrum and ocean */
+    Philipps philipps(lx, ly, nx, ny, wind_speed, wind_alignment, min_wave_size, A);  /* Philipps spectrum */
+    Height   height(nx, ny);                                                          /* initial wave height field */
+    ocean = new Ocean(lx, ly, nx, ny);
+    
+    height.generate_philipps(&philipps); /* Philipps spectrum */
+    ocean->generate_height(&height);     /* initial ocean wave height field */
+    
+    /* rendering */
+    Window::init(WIDTH, HEIGHT, "FFTOcean", argc, argv);
     Window::setFPS(35);
     Window::launch();
     
+    /* free */
     Window::quit();
     delete ocean;
     
     return 0;
+    
 }

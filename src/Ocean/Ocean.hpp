@@ -23,13 +23,14 @@ class Ocean {
     
     public :
     
-        Ocean(const double, const double, const int, const int, const double, const int, const double, const double);
+        Ocean(const double, const double, const int, const int);
+        //Ocean(const double, const double, const int, const int, const double, const int, const double, const double);
         ~Ocean();
     
         int  get_nx() { return nx; }
         int  get_ny() { return ny; }
     
-        void generate_height_0();
+        void generate_height(Height*);
         void main_computation();
         void gl_vertex_array_x(int, double*, int, int);
         void gl_vertex_array_y(int, double*, int, int);
@@ -42,13 +43,11 @@ class Ocean {
     
         void get_sine_amp(int, double, std::vector<double>*, std::vector<double>*);
     
-  const double    lx;        /* actual width */
-  const double    ly;        /* actual height */
-  const int       nx;        /* nb of x points - must be a power of 2 */
-  const int       ny;        /* nb of y points - must be a power of 2 */
+  const double lx;           /* actual width */
+  const double ly;           /* actual height */
+  const int    nx;           /* nb of x points - must be a power of 2 */
+  const int    ny;           /* nb of y points - must be a power of 2 */
   
-        Philipps* philipps;  /* philips spectrum */
-        Height    height;    /* initial random ocean wave height field - [x][y] */
         vec_vec_d height0R;  /* initial wave height field (spectrum) - real part */
         vec_vec_d height0I;  /* initial wave height field (spectrum) - imaginary part */
     

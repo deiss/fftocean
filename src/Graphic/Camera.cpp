@@ -86,7 +86,6 @@ void Camera::translation() {
     }
     if(keys[key_map[RIGHT]]) {
         X -= sin(theta + M_PI/2)*sin(psi) * translation_speed * t;
-        Z -= cos(
-        theta + M_PI/2)*sin(psi) * translation_speed * t;
+        Z -= cos(theta + M_PI/2)*sin(psi) * translation_speed * t;
     }
 }
