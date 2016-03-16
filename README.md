@@ -22,9 +22,13 @@ Linux/Mac : `make` will create the binary in the `bin` directory.
 
 ### Use
 
-To launch the simulation, call `bin/ocean`:
+To launch a default simulation, call `bin/ocean`:
 
     bin/ocean
+    
+You can specify more parameters for the simulation. You can get a list of these parameters with the option `--help`.
+
+    bin/ocean --help
 
 To close the application:
 * Mac: `cmd+Q`
