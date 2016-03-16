@@ -107,15 +107,15 @@ namespace Window {
         tim1.tv_nsec = (int)(((double)(1.0/fps_goal) - (double)(1.0/fps))*pow(10, 9) + sleep_avant) % 1000000000;
     }
     
-    void init(int width, int height, std::string titre, int argc, char** argv) {
+    void init(int width, int height, std::string titre, int argc, char** argv, std::string keyboard, int p_fps) {
         glutInit(&argc, argv);
         glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
         glutInitWindowSize(width, height);
         mainwindow = glutCreateWindow(titre.c_str());
         glEnable(GL_MULTISAMPLE);
-        
-        Camera::KEYBOARD mode = keyboard_mode=="azerty" ? Camera::AZERTY : Camera::QWERTY;
+        Camera::KEYBOARD mode = keyboard=="azerty" ? Camera::AZERTY : Camera::QWERTY;
         camera = new Camera(mode, -100, 100, -100, 4*M_PI/7, M_PI/4, 0.01, 0.2, WIDTH, HEIGHT);
+        fps_goal = p_fps;
     }
     
     void keyboard(unsigned char key, int x, int y) {
@@ -162,10 +162,6 @@ namespace Window {
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         gluPerspective(45, float(width)/float(height), 1, 100*ocean->get_ny());
-    }
-    
-    void setFPS(int f) {
-        fps_goal = f;
     }
     
 }
