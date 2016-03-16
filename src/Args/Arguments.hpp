@@ -19,17 +19,17 @@ class Arguments {
 
     public:
     
-        double      lx;
-        double      ly;
-        int         fps;
-        int         nx;
-        int         ny;
-        double      wind_speed;
-        int         wind_alignment;
-        double      min_wave_size;
-        double      A;
-        double      motion_factor;
-        std::string keyboard;
+        double      lx;               /* width of the scene */
+        double      ly;               /* height of the scene */
+        int         fps;              /* target FPS of the simulation */
+        int         nx;               /* waves detail level */
+        int         ny;               /* waves detail level */
+        double      wind_speed;       /* wind speed */
+        int         wind_alignment;   /* to specify how the waves should align to the wind */
+        double      min_wave_size;    /* minimum wave size, to smooth the simulation */
+        double      A;                /* amplification factor */
+        double      motion_factor;    /* motion factor to slow down or speed up the simulation */
+        std::string keyboard;         /* keyboard mode: azerty or qwerty */
     
         Arguments(int, char**);
         ~Arguments() {}
@@ -43,9 +43,9 @@ class Arguments {
         bool parse_string_arg(std::string, int*, std::string*, std::string);
         bool check_long_args(std::string);
     
-        std::set<std::string> arg_set;
-        int                   argc;
-        char**                argv;
+        std::set<std::string> arg_set;   /* if an argument is correct and specified it is added to this set */
+        int                   argc;      /* number of arguments */
+        char**                argv;      /* value of arguments */
 
 };
 
