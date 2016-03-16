@@ -23,8 +23,8 @@ namespace Window {
     
     /* keeps a constant FPS */
     int             frames(-1);
-    int             fps;
-    int             fps_goal;  // expected FPS
+    int             fps;              /* actual FPS */
+    int             fps_goal;         /* expected FPS */
     std::string     fps_str;
     time_t          sleep_avant(0);
     int             t;
@@ -35,8 +35,8 @@ namespace Window {
     int     nyOcean;
     double* vertexOceanX;
     double* vertexOceanY;
-    int     height = 1; /* for waves squares dupplication */
-    int     width  = 1; /* for waves squares dupplication */
+    int     height = 1;    /* for waves squares dupplication */
+    int     width  = 1;    /* for waves squares dupplication */
 
     void draw() {
         if(glutGet(GLUT_ELAPSED_TIME) - t >= 1000) fps_action();
