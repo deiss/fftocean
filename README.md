@@ -30,6 +30,26 @@ To close the application:
 * Mac: `cmd+Q`
 * Linux: `alt+f4` or `esc`
 
+Using the mouse, you can look around you. To move, the keys depend on the keyboard.
+
+##### AZERTY
+
+You can move using the `Z`, `Q`, `S`, `D` keys as follow:
+
+* `Z`: go forward
+* `Q`: translate to the left
+* `S`: go backward
+* `D`: translate to the right
+
+##### QWERTY
+
+You can move using the `W`, `A`, `S`, `D` keys as follow:
+
+* `W`: go forward
+* `A`: translate to the left
+* `S`: go backward
+* `D`: translate to the right 
+
 ***
 
 ### Contact

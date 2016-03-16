@@ -93,21 +93,20 @@ void Ocean::gl_vertex_array_y(int x, double *vertices, int offset_x, int offset_
     vertices[3*ny+2] = (1 + offset_y)*ly;
 }
 
-/* Does all the calculus needed for the ocean */
+/*
+Does all the calculus needed for the ocean. This basically means
+updating the spectrum and computing the 2D reverse FFT to get the wave shape.
+*/
 void Ocean::main_computation() {
-    // first FFT
     for(int x=0 ; x<nx ; x++) {
-        // puts heights in _hRf and _hIf
         get_sine_amp(x, (double)glutGet(GLUT_ELAPSED_TIME)/1000, &HR[x], &HI[x]);
         fft = FFT(ny, HR[x], HI[x]);
         fft.reverse();
         fft.get_result(&HR[x], &HI[x]);
     }
-    // second one, since it is a 2D FFT
     for(int y=0 ; y<ny ; y++) {
         int      x;
         vec_d_it it;
-        // puts heights in _hRf and _hIf
         for(it=hr[y].begin(), x=0 ; it!=hr[y].end() ; it++, x++) *it = HR[x][y];
         for(it=hi[y].begin(), x=0 ; it!=hi[y].end() ; it++, x++) *it = HI[x][y];
         fft = FFT(nx, hr[y], hi[y]);
