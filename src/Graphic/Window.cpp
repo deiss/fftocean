@@ -135,8 +135,8 @@ namespace Window {
         tim1.tv_sec  = 0;
         tim1.tv_nsec = 0;
         t = glutGet(GLUT_ELAPSED_TIME);
-        nxOcean = ocean->getNx();
-        nyOcean = ocean->getNy();
+        nxOcean = ocean->get_nx();
+        nyOcean = ocean->get_ny();
         vertexOceanX = new double[3*(nxOcean+1)];
         vertexOceanY = new double[3*(nyOcean+1)];
         glClearColor(1, 1, 1, 1);
@@ -169,7 +169,7 @@ namespace Window {
         glViewport(0, 0, width, height);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(45, float(width)/float(height), 1, 100*ocean->getNy());    // (near, .., .., far)
+        gluPerspective(45, float(width)/float(height), 1, 100*ocean->get_ny());    // (near, .., .., far)
     }
     
     /* fps accessor */

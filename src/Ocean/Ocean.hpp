@@ -4,6 +4,12 @@ Author:  DEISS Olivier
 License: This software is offered under the GPL license. See COPYING for more information.
 */
 
+/*
+This class gathers all the work needed to create an ocean. It includes a wave
+height field, a Philipps spectrum to initialize this wave height field, and an
+fft object to get the time-domain signal out of the wave spectrum.
+*/
+
 #ifndef OCEANHPP
 #define OCEANHPP
 
@@ -20,12 +26,13 @@ class Ocean {
         Ocean(const double, const double, const int, const int, const double, const int, const double, const double);
         ~Ocean();
     
-        int  getNx() { return nx; }
-        int  getNy() { return ny; }
+        int  get_nx() { return nx; }
+        int  get_ny() { return ny; }
+    
         void generate_height_0();
+        void main_computation();
         void gl_vertex_array_x(int, double*, int, int);
         void gl_vertex_array_y(int, double*, int, int);
-        void main_computation();
     
     private :
 
@@ -35,22 +42,21 @@ class Ocean {
     
         void get_sine_amp(int, double, std::vector<double>*, std::vector<double>*);
     
-        FFT       fft;       // fft structure to computes the transformation
-    
-  const double    lx;        // real width
-  const double    ly;        // real height
-  const int       nx;        // nb of x points - must be a power of 2
-  const int       ny;        // nb of y points - must be a power of 2
+  const double    lx;        /* actual width */
+  const double    ly;        /* actual height */
+  const int       nx;        /* nb of x points - must be a power of 2 */
+  const int       ny;        /* nb of y points - must be a power of 2 */
   
-        Philipps* philipps;  // philips spectrum
-        Height    height;    // initial random ocean wave height field - [x][y]
-        vec_vec_d height0I;  // tmp wave height field
-        vec_vec_d height0R;  // I : imaginary - R : real
+        Philipps* philipps;  /* philips spectrum */
+        Height    height;    /* initial random ocean wave height field - [x][y] */
+        vec_vec_d height0R;  /* initial wave height field (spectrum) - real part */
+        vec_vec_d height0I;  /* initial wave height field (spectrum) - imaginary part */
     
-        vec_vec_d HR;        // real part - frequency domain - [y][x]
-        vec_vec_d HI;        // imaginary part - time domain - [y][x]
-        vec_vec_d hr;        // real part - frequency domain - [y][x]
-        vec_vec_d hi;        // imaginary part - time domain - [y][x]
+        FFT       fft;       /* fft structure to compute the FFT */
+        vec_vec_d HR;        /* frequency domain, real part      - [y][x] */
+        vec_vec_d HI;        /* frequency domain, imaginary part - [y][x] */
+        vec_vec_d hr;        /* time domain, real part      - [y][x] */
+        vec_vec_d hi;        /* time domain, imaginary part - [y][x] */
     
 };
 
