@@ -10,6 +10,9 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 #include "Height.hpp"
 
+/*
+Initializes the variables.
+*/
 Height::Height(const int p_nx, const int p_ny) :
     nx(p_nx),
     ny(p_ny) {

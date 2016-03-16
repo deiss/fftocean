@@ -34,11 +34,13 @@ class Height {
      
     private :
     
-        const int                         nx;        /* nb of x points - must be a power of 2 */
-        const int                         ny;        /* nb of y points - must be a power of 2 */
-        std::vector<std::vector<double> > philipps;  /* Philips spectrum _philipps[y][x] */
-        int                               x;
-        int                               y;
+        typedef std::vector<std::vector<double> > vec_vec_d;
+    
+        const int nx;        /* nb of x points - must be a power of 2 */
+        const int ny;        /* nb of y points - must be a power of 2 */
+        vec_vec_d philipps;  /* Philips spectrum _philipps[y][x] */
+        int       x;
+        int       y;
     
 };
 
