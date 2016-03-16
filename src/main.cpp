@@ -53,7 +53,7 @@ int main (int argc, char** argv) {
     ocean->generate_height(&height);     /* initial ocean wave height field */
     
     /* rendering */
-    Window::init(WIDTH, HEIGHT, "FFTOcean", argc, argv, args.keyboard, 35);
+    Window::init(WIDTH, HEIGHT, "FFTOcean", argc, argv, args.keyboard, args.fps);
     Window::launch();
     
     /* free */

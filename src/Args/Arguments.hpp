@@ -17,6 +17,7 @@ class Arguments {
     
         double      lx;
         double      ly;
+        int         fps;
         int         nx;
         int         ny;
         double      wind_speed;
