@@ -5,9 +5,10 @@ License: This software is offered under the GPL license. See COPYING for more in
 */
 
 /*
-This class gathers all the work needed to create an ocean. It includes a wave
-height field, a Philipps spectrum to initialize this wave height field, and an
-fft object to get the time-domain signal out of the wave spectrum.
+This class implements an ocean. The initial spectrum is computed with generate_height_0(), and
+stored into HR/HI vectors. An fft object can trasform this into a time-domain signal that is
+stored in the hr/hi vectors. Over time, the spectrum is updated with get_sine_amp to give an
+impression of movement.
 */
 
 #ifndef OCEANHPP
