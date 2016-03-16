@@ -16,8 +16,8 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 #include "Graphic/Window.hpp"
 
-Ocean*      ocean;
-int         mainwindow;
+Ocean* ocean;
+int    mainwindow;
 
 int main (int argc, char** argv) {
 
