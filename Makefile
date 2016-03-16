@@ -10,7 +10,7 @@ CC_FLAGS = -Wall -Wno-deprecated-declarations -std=c++11 -Ofast -funroll-loops
 EXEC     = ocean
 
 # project structure
-MODULES     = ./ Ocean FFT Graphic
+MODULES     = ./ Ocean FFT Graphic Args
 BUILD_DIR   = build
 BIN_DIR     = bin
 SRC_DIR     = $(addprefix src/, $(MODULES))
@@ -45,7 +45,7 @@ clean:
 	rm -r $(BUILD_DIR)
 
 # objects
-$(BUILD_DIR)/main.o: main.cpp Window.hpp Ocean.hpp
+$(BUILD_DIR)/main.o: main.cpp Window.hpp Ocean.hpp Arguments.hpp
 	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<
 
 $(BUILD_DIR)/Camera.o: Camera.cpp Camera.hpp Window.hpp
@@ -64,4 +64,7 @@ $(BUILD_DIR)/Ocean.o: Ocean.cpp Ocean.hpp Height.hpp
 	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<
 
 $(BUILD_DIR)/Philipps.o: Philipps.cpp Philipps.hpp
+	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<
+
+$(BUILD_DIR)/Arguments.o: Arguments.cpp Arguments.hpp
 	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<

@@ -8,8 +8,13 @@ License: This software is offered under the GPL license. See COPYING for more in
 #include <ctime>
 #include <iostream>
 
-#include "Graphic/Window.hpp"
+#include "Args/Arguments.hpp"
+
 #include "Ocean/Ocean.hpp"
+#include "Ocean/Height.hpp"
+#include "Ocean/Philipps.hpp"
+
+#include "Graphic/Window.hpp"
 
 Ocean* ocean;
 int    mainwindow;
@@ -19,18 +24,28 @@ int main (int argc, char** argv) {
     /* random for gaussian numbers */
     srand(time(NULL));
     
-    /* ocean parameters */
-    const double lx             = 170;
-    const double ly             = 350;
-    const int    nx             = 128;
-    const int    ny             = 128;
-    const double wind_speed     = 100;
-    const int    wind_alignment = 1;
-    const double min_wave_size  = 0;
-    const double A              = 0.000006;
+    /* command line arguments */
+    Arguments args(argc, argv);
+    int err = args.parse_arguments();
+    if(err<0) {
+        if(err==-2) {
+            args.print_help();
+        }
+        return 0;
+    }
     
-    Philipps philipps(lx, ly, nx, ny, wind_speed, wind_alignment, min_wave_size, A);  /* Philipps spectrum */
-    Height   height(nx, ny);                                                          /* initial wave height field */
+    /* ocean parameters */
+    const double lx             = args.lx;
+    const double ly             = args.ly;
+    const int    nx             = args.nx;
+    const int    ny             = args.ny;
+    const double wind_speed     = args.wind_speed;
+    const int    wind_alignment = args.wind_alignment;
+    const double min_wave_size  = args.min_wave_size;
+    const double A              = args.A;
+    
+    Philipps philipps(lx, ly, nx, ny, wind_speed, wind_alignment, min_wave_size, A);
+    Height   height(nx, ny);
     ocean = new Ocean(lx, ly, nx, ny);
     
     height.generate_philipps(&philipps); /* Philipps spectrum */
