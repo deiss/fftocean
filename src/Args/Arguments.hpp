@@ -1,7 +1,11 @@
 /*
-Project: DigitScanner
+Project: Ocean
 Author:  DEISS Olivier
 License: This software is offered under the GPL license. See COPYING for more information.
+*/
+
+/*
+This class treats the command line arguments and sets their default value.
 */
 
 #ifndef Arguments_hpp

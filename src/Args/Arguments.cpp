@@ -1,5 +1,5 @@
 /*
-Project: DigitScanner
+Project: Ocean
 Author:  DEISS Olivier
 License: This software is offered under the GPL license. See COPYING for more information.
 */
@@ -8,6 +8,9 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 #include "Arguments.hpp"
 
+/*
+Initializes variables.
+*/
 Arguments::Arguments(int p_argc, char** p_argv) :
     lx(350),
     ly(350),
@@ -24,6 +27,9 @@ Arguments::Arguments(int p_argc, char** p_argv) :
     argv(p_argv) {
 }
 
+/*
+Prints help.
+*/
 void Arguments::print_help() {
     std::cout << "USE: ocean [options]" << std::endl;
     std::cout << std::endl;
@@ -44,6 +50,9 @@ void Arguments::print_help() {
     std::cout << "   --A <value>                Adjustment parameter, to increase or decrease wave depth. Default: 0.0000038." << std::endl;
 }
 
+/*
+Parses the command line arguments.
+*/
 int Arguments::parse_arguments() {
     std::string help_msg = "You can use --help to get more help.";
     for(int i=1 ; i<argc ; i++) {
@@ -167,6 +176,9 @@ int Arguments::parse_arguments() {
     return 0;
 }
 
+/*
+Parses a string argument and detects errors like a missing value.
+*/
 bool Arguments::parse_string_arg(std::string arg_value, int* i, std::string* arg_container, std::string error_msg) {
     if(++*i<argc) {
         *arg_container = std::string(argv[*i]);
@@ -179,6 +191,9 @@ bool Arguments::parse_string_arg(std::string arg_value, int* i, std::string* arg
     }
 }
 
+/*
+Check incompatibility or misuse of options.
+*/
 bool Arguments::check_long_args(std::string help_msg) {
     if(keyboard!="azerty" && keyboard!="qwerty") {
         std::cerr << "The keyboard mode \"" << keyboard << "\" doesn't exist. Choose between \"azerty\" and \"qwerty\"." << std::endl;
