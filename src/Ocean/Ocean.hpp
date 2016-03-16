@@ -24,8 +24,7 @@ class Ocean {
     public :
     
         Ocean(const double, const double, const int, const int);
-        //Ocean(const double, const double, const int, const int, const double, const int, const double, const double);
-        ~Ocean();
+        ~Ocean() {}
     
         int  get_nx() { return nx; }
         int  get_ny() { return ny; }

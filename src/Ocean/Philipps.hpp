@@ -20,6 +20,7 @@ class Philipps {
     public :
     
         Philipps(const double, const double, const int, const int, const double, const int, const double, const double);
+        ~Philipps() {}
     
         double operator()();
     

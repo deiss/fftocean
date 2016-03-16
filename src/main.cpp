@@ -11,11 +11,8 @@ License: This software is offered under the GPL license. See COPYING for more in
 #include "Graphic/Window.hpp"
 #include "Ocean/Ocean.hpp"
 
-/* Ocean(lx, ly, nx, ny, windSpeed,  windAlignment, minWaveSize, A) */
 Ocean* ocean;
-
-/* handle for the window */
-int mainwindow;
+int    mainwindow;
 
 int main (int argc, char** argv) {
 
@@ -32,7 +29,6 @@ int main (int argc, char** argv) {
     const double min_wave_size  = 0;
     const double A              = 0.000003;
     
-    /* spectrum and ocean */
     Philipps philipps(lx, ly, nx, ny, wind_speed, wind_alignment, min_wave_size, A);  /* Philipps spectrum */
     Height   height(nx, ny);                                                          /* initial wave height field */
     ocean = new Ocean(lx, ly, nx, ny);

@@ -22,7 +22,7 @@ class FFT {
 
     public :
     
-        FFT() { }
+        FFT() {}
         FFT(int, std::vector<double>, std::vector<double>);
     
         void direct()                                                             { sort(); radix_direct(); }

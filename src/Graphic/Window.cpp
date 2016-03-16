@@ -62,8 +62,8 @@ namespace Window {
         glPushMatrix();
         glLoadIdentity();
         glRasterPos2f(550, 460);
-        char       buf[15] = "FPS : ";
-        const char *p(buf);
+        char        buf[15] = "FPS : ";
+        const char* p(buf);
         strcat(buf, fps_str.c_str());
         do glutBitmapCharacter(GLUT_BITMAP_8_BY_13, *p); while(*(++p));
         glMatrixMode(GL_PROJECTION);
@@ -107,7 +107,7 @@ namespace Window {
         tim1.tv_nsec = (int)(((double)(1.0/fps_goal) - (double)(1.0/fps))*pow(10, 9) + sleep_avant) % 1000000000;
     }
     
-    void init(int width, int height, std::string titre, int argc, char **argv) {
+    void init(int width, int height, std::string titre, int argc, char** argv) {
         glutInit(&argc, argv);
         glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
         glutInitWindowSize(width, height);
@@ -143,7 +143,7 @@ namespace Window {
     
     void mouseMove(int x, int y) {
         camera.rotation(x, y);
-        if(x >= WIDTH || x <= 0 || y >= HEIGHT || y <= 0) {
+        if(x>=WIDTH || x<=0 || y>=HEIGHT || y<=0) {
             glutWarpPointer(WIDTH/2, HEIGHT/2);
             camera.setMouse(WIDTH/2, HEIGHT/2);
         }

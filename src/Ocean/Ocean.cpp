@@ -15,25 +15,7 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 /*
 Initializes the variables and allocates space for the vectors.
-
-Ocean::Ocean(const double p_lx, const double p_ly, const int p_nx, const int p_ny, const double p_wind_speed, const int p_wind_alignment, const double p_min_wave_size, const double p_A) :
-    lx(p_lx),
-    ly(p_ly),
-    nx(p_nx),
-    ny(p_ny) {
-    height0I.resize(nx+1);
-    height0R.resize(nx+1);
-    HR.resize(nx+1);
-    HI.resize(nx+1);
-    hr.resize(ny+1);
-    hi.resize(ny+1);
-    for(vec_vec_d_it it=HR.begin() ; it!=HR.end() ; it++) it->resize(ny+1);
-    for(vec_vec_d_it it=HI.begin() ; it!=HI.end() ; it++) it->resize(ny+1);
-    for(vec_vec_d_it it=hr.begin() ; it!=hr.end() ; it++) it->resize(nx+1);
-    for(vec_vec_d_it it=hi.begin() ; it!=hi.end() ; it++) it->resize(nx+1);
-}
 */
-
 Ocean::Ocean(const double p_lx, const double p_ly, const int p_nx, const int p_ny) :
     lx(p_lx),
     ly(p_ly),
@@ -52,14 +34,7 @@ Ocean::Ocean(const double p_lx, const double p_ly, const int p_nx, const int p_n
 }
 
 /*
-Memory freeing.
-*/
-Ocean::~Ocean() {
-}
-
-/*
-Generates the Philipps spectrum then computes
-the initial random height field.
+Computes the initial random height field.
 */
 void Ocean::generate_height(Height* height) {
     /* real part */
@@ -84,7 +59,7 @@ is useless in our application.
 */
 void Ocean::main_computation() {
     for(int x=0 ; x<nx ; x++) {
-        get_sine_amp(x, (double)glutGet(GLUT_ELAPSED_TIME)/1000, &HR[x], &HI[x]);
+        get_sine_amp(x, static_cast<double>(glutGet(GLUT_ELAPSED_TIME))/1000, &HR[x], &HI[x]);
         fft = FFT(ny, HR[x], HI[x]);
         fft.reverse();
         fft.get_result(&HR[x], &HI[x]);
@@ -103,7 +78,7 @@ void Ocean::main_computation() {
 /*
 Updates the wave height field.
 */
-void Ocean::get_sine_amp(int x, double time, std::vector<double> *p_HR, std::vector<double> *p_HI) {
+void Ocean::get_sine_amp(int x, double time, std::vector<double>* p_HR, std::vector<double>* p_HI) {
     double   A;
     double   L = 0.1;
     int      y;
@@ -119,7 +94,7 @@ void Ocean::get_sine_amp(int x, double time, std::vector<double> *p_HR, std::vec
 /*
 Creates an array that OpenGL can directly use - X
 */
-void Ocean::gl_vertex_array_x(int y, double *vertices, int offset_x, int offset_y) {
+void Ocean::gl_vertex_array_x(int y, double* vertices, int offset_x, int offset_y) {
     for(int x=0 ; x<nx ; x++) {
         vertices[3*x]   = (lx/nx)*x + offset_x*lx;
         vertices[3*x+1] = pow(-1, x+y)*hr[y][x];
@@ -133,7 +108,7 @@ void Ocean::gl_vertex_array_x(int y, double *vertices, int offset_x, int offset_
 /*
 Creates an array that OpenGL can directly use - Y
 */
-void Ocean::gl_vertex_array_y(int x, double *vertices, int offset_x, int offset_y) {
+void Ocean::gl_vertex_array_y(int x, double* vertices, int offset_x, int offset_y) {
     for(int y=0 ; y<ny ; y++) {
         vertices[3*y]   = (lx/nx)*x + offset_x*lx;
         vertices[3*y+1] = pow(-1, x+y)*hr[y][x];
