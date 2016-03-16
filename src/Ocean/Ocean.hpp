@@ -24,7 +24,7 @@ class Ocean {
     
     public:
     
-        Ocean(const double, const double, const int, const int);
+        Ocean(const double, const double, const int, const int, const double);
         ~Ocean() {}
     
         int  get_nx() { return nx; }
@@ -56,6 +56,8 @@ class Ocean {
         vec_vec_d HI;        /* frequency domain, imaginary part - [y][x] */
         vec_vec_d hr;        /* time domain, real part      - [y][x] */
         vec_vec_d hi;        /* time domain, imaginary part - [y][x] */
+    
+        double motion_factor;
     
 };
 

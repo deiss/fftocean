@@ -43,10 +43,11 @@ int main (int argc, char** argv) {
     const int    wind_alignment = args.wind_alignment;
     const double min_wave_size  = args.min_wave_size;
     const double A              = args.A;
+    const double motion_factor  = args.motion_factor;
     
     Philipps philipps(lx, ly, nx, ny, wind_speed, wind_alignment, min_wave_size, A);
     Height   height(nx, ny);
-    ocean = new Ocean(lx, ly, nx, ny);
+    ocean = new Ocean(lx, ly, nx, ny, motion_factor);
     
     height.generate_philipps(&philipps); /* Philipps spectrum */
     ocean->generate_height(&height);     /* initial ocean wave height field */

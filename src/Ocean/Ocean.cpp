@@ -16,11 +16,12 @@ License: This software is offered under the GPL license. See COPYING for more in
 /*
 Initializes the variables and allocates space for the vectors.
 */
-Ocean::Ocean(const double p_lx, const double p_ly, const int p_nx, const int p_ny) :
+Ocean::Ocean(const double p_lx, const double p_ly, const int p_nx, const int p_ny, const double p_motion_factor) :
     lx(p_lx),
     ly(p_ly),
     nx(p_nx),
-    ny(p_ny) {
+    ny(p_ny),
+    motion_factor(p_motion_factor) {
     height0I.resize(nx+1);
     height0R.resize(nx+1);
     HR.resize(nx+1);
@@ -59,7 +60,7 @@ is useless in our application.
 */
 void Ocean::main_computation() {
     for(int x=0 ; x<nx ; x++) {
-        get_sine_amp(x, static_cast<double>(glutGet(GLUT_ELAPSED_TIME))/1000, &HR[x], &HI[x]);
+        get_sine_amp(x, static_cast<double>(motion_factor*glutGet(GLUT_ELAPSED_TIME))/1000, &HR[x], &HI[x]);
         fft = FFT(ny, &HR[x], &HI[x]);
         fft.reverse();
     }

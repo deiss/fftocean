@@ -23,6 +23,7 @@ class Arguments {
         int    wind_alignment;
         double min_wave_size;
         double A;
+        double motion_factor;
     
         Arguments(int, char**);
         ~Arguments() {}

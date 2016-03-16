@@ -9,14 +9,15 @@ License: This software is offered under the GPL license. See COPYING for more in
 #include "Arguments.hpp"
 
 Arguments::Arguments(int p_argc, char** p_argv) :
-    lx(130),
+    lx(350),
     ly(350),
     nx(128),
     ny(256),
-    wind_speed(25),
-    wind_alignment(1),
-    min_wave_size(0),
-    A(0.000005),
+    wind_speed(50),
+    wind_alignment(2),
+    min_wave_size(0.1),
+    A(0.000004),
+    motion_factor(0.6),
     argc(p_argc),
     argv(p_argv) {
 }
@@ -26,14 +27,15 @@ void Arguments::print_help() {
     std::cout << std::endl;
     std::cout << "OPTIONS:" << std::endl;
     std::cout << "   --help                     Displays this help." << std::endl;
-    std::cout << "   --lx <value>               Actual width of the ocean. Default: 130" << std::endl;
+    std::cout << "   --lx <value>               Actual width of the ocean. Default: 350" << std::endl;
     std::cout << "   --ly <value>               Actual height of the ocean. Default: 350" << std::endl;
     std::cout << "   --nx <value>               Number of subdivision of the ocean. The higher it is, the mode precise the waves are. This needs to be a power of 2. Default: 128." << std::endl;
     std::cout << "   --nx <value>               Number of subdivision of the ocean. The higher it is, the mode precise the waves are. This needs to be a power of 2. Default: 256." << std::endl;
-    std::cout << "   --wind_speed <value>       Speed of the wind. Default: 25." << std::endl;
-    std::cout << "   --wind_alignment <value>   Defines how the waves should stay in the wind's direction This parameter is an integer. Default: 1." << std::endl;
-    std::cout << "   --min_wave_size <value>    Defines the minimum wave height. Default: 0." << std::endl;
-    std::cout << "   --A <value>                Adjustment parameter, to increase or decrease wave depth. Default: 0.000005" << std::endl;
+    std::cout << "   --motion_factor <value>    Allows to slow down or speed up the simulation. Default: 0.6." << std::endl;
+    std::cout << "   --wind_speed <value>       Speed of the wind. Default: 50." << std::endl;
+    std::cout << "   --wind_alignment <value>   Defines how the waves should stay in the wind's direction This parameter is an integer. Default: 2." << std::endl;
+    std::cout << "   --min_wave_size <value>    Defines the minimum wave height and makes the simulation smoother. Default: 0.1." << std::endl;
+    std::cout << "   --A <value>                Adjustment parameter, to increase or decrease wave depth. Default: 0.000004" << std::endl;
 }
 
 int Arguments::parse_arguments() {
@@ -124,6 +126,16 @@ int Arguments::parse_arguments() {
                 else     { arg_set.insert("min_wave_size"); }
             }
             else { std::cerr << "A is not specified." << std::endl; std::cerr << help_msg << std::endl; return -1; }
+        }
+        else if(arg_value=="--motion_factor") {
+            if(++i<argc) {
+                std::string motion_factor_str(argv[i]);
+                try                            { motion_factor = std::stod(motion_factor_str); }
+                catch(std::exception const& e) { std::cerr << "motion_factor must be a positive float." << std::endl; return -1; }
+                if(motion_factor<=0) { std::cerr << "motion_factor must be a positive float." << std::endl; return -1; }
+                else                 { arg_set.insert("min_wave_size"); }
+            }
+            else { std::cerr << "motion_factor is not specified." << std::endl; std::cerr << help_msg << std::endl; return -1; }
         }
         else {
             std::cerr << "Unknown \"" << arg_value << "\" parameter." << std::endl;
