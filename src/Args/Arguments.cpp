@@ -16,8 +16,9 @@ Arguments::Arguments(int p_argc, char** p_argv) :
     wind_speed(50),
     wind_alignment(2),
     min_wave_size(0.1),
-    A(0.000004),
+    A(0.0000038),
     motion_factor(0.6),
+    keyboard("azerty"),
     argc(p_argc),
     argv(p_argv) {
 }
@@ -27,6 +28,9 @@ void Arguments::print_help() {
     std::cout << std::endl;
     std::cout << "OPTIONS:" << std::endl;
     std::cout << "   --help                     Displays this help." << std::endl;
+    std::cout << "   --keyboard <mode>          Specifies the type of keyboard." << std::endl;
+    std::cout << "                                 \"azerty\" (default)" << std::endl;
+    std::cout << "                                 \"qwerty\"" << std::endl;
     std::cout << "   --lx <value>               Actual width of the ocean. Default: 350" << std::endl;
     std::cout << "   --ly <value>               Actual height of the ocean. Default: 350" << std::endl;
     std::cout << "   --nx <value>               Number of subdivision of the ocean. The higher it is, the mode precise the waves are. This needs to be a power of 2. Default: 128." << std::endl;
@@ -35,7 +39,7 @@ void Arguments::print_help() {
     std::cout << "   --wind_speed <value>       Speed of the wind. Default: 50." << std::endl;
     std::cout << "   --wind_alignment <value>   Defines how the waves should stay in the wind's direction This parameter is an integer. Default: 2." << std::endl;
     std::cout << "   --min_wave_size <value>    Defines the minimum wave height and makes the simulation smoother. Default: 0.1." << std::endl;
-    std::cout << "   --A <value>                Adjustment parameter, to increase or decrease wave depth. Default: 0.000004" << std::endl;
+    std::cout << "   --A <value>                Adjustment parameter, to increase or decrease wave depth. Default: 0.0000038" << std::endl;
 }
 
 int Arguments::parse_arguments() {
@@ -45,6 +49,10 @@ int Arguments::parse_arguments() {
         /* help */
         if(arg_value=="--help") {
             return -2;
+        }
+        /* string */
+        else if(arg_value=="--keyboard") {
+            if(!parse_string_arg(std::string(argv[i]), &i, &keyboard, "You must specify the keyboard mode.\n" + help_msg)) { return -1; }
         }
         /* integer */
         else if(arg_value=="--nx") {
@@ -160,5 +168,10 @@ bool Arguments::parse_string_arg(std::string arg_value, int* i, std::string* arg
 }
 
 bool Arguments::check_long_args(std::string help_msg) {
+    if(keyboard!="azerty" && keyboard!="qwerty") {
+        std::cerr << "The keyboard mode \"" << keyboard << "\" doesn't exist. Choose between \"azerty\" and \"qwerty\"." << std::endl;
+        std::cerr << help_msg << std::endl;
+        return false;
+    }
     return true;
 }

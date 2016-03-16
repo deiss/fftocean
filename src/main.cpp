@@ -16,8 +16,9 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 #include "Graphic/Window.hpp"
 
-Ocean* ocean;
-int    mainwindow;
+Ocean*      ocean;
+int         mainwindow;
+std::string keyboard_mode;
 
 int main (int argc, char** argv) {
 
@@ -44,6 +45,7 @@ int main (int argc, char** argv) {
     const double min_wave_size  = args.min_wave_size;
     const double A              = args.A;
     const double motion_factor  = args.motion_factor;
+    keyboard_mode               = args.keyboard;
     
     Philipps philipps(lx, ly, nx, ny, wind_speed, wind_alignment, min_wave_size, A);
     Height   height(nx, ny);

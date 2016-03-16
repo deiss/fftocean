@@ -15,15 +15,16 @@ class Arguments {
 
     public:
     
-        double lx;
-        double ly;
-        int    nx;
-        int    ny;
-        double wind_speed;
-        int    wind_alignment;
-        double min_wave_size;
-        double A;
-        double motion_factor;
+        double      lx;
+        double      ly;
+        int         nx;
+        int         ny;
+        double      wind_speed;
+        int         wind_alignment;
+        double      min_wave_size;
+        double      A;
+        double      motion_factor;
+        std::string keyboard;
     
         Arguments(int, char**);
         ~Arguments() {}

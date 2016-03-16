@@ -17,8 +17,9 @@ events (mouse, keyboard) and prints the ocean, fps to screen.
 
 #include "../Ocean/Ocean.hpp"
 
-extern Ocean *ocean;
-extern int    mainwindow;
+extern Ocean*      ocean;
+extern int         mainwindow;
+extern std::string keyboard_mode;
 
 namespace Window {
 
@@ -26,15 +27,15 @@ namespace Window {
     void draw_fps();                                 /* draws the FPS (Frames Per Second) in the top right corner */
     void draw_ocean();                               /* draws the ocean, don't forget to call that one... */
     
-    void setFPS(int);
+    void setFPS(int);                                /* sets the target FPS */
     void fps_action();                               /* given the current FPS and the target FPS, computes the needed sleeping time */
-    void init(int, int, std::string, int, char**);
+    void init(int, int, std::string, int, char**);   /* creates the window */
     
     void keyboard(unsigned char, int, int);          /* keyboard (key is pushed) event function */
     void keyboardUp(unsigned char, int, int);        /* keyboard (key is released) event function */
     void mouseMove(int, int);                        /* mouse event function */
 
-    void launch();                                   /* creates the window, initializes the variables and start the drawing */
+    void launch();                                   /* listen to events, initializes the variables and start the drawing */
     void quit();                                     /* clean exit - actually never executed */
     void reshape(int, int);                          /* sets the viewport and perspective */
 

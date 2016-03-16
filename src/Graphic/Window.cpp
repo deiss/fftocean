@@ -19,7 +19,7 @@ License: This software is offered under the GPL license. See COPYING for more in
 namespace Window {
     
     /* allows to move in the 3D scene */
-    Camera camera(Camera::AZERTY, -100, 100, -100, 4*M_PI/7, M_PI/4, 0.01, 0.2, WIDTH, HEIGHT);
+    Camera* camera;
     
     /* keeps a constant FPS */
     int             frames(-1);
@@ -43,8 +43,8 @@ namespace Window {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        camera.translation();
-        gluLookAt(camera.getX(), camera.getY(), camera.getZ(), camera.getSightX(), camera.getSightY(), camera.getSightZ(), 0, 1, 0);
+        camera->translation();
+        gluLookAt(camera->getX(), camera->getY(), camera->getZ(), camera->getSightX(), camera->getSightY(), camera->getSightZ(), 0, 1, 0);
         draw_ocean();
         draw_fps();
         glutSwapBuffers();
@@ -113,14 +113,17 @@ namespace Window {
         glutInitWindowSize(width, height);
         mainwindow = glutCreateWindow(titre.c_str());
         glEnable(GL_MULTISAMPLE);
+        
+        Camera::KEYBOARD mode = keyboard_mode=="azerty" ? Camera::AZERTY : Camera::QWERTY;
+        camera = new Camera(mode, -100, 100, -100, 4*M_PI/7, M_PI/4, 0.01, 0.2, WIDTH, HEIGHT);
     }
     
     void keyboard(unsigned char key, int x, int y) {
-        camera.setKeyboard(key, true);
+        camera->setKeyboard(key, true);
     }
     
     void keyboardUp(unsigned char key, int x, int y) {
-        camera.setKeyboard(key, false);
+        camera->setKeyboard(key, false);
     }
 
     void launch() {
@@ -142,10 +145,10 @@ namespace Window {
     }
     
     void mouseMove(int x, int y) {
-        camera.rotation(x, y);
+        camera->rotation(x, y);
         if(x>=WIDTH || x<=0 || y>=HEIGHT || y<=0) {
             glutWarpPointer(WIDTH/2, HEIGHT/2);
-            camera.setMouse(WIDTH/2, HEIGHT/2);
+            camera->setMouse(WIDTH/2, HEIGHT/2);
         }
     }
     
