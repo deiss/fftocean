@@ -22,12 +22,12 @@ int main (int argc, char** argv) {
     /* ocean parameters */
     const double lx             = 170;
     const double ly             = 350;
-    const int    nx             = 64;
+    const int    nx             = 128;
     const int    ny             = 128;
-    const double wind_speed     = 50;
-    const int    wind_alignment = 2;
+    const double wind_speed     = 100;
+    const int    wind_alignment = 1;
     const double min_wave_size  = 0;
-    const double A              = 0.000003;
+    const double A              = 0.000006;
     
     Philipps philipps(lx, ly, nx, ny, wind_speed, wind_alignment, min_wave_size, A);  /* Philipps spectrum */
     Height   height(nx, ny);                                                          /* initial wave height field */
