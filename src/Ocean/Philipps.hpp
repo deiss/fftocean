@@ -17,7 +17,7 @@ wind speed, wind force (how the waves align with the wind direction) and the min
 
 class Philipps {
     
-    public :
+    public:
     
         Philipps(const double, const double, const int, const int, const double, const int, const double, const double);
         ~Philipps() {}
@@ -26,7 +26,7 @@ class Philipps {
     
         void init_fonctor(int);
     
-    private :
+    private:
   
         const double lx;         /* actual width of the scene */
         const double ly;         /* actual height of the scene */

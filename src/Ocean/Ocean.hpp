@@ -21,7 +21,7 @@ fft object to get the time-domain signal out of the wave spectrum.
 
 class Ocean {
     
-    public :
+    public:
     
         Ocean(const double, const double, const int, const int);
         ~Ocean() {}
@@ -34,7 +34,7 @@ class Ocean {
         void gl_vertex_array_x(int, double*, int, int);
         void gl_vertex_array_y(int, double*, int, int);
     
-    private :
+    private:
 
         typedef std::vector<double>::iterator               vec_d_it;
         typedef std::vector<std::vector<double> >           vec_vec_d;

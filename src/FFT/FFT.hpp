@@ -21,7 +21,7 @@ instead of O(n^2).
 
 class FFT {
 
-    public :
+    public:
     
         FFT() {}
         FFT(int, std::vector<double>*, std::vector<double>*);

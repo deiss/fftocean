@@ -21,7 +21,7 @@ with std::generate algorithm.
 
 class Height {
     
-    public :
+    public:
     
         Height(const int, const int);
         ~Height() {}
@@ -32,7 +32,7 @@ class Height {
         void   generate_philipps(Philipps*);
         double gaussian();
      
-    private :
+    private:
     
         typedef std::vector<std::vector<double> > vec_vec_d;
     

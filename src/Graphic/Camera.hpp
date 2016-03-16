@@ -23,7 +23,7 @@ call the gluLookAt() function with the matching parameters.
 
 class Camera {
 
-    public :
+    public:
     
         enum KEYBOARD {AZERTY, QWERTY};   /* type of keyboard */
     
@@ -48,7 +48,7 @@ class Camera {
         void rotation(int, int);
         void translation();
     
-    private :
+    private:
     
         enum    DIR {FORWARD, BACKWARD, LEFT, RIGHT};   /* translation direction */
         typedef std::map<DIR, int> k_map;
