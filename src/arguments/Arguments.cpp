@@ -49,7 +49,7 @@ Prints help.
 */
 void Arguments::print_help() {
     std::cout << "FFTOcean Copyright (C) 2016 Olivier Deiss - olivier.deiss@gmail.com" << std::endl;
-    std::cout << "This program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions. Type 'FFTOcean --license' for details." << std::endl;
+    std::cout << "This program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions. Type 'fftocean --license' for details." << std::endl;
     std::cout << "USE: fftocean [options]" << std::endl;
     std::cout << std::endl;
     std::cout << "OPTIONS:" << std::endl;
