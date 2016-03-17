@@ -60,6 +60,16 @@ You can move using the `W`, `A`, `S`, `D` keys as follow:
 
 ***
 
+### Improvements
+
+I wanted to focus on the mathematical aspect of the waves, which is why I did not spend much time on the rendering aspect. J. Tessendorf's paper gives ways to obtain a really nice rendering, taking into consideration the reflection of the sun. 
+
+This project is meant to be embedded within a video game or any type of simulation you might need to do. For this kind of project, you may need a sort of infinite ocean. Fortunately, the reverse FFT produces a periodical signal so you can multiply the squares of ocean and put them one next to another. The downward of this method is that if the viewpoint is high on the *z* axis, this periodicity will be striking. One solution is to create waves with a second method which does not require a lot of computing power (like using Perlin noise), and mix it with these waves. The resulting wave *w* will be the sum of the FFT wave *wf* and the Perlin noise wave *wp*: *w* = a*wf* + b*wp*. Coefficients *a* and *b* will be dynamically adjusted so that for a wave that is close to the viewer, the FFT part of the wave is dominant, but for further waves it is the perlin noise part of the wave. With this method you can have a simulation of true ocean.
+
+Next steps to make this project perfect would be to generate an entire atmosphere, with sky, clouds, islands, and maybe animals. Feel free to code that.
+
+***
+
 ### License
 
 FFTOcean - Copyright (C) 2016 -  Olivier Deiss
