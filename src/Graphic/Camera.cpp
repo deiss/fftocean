@@ -6,7 +6,7 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 #include <iostream>
 
-#ifdef __APPLE__
+#if defined(__APPLE__) | defined(__linux__)
     #include "mac/GLUT/glut.h"
 #endif
 
