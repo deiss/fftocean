@@ -4,7 +4,7 @@
 
 ## PROJECT
 
-FFTOcean is a C++ implementation of researcher J. Tessendorf's paper [*"Simulating Ocean Water"*](http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf). It is a real-time simulation of ocean water in a 3D world. The (reverse) FFT is used to compute the 2D wave height field from the Philipps spectrum. It is possible to adjusts parameters such as wind speed, direction and strength, wave choppiness, and sea depth.
+FFTOcean is a C++ implementation of researcher J. Tessendorf's paper [*"Simulating Ocean Water"*](http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf). It is a real-time simulation of ocean water in a 3D world. The (reverse) FFT is used to compute the 2D wave height field from the Philipps spectrum. It is possible to adjust parameters such as wind speed, direction and strength, wave choppiness, and sea depth.
 
 See on [Youtube](http://youtu.be/JSNyfPAvYbg).
 
