@@ -19,7 +19,7 @@ SRC     = $(foreach sdir, $(SRC_DIRS), $(wildcard $(sdir)/*.cpp))
 OBJ     = $(foreach sdir, $(SRC_DIRS), $(patsubst $(sdir)/%.cpp, $(BUILD_DIR)/%.o, $(wildcard $(sdir)/*.cpp)))
 
 # sourcefile subfolders lookup
-VPATH = $(SRC_DIR)/
+VPATH = $(SRC_DIRS)/
 
 # entry point
 default:
