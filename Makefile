@@ -13,13 +13,12 @@ MODULES   = ./ ocean fft rendering arguments
 SRC_DIRS  = $(addprefix $(SRC_DIR)/, $(MODULES))
 
 # libs and headers subfolders lookup
-LIB     = 
 INCLUDE = -I$(SRC_DIR)
 SRC     = $(foreach sdir, $(SRC_DIRS), $(wildcard $(sdir)/*.cpp))
 OBJ     = $(foreach sdir, $(SRC_DIRS), $(patsubst $(sdir)/%.cpp, $(BUILD_DIR)/%.o, $(wildcard $(sdir)/*.cpp)))
 
 # sourcefile subfolders lookup
-VPATH = $(SRC_DIRS)/
+VPATH = $(SRC_DIRS)
 
 # entry point
 default:
@@ -43,7 +42,7 @@ make_dir:
 
 # create binary
 $(BIN_DIR)/$(EXEC): $(OBJ)
-	$(CC) -o $@ $^ $(LIB) $(LD_FLAGS)
+	$(CC) -o $@ $^ $(LD_FLAGS)
 
 # objects
 $(BUILD_DIR)/main.o: main.cpp Window.hpp Ocean.hpp Arguments.hpp
