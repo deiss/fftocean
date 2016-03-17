@@ -12,12 +12,6 @@ See on [Youtube](http://youtu.be/JSNyfPAvYbg).
 
 FFTOcean - Copyright (C) 2016 -  Olivier Deiss
 
-FFTOcean is a C++ implementation of researcher J. Tessendorf's paper
-"Simulating Ocean Water". It is a real-time simulation of ocean water
-in a 3D world. The (reverse) FFT is used to compute the 2D wave height
-field from the Philipps spectrum. It is possible to adjust parameters
-such as wind speed, direction and strength, wave choppiness, and sea depth.
-
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
