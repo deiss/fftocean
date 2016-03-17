@@ -15,7 +15,7 @@ events (mouse, keyboard) and prints the ocean, fps to screen.
 #define WIDTH  640
 #define HEIGHT 480
 
-#include "../Ocean/Ocean.hpp"
+#include "Ocean/Ocean.hpp"
 
 extern Ocean* ocean;
 extern int    mainwindow;

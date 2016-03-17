@@ -16,7 +16,7 @@ impression of movement.
 
 #include <vector>
 
-#include "../FFT/FFT.hpp"
+#include "FFT/FFT.hpp"
 #include "Height.hpp"
 #include "Philipps.hpp"
 

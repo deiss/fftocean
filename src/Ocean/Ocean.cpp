@@ -8,7 +8,9 @@ License: This software is offered under the GPL license. See COPYING for more in
 #include <cmath>
 #include <iostream>
 
-#include "GLUT/glut.h"
+#ifdef __APPLE__
+    #include "mac/GLUT/glut.h"
+#endif
 
 #include "Height.hpp"
 #include "Ocean.hpp"

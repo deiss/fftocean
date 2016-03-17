@@ -11,7 +11,9 @@ License: This software is offered under the GPL license. See COPYING for more in
 #include <sstream>
 #include <vector>
 
-#include "GLUT/glut.h"
+#ifdef __APPLE__
+    #include "mac/GLUT/glut.h"
+#endif
 
 #include "Camera.hpp"
 #include "Window.hpp"

@@ -1,6 +1,5 @@
 # third party
 LIB_LIST     = glut
-INCLUDE_LIST = GLUT
 LIB_GLUT     = -lGL -lGLU -lGLUT
 
 # project configuration
@@ -13,18 +12,19 @@ EXEC     = ocean
 MODULES     = ./ Ocean FFT Graphic Args
 BUILD_DIR   = build
 BIN_DIR     = bin
-SRC_DIR     = $(addprefix src/, $(MODULES))
+SRC_DIR     = src
+SRC_DIRS    = $(addprefix $(SRC_DIR)/, $(MODULES))
 LIB_DIR     = lib
 INCLUDE_DIR = include
 
 # libs and headers subfolders lookup
 LIB     = $(foreach lib, $(LIB_LIST), $(addprefix -L$(LIB_DIR)/, $(lib)))
-INCLUDE = $(foreach include, $(INCLUDE_LIST), $(addprefix -I$(INCLUDE_DIR)/, $(include)))
+INCLUDE = -I$(INCLUDE_DIR) -I$(SRC_DIR)
 SRC     = $(foreach sdir, $(SRC_DIR), $(wildcard $(sdir)/*.cpp))
-OBJ     = $(foreach sdir, $(SRC_DIR), $(patsubst $(sdir)/%.cpp, $(BUILD_DIR)/%.o, $(wildcard $(sdir)/*.cpp)))
+OBJ     = $(foreach sdir, $(SRC_DIRS), $(patsubst $(sdir)/%.cpp, $(BUILD_DIR)/%.o, $(wildcard $(sdir)/*.cpp)))
 
 # sourcefile subfolders lookup
-VPATH = $(SRC_DIR)/
+VPATH = $(SRC_DIRS)/
 
 # entry point
 all: make_dir $(BIN_DIR)/$(EXEC) clean
