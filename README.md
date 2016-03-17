@@ -2,28 +2,9 @@
 
 ![Screenshot](media/Screenshot.png)
 
-## PROJECT
-
 FFTOcean is a C++ implementation of researcher J. Tessendorf's paper [*"Simulating Ocean Water"*](http://graphics.ucsd.edu/courses/rendering/2005/jdewall/tessendorf.pdf). It is a real-time simulation of ocean water in a 3D world. The (reverse) FFT is used to compute the 2D wave height field from the Philipps spectrum. It is possible to adjust parameters such as wind speed, direction and strength, wave choppiness, and sea depth.
 
 See on [Youtube](http://youtu.be/JSNyfPAvYbg).
-
-## LICENSE
-
-FFTOcean - Copyright (C) 2016 -  Olivier Deiss
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received [a copy of the GNU General Public License](COPYING)
-along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 ***
 
@@ -76,6 +57,25 @@ You can move using the `W`, `A`, `S`, `D` keys as follow:
 * `A`: translate to the left
 * `S`: go backward
 * `D`: translate to the right 
+
+***
+
+### License
+
+FFTOcean - Copyright (C) 2016 -  Olivier Deiss
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received [a copy of the GNU General Public License](COPYING)
+along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 ***
 
