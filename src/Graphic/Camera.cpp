@@ -6,9 +6,7 @@ License: This software is offered under the GPL license. See COPYING for more in
 
 #include <iostream>
 
-#if defined(__APPLE__) | defined(__linux__)
-    #include "mac/GLUT/glut.h"
-#endif
+#include "GLUT_cross.hpp"
 
 #include "Camera.hpp"
 

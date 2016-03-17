@@ -19,7 +19,7 @@ License: This software is offered under the GPL license. See COPYING for more in
 Ocean* ocean;
 int    mainwindow;
 
-int main (int argc, char** argv) {
+int main(int argc, char** argv) {
 
     /* random for gaussian numbers */
     srand(time(NULL));
