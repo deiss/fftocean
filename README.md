@@ -16,7 +16,21 @@ This project is licensed under the GPL License. See [COPYING](COPYING) for more 
 
 ### Install
 
-Linux/Mac : `make` will create the binary in the *bin* directory.
+##### Linux
+
+You need to have glut installed on your platform. You can install it with:
+
+	apt-get install freeglut3 freeglut3-dev
+
+Then you can compile FFTOcean with:
+
+    make linux
+
+##### Mac
+
+You need to have XCode installed on your system. Then you can compile FFTOcean with:
+
+    make mac
 
 ***
 
