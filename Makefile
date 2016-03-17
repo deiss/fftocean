@@ -13,8 +13,9 @@ MODULES   = ./ ocean fft rendering arguments
 SRC_DIRS  = $(addprefix $(SRC_DIR)/, $(MODULES))
 
 # libs and headers subfolders lookup
+LIB     = 
 INCLUDE = -I$(SRC_DIR)
-SRC     = $(foreach sdir, $(SRC_DIR), $(wildcard $(sdir)/*.cpp))
+SRC     = $(foreach sdir, $(SRC_DIRS), $(wildcard $(sdir)/*.cpp))
 OBJ     = $(foreach sdir, $(SRC_DIRS), $(patsubst $(sdir)/%.cpp, $(BUILD_DIR)/%.o, $(wildcard $(sdir)/*.cpp)))
 
 # sourcefile subfolders lookup
