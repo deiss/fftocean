@@ -3,7 +3,7 @@ LIB_GLUT_LINUX = -lGL -lGLU -lglut
 LIB_GLUT_MAC   = -framework OpenGL -framework GLUT
 CC             = g++
 CC_FLAGS       = -Wall -Wno-deprecated-declarations -std=c++11 -Ofast -funroll-loops
-EXEC           = FFTOcean
+EXEC           = fftocean
 
 # project structure
 BUILD_DIR = build
