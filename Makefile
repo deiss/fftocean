@@ -9,7 +9,7 @@ EXEC           = fftocean
 BUILD_DIR = build
 BIN_DIR   = bin
 SRC_DIR   = src
-MODULES   = ./ ocean fft rendering arguments
+MODULES   = ./ ocean fft rendering arguments cross_platform
 SRC_DIRS  = $(addprefix $(SRC_DIR)/, $(MODULES))
 
 # libs and headers subfolders lookup
@@ -45,13 +45,13 @@ $(BIN_DIR)/$(EXEC): $(OBJ)
 	$(CC) -o $@ $^ $(LD_FLAGS)
 
 # objects
-$(BUILD_DIR)/main.o: main.cpp Window.hpp Ocean.hpp Arguments.hpp
+$(BUILD_DIR)/main.o: main.cpp Window.hpp Ocean.hpp Height.hpp Philipps.hpp Arguments.hpp
 	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<
 
-$(BUILD_DIR)/Camera.o: Camera.cpp Camera.hpp Window.hpp
+$(BUILD_DIR)/Camera.o: Camera.cpp Camera.hpp GLUT.hpp
 	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<
 
-$(BUILD_DIR)/Window.o: Window.cpp Window.hpp
+$(BUILD_DIR)/Window.o: Window.cpp Window.hpp Camera.hpp GLUT.hpp
 	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<
 
 $(BUILD_DIR)/FFT.o: FFT.cpp FFT.hpp
@@ -60,7 +60,7 @@ $(BUILD_DIR)/FFT.o: FFT.cpp FFT.hpp
 $(BUILD_DIR)/Height.o: Height.cpp Height.hpp
 	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<
 
-$(BUILD_DIR)/Ocean.o: Ocean.cpp Ocean.hpp Height.hpp
+$(BUILD_DIR)/Ocean.o: Ocean.cpp Ocean.hpp Height.hpp GLUT.hpp
 	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<
 
 $(BUILD_DIR)/Philipps.o: Philipps.cpp Philipps.hpp
