@@ -16,7 +16,7 @@ This project is licensed under the GPL License. See [COPYING](COPYING) for more 
 
 ### Install
 
-Linux/Mac : `make` will create the binary in the `bin` directory.
+Linux/Mac : `make` will create the binary in the *bin* directory.
 
 ***
 
@@ -32,7 +32,7 @@ You can specify more parameters for the simulation. You can get a list of these 
 
 To close the application:
 * Mac: `cmd+Q`
-* Linux: `alt+f4` or `esc`
+* Linux: `alt+f4`
 
 Using the mouse, you can look around you. To move, the keys depend on the keyboard, and you can specify the type of keyboard you are using with the option `--keyboard` (default: "azerty").
 
