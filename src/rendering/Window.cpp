@@ -161,7 +161,7 @@ namespace Window {
         glViewport(0, 0, width, height);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(45, float(width)/float(height), 1, 100*ocean->get_ny());
+        gluPerspective(45, float(width)/float(height), 1, 10*sqrt(pow(ocean->get_ly(), 2) + pow(ocean->get_lx(), 2)));
     }
     
 }

@@ -27,6 +27,8 @@ class Ocean {
         Ocean(const double, const double, const int, const int, const double);
         ~Ocean() {}
     
+        int  get_lx() { return lx; }
+        int  get_ly() { return ly; }
         int  get_nx() { return nx; }
         int  get_ny() { return ny; }
     
