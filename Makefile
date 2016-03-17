@@ -23,7 +23,9 @@ VPATH = $(SRC_DIRS)/
 
 # entry point
 default:
-	@echo "You need to specify 'make linux' or 'make mac' according to your system."
+	@echo "You need to specify the system you are building on. Possibilities:"
+	@echo "  'make linux'"
+	@echo "  'make mac'"
 
 linux: lib_linux make_dir $(BIN_DIR)/$(EXEC)
 
