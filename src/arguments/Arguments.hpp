@@ -1,7 +1,5 @@
 /*
-FFTOcean
-
-Copyright (C) 2016 -  Olivier Deiss - olivier.deiss@gmail.com
+FFTOcean - Copyright (C) 2016 -  Olivier Deiss - olivier.deiss@gmail.com
 
 FFTOcean is a C++ implementation of researcher J. Tessendorf's paper
 "Simulating Ocean Water". It is a real-time simulation of ocean water
@@ -56,6 +54,7 @@ class Arguments {
         bool is_set(std::string arg) { return arg_set.count(arg); }
         void print_help();
         int  parse_arguments();
+        void print_license();
 
     private:
 
