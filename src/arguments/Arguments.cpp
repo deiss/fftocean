@@ -1,7 +1,26 @@
 /*
-Project: Ocean
-Author:  DEISS Olivier
-License: This software is offered under the GPL license. See COPYING for more information.
+FFTOcean
+
+Copyright (C) 2016 -  Olivier Deiss - olivier.deiss@gmail.com
+
+FFTOcean is a C++ implementation of researcher J. Tessendorf's paper
+"Simulating Ocean Water". It is a real-time simulation of ocean water
+in a 3D world. The (reverse) FFT is used to compute the 2D wave height
+field from the Philipps spectrum. It is possible to adjust parameters
+such as wind speed, direction and strength, wave choppiness, and sea depth.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <iostream>
@@ -31,6 +50,8 @@ Arguments::Arguments(int p_argc, char** p_argv) :
 Prints help.
 */
 void Arguments::print_help() {
+    std::cout << "FFTOcean Copyright (C) 2016 Olivier Deiss - olivier.deiss@gmail.com" << std::endl;
+    std::cout << "This program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions. Type 'FFTOcean --license' for details." << std::endl;
     std::cout << "USE: ocean [options]" << std::endl;
     std::cout << std::endl;
     std::cout << "OPTIONS:" << std::endl;
