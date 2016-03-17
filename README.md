@@ -24,8 +24,6 @@ You need to have glut installed on your platform. You can install it with:
 
 Then running `make linux` will compile *FFTOcean* in *bin*. You can run `make clean` to delete the build directory.
 
-    
-
 ##### Mac
 
 You need to have XCode installed on your system. Then running `make mac` will compile *FFTOcean* in *bin*. You can run `make clean` to delete the build directory.
