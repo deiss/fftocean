@@ -1,25 +1,19 @@
-# third party
-LIB_LIST     = glut
-LIB_GLUT     = -lGL -lGLU -lGLUT
-
 # project configuration
-CC       = g++
-LD_FLAGS = $(LIB_GLUT)
-CC_FLAGS = -Wall -Wno-deprecated-declarations -std=c++11 -Ofast -funroll-loops
-EXEC     = ocean
+LIB_GLUT_LINUX = -lGL -lGLU -lglut
+LIB_GLUT_MAC   = -framework OpenGL -framework GLUT
+CC             = g++
+CC_FLAGS       = -Wall -Wno-deprecated-declarations -std=c++11 -Ofast -funroll-loops
+EXEC           = ocean
 
 # project structure
-MODULES     = ./ Ocean FFT Graphic Args
-BUILD_DIR   = build
-BIN_DIR     = bin
-SRC_DIR     = src
-SRC_DIRS    = $(addprefix $(SRC_DIR)/, $(MODULES))
-LIB_DIR     = lib
-INCLUDE_DIR = include
+BUILD_DIR = build
+BIN_DIR   = bin
+SRC_DIR   = src
+MODULES   = ./ ocean fft rendering arguments
+SRC_DIRS  = $(addprefix $(SRC_DIR)/, $(MODULES))
 
 # libs and headers subfolders lookup
-LIB     = $(foreach lib, $(LIB_LIST), $(addprefix -L$(LIB_DIR)/, $(lib)))
-INCLUDE = -I$(INCLUDE_DIR) -I$(SRC_DIR)
+INCLUDE = -I$(SRC_DIR)
 SRC     = $(foreach sdir, $(SRC_DIR), $(wildcard $(sdir)/*.cpp))
 OBJ     = $(foreach sdir, $(SRC_DIRS), $(patsubst $(sdir)/%.cpp, $(BUILD_DIR)/%.o, $(wildcard $(sdir)/*.cpp)))
 
@@ -27,22 +21,26 @@ OBJ     = $(foreach sdir, $(SRC_DIRS), $(patsubst $(sdir)/%.cpp, $(BUILD_DIR)/%.
 VPATH = $(SRC_DIRS)/
 
 # entry point
-all: make_dir $(BIN_DIR)/$(EXEC) clean
+default:
+	@echo "You need to specify 'make linux' or 'make mac' according to your system."
 
-# directory 'build'
+linux: lib_linux make_dir $(BIN_DIR)/$(EXEC)
+
+mac: lib_mac make_dir $(BIN_DIR)/$(EXEC)
+
+lib_linux:
+	$(eval LD_FLAGS = $(LIB_GLUT_LINUX))
+
+lib_mac:
+	$(eval LD_FLAGS = $(LIB_GLUT_MAC))
+
 make_dir:
-	@echo $(OBJ)
 	@mkdir -p $(BUILD_DIR)
 	@mkdir -p $(BIN_DIR)
 
 # create binary
 $(BIN_DIR)/$(EXEC): $(OBJ)
 	$(CC) -o $@ $^ $(LIB) $(LD_FLAGS)
-
-# remove *.o and 'build' directory
-clean:
-	rm $(BUILD_DIR)/*.o
-	rm -r $(BUILD_DIR)
 
 # objects
 $(BUILD_DIR)/main.o: main.cpp Window.hpp Ocean.hpp Arguments.hpp
@@ -68,3 +66,7 @@ $(BUILD_DIR)/Philipps.o: Philipps.cpp Philipps.hpp
 
 $(BUILD_DIR)/Arguments.o: Arguments.cpp Arguments.hpp
 	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<
+
+clean:
+	@rm -f  $(BUILD_DIR)/*.o
+	@rm -rf $(BUILD_DIR)

@@ -11,7 +11,7 @@ License: This software is offered under the GPL license. See COPYING for more in
 #include <sstream>
 #include <vector>
 
-#include "GLUT_cross.hpp"
+#include "cross_platform/GLUT.hpp"
 
 #include "Camera.hpp"
 #include "Window.hpp"

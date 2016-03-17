@@ -8,7 +8,7 @@ License: This software is offered under the GPL license. See COPYING for more in
 #include <cmath>
 #include <iostream>
 
-#include "GLUT_cross.hpp"
+#include "cross_platform/GLUT.hpp"
 
 #include "Height.hpp"
 #include "Ocean.hpp"

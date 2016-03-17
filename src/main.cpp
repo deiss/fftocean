@@ -8,13 +8,13 @@ License: This software is offered under the GPL license. See COPYING for more in
 #include <ctime>
 #include <iostream>
 
-#include "Args/Arguments.hpp"
+#include "arguments/Arguments.hpp"
 
-#include "Ocean/Ocean.hpp"
-#include "Ocean/Height.hpp"
-#include "Ocean/Philipps.hpp"
+#include "ocean/Ocean.hpp"
+#include "ocean/Height.hpp"
+#include "ocean/Philipps.hpp"
 
-#include "Graphic/Window.hpp"
+#include "rendering/Window.hpp"
 
 Ocean* ocean;
 int    mainwindow;
