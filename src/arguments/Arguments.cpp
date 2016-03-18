@@ -82,7 +82,7 @@ int Arguments::parse_arguments() {
             return -4;
         }
         /* help */
-        if(arg_value=="--help") {
+        else if(arg_value=="--help") {
             return -2;
         }
         /* string */
