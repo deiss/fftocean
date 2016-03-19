@@ -66,8 +66,6 @@ I wanted to focus on the mathematical aspect of the waves, which is why I did no
 
 This project is meant to be embedded in a video game or any type of simulation. For this kind of project, you may need an infinite ocean. Fortunately, the reverse FFT produces a periodical signal so you can multiply the patterns of ocean and put them one next to another. The downward of this method is that if the viewpoint is high on the *z* axis, this periodicity will be striking to the user. One solution is to create waves with a second method which does not require a lot of computing power (like using Perlin noise), and to mix it with these waves. The resulting wave *w* will be the sum of the FFT wave *wf* and of the Perlin noise wave *wp*: *w* = a*wf* + b*wp*. *a* and *b* coefficients will be dynamically adjusted so that for a wave that is close to the viewer, the FFT part of the wave is dominant, but for further waves it is the perlin noise part of the wave that takes over.
 
-Next steps to make this project perfect would be to generate an entire atmosphere, with sky, clouds, islands, and maybe animals. Feel free to code that.
-
 ***
 
 ### License
