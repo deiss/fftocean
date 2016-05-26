@@ -4,12 +4,13 @@
  
 LICENSE
 
-    DigitScanner - Copyright (C) 2016 - Olivier Deiss - olivier.deiss@gmail.com
+    FFTOcean - Copyright (C) 2016 - Olivier Deiss - olivier.deiss@gmail.com
     
-    DigitScanner is a C++ tool to create, train and test feedforward neural
-    networks (fnn) for handwritten number recognition. The project uses the
-    MNIST dataset to train and test the neural networks. It is also possible
-    to draw numbers in a window and ask the tool to guess the number you drew.
+    FFTOcean is a C++ implementation of researcher J. Tessendorf's paper
+    "Simulating Ocean Water". It is a real-time simulation of ocean water
+    in a 3D world. The (reverse) FFT is used to compute the 2D wave height
+    field from the Philipps spectrum. It is possible to adjust parameters
+    such as wind speed, direction and strength, wave choppiness, and sea depth.
  
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
