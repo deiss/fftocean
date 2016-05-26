@@ -1,4 +1,6 @@
 /*
+
+    This class is part of another project Help80 also available on Github.
     
 ************************************************************************************************
  
@@ -28,6 +30,7 @@ LICENSE
 ************************************************************************************************
 
 FILE
+
 
     The classes defined in this file can be used for parameters parsing and display, while
     making sure the help menu looks nice on terminals.
