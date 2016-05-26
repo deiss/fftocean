@@ -92,7 +92,7 @@ int main(int argc, char** argv) {
     ocean->generate_height(&height);     /* initial ocean wave height field */
     
     /* rendering */
-    Window::init(WIDTH, HEIGHT, "FFTOcean", argc, argv, p.cho_val("keyboard"), p.num_val<int>("FPS"));
+    Window::init(WIDTH, HEIGHT, "FFTOcean", argc, argv, p.cho_val("keyboard"), p.num_val<int>("fps"), p.num_val<float>("camera_speed"));
     Window::launch();
     
     /* free */
@@ -106,14 +106,12 @@ int main(int argc, char** argv) {
 void build_menu(Parameters* const p) {
     p->set_program_description("FFTOcean is a C++ implementation of researcher J. Tessendorf's paper \"Simulating Ocean Water\". It is a real-time simulation of ocean water in a 3D world. The reverse FFT is used to compute the 2D wave height field from the Philipps spectrum. It is possible to adjust parameters such as wind speed, direction and strength, wave choppiness, and sea depth.\n\nGithub: https://github.com/CSWest/FFTOcean.git\n\nFFTOcean Copyright (C) 2016 Olivier Deiss - olivier.deiss@gmail.com\n\nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions. Type 'fftocean --license' for details.");
     
-    p->set_usage("fftocean [parameters]");
+    p->set_usage("fftocean [--run] [parameters]");
 
     p->insert_subsection("GENERAL");
     p->define_param                   ("help", "Displays this help.");
     p->define_param                   ("license", "Displays the GPL license.");
-    p->define_choice_param            ("keyboard", "mode", "azerty", {{"azerty", "Z, Q, S, D: forward, left, backward, right."},
-                                                                      {"qwerty", "W, A, S, D: forward, left, backward, right."}},
-                                       "Specifies the type of keyboard.");
+    p->define_param                   ("run", "Runs the simulation");
                                        
     p->insert_subsection("ENVIRONMENT DIMENSIONS AND FACTORS");
     p->define_num_str_param<double>   ("lx", {"value"}, {350}, "Actual width of the ocean.", true);
@@ -128,6 +126,10 @@ void build_menu(Parameters* const p) {
     p->insert_subsection("CAMERA SETTINGS");
     p->define_num_str_param<int>      ("fps", {"value"}, {35}, "Target FPS.", true);
     p->define_num_str_param<double>   ("motion_factor", {"value"}, {0.6}, "Allows to slow down or speed up the simulation.", true);
+    p->define_num_str_param<float>    ("camera_speed", {"value"}, {0.2}, "Translation speed of the camera.", true);
+    p->define_choice_param            ("keyboard", "mode", "azerty", {{"azerty", "Z, Q, S, D: forward, left, backward, right."},
+                                                                      {"qwerty", "W, A, S, D: forward, left, backward, right."}},
+                                       "Specifies the type of keyboard.");
 }
 
 const bool check_errors(Parameters* const p) {
@@ -149,6 +151,8 @@ const bool check_errors(Parameters* const p) {
         std::cerr << "FPS must be positive." << std::endl;
     else if(p->num_val<double>("motion_factor")<=0)
         std::cerr << "Motion factor must be positive." << std::endl;
+    else if(p->num_val<float>("camera_speed")<=0)
+        std::cerr << "Camera speed must be positive." << std::endl;
     else
         return true;
     return false;
