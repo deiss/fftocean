@@ -45,7 +45,8 @@ namespace Window {
     
     void setFPS(int);                                                               /* sets the target FPS */
     void fps_action();                                                              /* given the current FPS and the target FPS, computes the needed sleeping time */
-    void init(int, int, std::string, int, char**, std::string keyboard, int FPS);   /* creates the window */
+    void init(int, int, std::string, int, char**, std::string keyboard,
+                  int FPS, float translation_speed);                                /* creates the window */
     
     void keyboard(unsigned char, int, int);                                         /* keyboard (key is pushed) event function */
     void keyboardUp(unsigned char, int, int);                                       /* keyboard (key is released) event function */

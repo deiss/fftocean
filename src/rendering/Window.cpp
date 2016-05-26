@@ -124,14 +124,14 @@ namespace Window {
         tim1.tv_nsec = (int)(((double)(1.0/fps_goal) - (double)(1.0/fps))*pow(10, 9) + sleep_avant) % 1000000000;
     }
     
-    void init(int width, int height, std::string titre, int argc, char** argv, std::string keyboard, int p_fps) {
+    void init(int width, int height, std::string titre, int argc, char** argv, std::string keyboard, int p_fps, float translation_speed) {
         glutInit(&argc, argv);
         glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
         glutInitWindowSize(width, height);
         mainwindow = glutCreateWindow(titre.c_str());
         glEnable(GL_MULTISAMPLE);
         Camera::KEYBOARD mode = keyboard=="azerty" ? Camera::AZERTY : Camera::QWERTY;
-        camera = new Camera(mode, -100, 100, -100, 4*M_PI/7, M_PI/4, 0.01, 0.2, WIDTH, HEIGHT);
+        camera = new Camera(mode, -100, 100, -100, 4*M_PI/7, M_PI/4, 0.01, translation_speed, WIDTH, HEIGHT);
         fps_goal = p_fps;
     }
     
