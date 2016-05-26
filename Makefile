@@ -9,7 +9,7 @@ EXEC           = fftocean
 BUILD_DIR = build
 BIN_DIR   = bin
 SRC_DIR   = src
-MODULES   = ./ ocean fft rendering arguments cross_platform
+MODULES   = ./ ocean fft rendering parameters cross_platform
 SRC_DIRS  = $(addprefix $(SRC_DIR)/, $(MODULES))
 
 # libs and headers subfolders lookup
@@ -45,7 +45,7 @@ $(BIN_DIR)/$(EXEC): $(OBJ)
 	$(CC) -o $@ $^ $(LD_FLAGS)
 
 # objects
-$(BUILD_DIR)/main.o: main.cpp Window.hpp Ocean.hpp Height.hpp Philipps.hpp Arguments.hpp
+$(BUILD_DIR)/main.o: main.cpp Window.hpp Ocean.hpp Height.hpp Philipps.hpp Parameters.hpp
 	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<
 
 $(BUILD_DIR)/Camera.o: Camera.cpp Camera.hpp GLUT.hpp
@@ -66,7 +66,7 @@ $(BUILD_DIR)/Ocean.o: Ocean.cpp Ocean.hpp Height.hpp GLUT.hpp
 $(BUILD_DIR)/Philipps.o: Philipps.cpp Philipps.hpp
 	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<
 
-$(BUILD_DIR)/Arguments.o: Arguments.cpp Arguments.hpp
+$(BUILD_DIR)/Parameters.o: Parameters.cpp Parameters.hpp
 	$(CC) $(INCLUDE) $(CC_FLAGS) -o $@ -c $<
 
 clean:
