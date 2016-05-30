@@ -39,7 +39,7 @@ Height::Height(const int p_nx, const int p_ny) :
 This function initializes the variables to the right values before
 a series of calls to the functor.
 */
-void Height::init_fonctor(int i) {
+void Height::init_fonctor(const int i) {
     x = i - nx/2;
     y = -ny/2;
 }
@@ -48,7 +48,7 @@ void Height::init_fonctor(int i) {
 Computes the original spectrum. This uses the Philipps spectrum
 and a gaussian number so that the scene is different every time.
 */
-double Height::operator()() {
+const double Height::operator()() {
     y++;
     return sqrt(philipps[x+(nx/2)][y+(ny/2)]/2) * gaussian();
 }
@@ -56,7 +56,7 @@ double Height::operator()() {
 /*
 Generates the Philips spectrum using the Philipps fonctor.
 */
-void Height::generate_philipps(Philipps *p) {
+void Height::generate_philipps(Philipps* const p) {
     philipps.resize(nx+1);
     for(std::vector<std::vector<double> >::iterator itx=philipps.begin() ; itx!=philipps.end() ; itx++) {
         itx->resize(ny+1);
@@ -69,7 +69,7 @@ void Height::generate_philipps(Philipps *p) {
 Gaussian random generator. The numbers are generated
 using the Box-Muller method.
 */
-double Height::gaussian() {
+const double Height::gaussian() {
     double var1;
     double var2;
     double s;

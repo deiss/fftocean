@@ -44,7 +44,7 @@ Philipps::Philipps(const double p_lx, const double p_ly, const int p_nx, const i
 This function initializes the variables to the right values before
 a series of calls to the functor.
 */
-void Philipps::init_fonctor(int i) {
+void Philipps::init_fonctor(const int i) {
     x = i - nx/2;
     y = -ny/2;
 }
@@ -53,12 +53,12 @@ void Philipps::init_fonctor(int i) {
 Philipps spectrum fonctor. See J. Tessendorf's paper for more information
 and the mathematical formula.
 */
-double Philipps::operator()() {
-    double g    = 9.81;
-    double kx   = (2*M_PI*x)/lx;
-    double ky   = (2*M_PI*y)/ly;
-    double k_sq = kx*kx + ky*ky;
-    double L_sq = pow((wind_speed*wind_speed)/g, 2);
+const double Philipps::operator()() {
+    const double g    = 9.81;
+    const double kx   = (2*M_PI*x)/lx;
+    const double ky   = (2*M_PI*y)/ly;
+    const double k_sq = kx*kx + ky*ky;
+    const double L_sq = pow((wind_speed*wind_speed)/g, 2);
     y++;
     if(k_sq==0) {
         return 0;
