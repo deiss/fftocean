@@ -40,8 +40,7 @@ class FFT {
 
     public:
     
-        FFT() {}
-        FFT(int, std::vector<double>*, std::vector<double>*);
+        FFT(const int, std::vector<double>* const, std::vector<double>* const);
     
         void direct()  { sort(); radix_direct(); }
         void reverse() { sort(); radix_reverse(); }
@@ -54,10 +53,10 @@ class FFT {
         void radix_reverse();
         void sort();
 
-        int     n;      /* power of two, the size of the vector */
-        int     p;      /* so that n = 2^p */
-        vec_d_p real;   /* data vector, real values */
-        vec_d_p imag;   /* data vectorn imaginary values */
+        const int n;      /* power of two, the size of the vector */
+        const int p;      /* so that n = 2^p */
+        vec_d_p   real;   /* data vector, real values */
+        vec_d_p   imag;   /* data vectorn imaginary values */
     
 };
 

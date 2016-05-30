@@ -48,12 +48,10 @@ namespace Window {
     struct timespec tim1, tim2;
 
     /* Ocean vertices and parameters */
-    int     nxOcean;
-    int     nyOcean;
-    double* vertexOceanX;
-    double* vertexOceanY;
-    int     height = 1;    /* for waves squares dupplication */
-    int     width  = 1;    /* for waves squares dupplication */
+    int                  nxOcean;
+    int                  nyOcean;
+    std::vector<double*> vertexOceanX;
+    std::vector<double*> vertexOceanY;
 
     void draw() {
         if(glutGet(GLUT_ELAPSED_TIME) - t >= 1000) fps_action();
@@ -92,23 +90,19 @@ namespace Window {
     void draw_ocean() {
         ocean->main_computation();
         glColor3ub(82, 184, 255);
-        for(int offsetX = 0 ; offsetX <= width ; offsetX++) {
-            for(int offsetY = 0 ; offsetY <= height ; offsetY++) {
-                for(int x = 0 ; x < nxOcean ; x++) {
-                    ocean->gl_vertex_array_y(x, vertexOceanY, offsetX, offsetY);
-                    glEnableClientState(GL_VERTEX_ARRAY);
-                    glVertexPointer(3, GL_DOUBLE, 0, vertexOceanY);
-                    glDrawArrays(GL_LINE_STRIP, 0, nyOcean+1);
-                    glDisableClientState(GL_VERTEX_ARRAY);
-                }
-                for(int y = 0 ; y < nyOcean ; y++) {
-                    ocean->gl_vertex_array_x(y, vertexOceanX, offsetX, offsetY);
-                    glEnableClientState(GL_VERTEX_ARRAY);
-                    glVertexPointer(3, GL_DOUBLE, 0, vertexOceanX);
-                    glDrawArrays(GL_LINE_STRIP, 0, nxOcean+1);
-                    glDisableClientState(GL_VERTEX_ARRAY);
-                }
-            }
+        for(int x = 0 ; x < nxOcean ; x++) {
+            ocean->gl_vertex_array_y(x, vertexOceanY[x]);
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glVertexPointer(3, GL_DOUBLE, 0, vertexOceanY[x]);
+            glDrawArrays(GL_LINE_STRIP, 0, nyOcean+1);
+            glDisableClientState(GL_VERTEX_ARRAY);
+        }
+        for(int y = 0 ; y < nyOcean ; y++) {
+            ocean->gl_vertex_array_x(y, vertexOceanX[y]);
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glVertexPointer(3, GL_DOUBLE, 0, vertexOceanX[y]);
+            glDrawArrays(GL_LINE_STRIP, 0, nxOcean+1);
+            glDisableClientState(GL_VERTEX_ARRAY);
         }
         glColor3ub(0, 0, 0);
     }
@@ -149,8 +143,11 @@ namespace Window {
         t = glutGet(GLUT_ELAPSED_TIME);
         nxOcean = ocean->get_nx();
         nyOcean = ocean->get_ny();
-        vertexOceanX = new double[3*(nxOcean+1)];
-        vertexOceanY = new double[3*(nyOcean+1)];
+        for(int i=0 ; i<nyOcean ; i++) vertexOceanX.push_back(new double[3*(nxOcean+1)]);
+        for(int i=0 ; i<nxOcean ; i++) vertexOceanY.push_back(new double[3*(nyOcean+1)]);
+        /* init ocean */
+        for(int x=0 ; x<nxOcean ; x++) ocean->init_gl_vertex_array_y(x, vertexOceanY[x]);
+        for(int y=0 ; y<nyOcean ; y++) ocean->init_gl_vertex_array_x(y, vertexOceanX[y]);
         glClearColor(1, 1, 1, 1);
         glutReshapeFunc(reshape);
         glutDisplayFunc(draw);
@@ -170,8 +167,8 @@ namespace Window {
     }
     
     void quit() {
-        delete[] vertexOceanX;
-        delete[] vertexOceanY;
+        for(int i=0 ; i<nyOcean ; i++) delete[] vertexOceanX[i];
+        for(int i=0 ; i<nxOcean ; i++) delete[] vertexOceanY[i];
     }
 
     void reshape(int width, int height) {

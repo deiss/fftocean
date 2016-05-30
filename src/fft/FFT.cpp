@@ -30,15 +30,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /*
 Initializes the variables and computes p so that n = 2^p.
 */
-FFT::FFT(int p_n, std::vector<double>* p_real, std::vector<double>* p_imag) :
+FFT::FFT(const int p_n, std::vector<double>* const p_real, std::vector<double>* const p_imag) :
     n(p_n),
-    p(0),
+    p(log2(p_n)),
     real(p_real),
     imag(p_imag) {
-    while(p_n!=1) {
-        p_n/=2;
-        p++;
-    }
 }
 
 /*
@@ -55,15 +51,15 @@ void FFT::radix_direct() {
         /* compute n/2 values and use them twice */
         for(int j=0 ; j<n_copy/2 ; j++) {
             for(int k=0 ; k<pow(2, i) ; k++) {
-                int    index1     = k+j*pow(2, i+1);
-                int    index2     = index1 + pow(2, i);
-                double var        = static_cast<double>(-(2*M_PI)/pow(2, i+1))*index1;
-                double v_cos      = cos(var);
-                double v_sin      = sin(var);
-                double imag2      = imag->at(index2);
-                double real2      = real->at(index2);
-                double real1      = real->at(index1);
-                double imag1      = imag->at(index1);
+                const int    index1 = k+j*pow(2, i+1);
+                const int    index2 = index1 + pow(2, i);
+                const double var    = static_cast<double>(-(2*M_PI)/pow(2, i+1))*index1;
+                const double v_cos  = cos(var);
+                const double v_sin  = sin(var);
+                const double imag2  = imag->at(index2);
+                const double real2  = real->at(index2);
+                const double real1  = real->at(index1);
+                const double imag1  = imag->at(index1);
                 real_copy[index1] = real1 + v_cos*real2 - v_sin*imag2;
                 real_copy[index2] = real1 - v_cos*real2 + v_sin*imag2;
                 imag_copy[index1] = imag1 + v_cos*imag2 + v_sin*real2;
@@ -90,15 +86,15 @@ void FFT::radix_reverse() {
         /* compute n/2 values and use them twice */
         for(int j=0 ; j<n_copy/2 ; j++) {
             for(int k=0 ; k<pow(2, i) ; k++) {
-                int    index1     = k+j*pow(2, i+1);
-                int    index2     = index1 + pow(2, i);
-                double var        = static_cast<double>((2*M_PI)/pow(2, i+1))*index1;
-                double v_cos      = cos(var);
-                double v_sin      = sin(var);
-                double imag2      = imag->at(index2);
-                double real2      = real->at(index2);
-                double real1      = real->at(index1);
-                double imag1      = imag->at(index1);
+                const int    index1 = k+j*pow(2, i+1);
+                const int    index2 = index1 + pow(2, i);
+                const double var    = static_cast<double>((2*M_PI)/pow(2, i+1))*index1;
+                const double v_cos  = cos(var);
+                const double v_sin  = sin(var);
+                const double imag2  = imag->at(index2);
+                const double real2  = real->at(index2);
+                const double real1  = real->at(index1);
+                const double imag1  = imag->at(index1);
                 real_copy[index1] = real1 + v_cos*real2 - v_sin*imag2;
                 real_copy[index2] = real1 - v_cos*real2 + v_sin*imag2;
                 imag_copy[index1] = imag1 + v_cos*imag2 + v_sin*real2;
@@ -133,7 +129,7 @@ void FFT::sort() {
         for(int j=0 ; j<n/n_copy ; j++) {
             /* reorganize sub array */
             for(int k=0 ; k<n_copy/2 ; k++) {
-                double index = 2*k+j*n_copy;
+                const double index = 2*k+j*n_copy;
                 vectRp[k]    = real->at(index);
                 vectIp[k]    = imag->at(index);
                 vectRi[k]    = real->at(index+1);

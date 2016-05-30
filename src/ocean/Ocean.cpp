@@ -49,12 +49,25 @@ Ocean::Ocean(const double p_lx, const double p_ly, const int p_nx, const int p_n
     for(vec_vec_d_it it=HI.begin() ; it!=HI.end() ; it++) it->resize(ny+1);
     for(vec_vec_d_it it=hr.begin() ; it!=hr.end() ; it++) it->resize(nx+1);
     for(vec_vec_d_it it=hi.begin() ; it!=hi.end() ; it++) it->resize(nx+1);
+    ffty.reserve(nx);
+    fftx.reserve(ny);
+    for(int i=0 ; i<nx ; i++) ffty.push_back(new FFT(ny, &HR[i], &HI[i]));
+    for(int i=0 ; i<ny ; i++) fftx.push_back(new FFT(nx, &hr[i], &hi[i]));
+}
+
+
+/*
+Free memory.
+*/
+Ocean::~Ocean() {
+    for(int i=0 ; i<nx ; i++) delete ffty[i];
+    for(int i=0 ; i<ny ; i++) delete fftx[i];
 }
 
 /*
 Computes the initial random height field.
 */
-void Ocean::generate_height(Height* height) {
+void Ocean::generate_height(Height* const height) {
     /* real part */
     for(vec_vec_d_it itx=height0R.begin() ; itx!=height0R.end() ; itx++) {
         itx->resize(ny+1);
@@ -78,23 +91,21 @@ is useless in our application.
 void Ocean::main_computation() {
     for(int x=0 ; x<nx ; x++) {
         get_sine_amp(x, static_cast<double>(motion_factor*glutGet(GLUT_ELAPSED_TIME))/1000, &HR[x], &HI[x]);
-        fft = FFT(ny, &HR[x], &HI[x]);
-        fft.reverse();
+        ffty[x]->reverse();
     }
     for(int y=0 ; y<ny ; y++) {
         int      x;
         vec_d_it it;
         for(it=hr[y].begin(), x=0 ; it!=hr[y].end() ; it++, x++) *it = HR[x][y];
         for(it=hi[y].begin(), x=0 ; it!=hi[y].end() ; it++, x++) *it = HI[x][y];
-        fft = FFT(nx, &hr[y], &hi[y]);
-        fft.reverse();
+        fftx[y]->reverse();
     }
 }
 
 /*
 Updates the wave height field.
 */
-void Ocean::get_sine_amp(int x, double time, std::vector<double>* p_HR, std::vector<double>* p_HI) {
+void Ocean::get_sine_amp(const int x, const double time, std::vector<double>* const p_HR, std::vector<double>* const p_HI) const {
     double   A;
     double   L = 0.1;
     int      y;
@@ -110,27 +121,43 @@ void Ocean::get_sine_amp(int x, double time, std::vector<double>* p_HR, std::vec
 /*
 Creates an array that OpenGL can directly use - X
 */
-void Ocean::gl_vertex_array_x(int y, double* vertices, int offset_x, int offset_y) {
+void Ocean::init_gl_vertex_array_x(const int y, double* const vertices) const {
     for(int x=0 ; x<nx ; x++) {
-        vertices[3*x]   = (lx/nx)*x + offset_x*lx;
-        vertices[3*x+1] = pow(-1, x+y)*hr[y][x];
-        vertices[3*x+2] = (ly/ny)*y + offset_y*ly;
+        vertices[3*x]   = (lx/nx)*x;
+        vertices[3*x+2] = (ly/ny)*y;
     }
-    vertices[3*nx]   = (1 + offset_x)*lx;
-    vertices[3*nx+1] = pow(-1, nx+y)*hr[y][0];
-    vertices[3*nx+2] = (ly/ny)*y + offset_y*ly;
+    vertices[3*nx]   = lx;
+    vertices[3*nx+2] = (ly/ny)*y;
 }
 
 /*
 Creates an array that OpenGL can directly use - Y
 */
-void Ocean::gl_vertex_array_y(int x, double* vertices, int offset_x, int offset_y) {
+void Ocean::init_gl_vertex_array_y(const int x, double* const vertices) const {
     for(int y=0 ; y<ny ; y++) {
-        vertices[3*y]   = (lx/nx)*x + offset_x*lx;
-        vertices[3*y+1] = pow(-1, x+y)*hr[y][x];
-        vertices[3*y+2] = (ly/ny)*y + offset_y*ly;
+        vertices[3*y]   = (lx/nx)*x;
+        vertices[3*y+2] = (ly/ny)*y;
     }
-    vertices[3*ny]   = (lx/nx)*x + offset_x*lx;
+    vertices[3*ny]   = (lx/nx)*x;
+    vertices[3*ny+2] = ly;
+}
+
+/*
+Creates an array that OpenGL can directly use - X
+*/
+void Ocean::gl_vertex_array_x(const int y, double* const vertices) const {
+    for(int x=0 ; x<nx ; x++) {
+        vertices[3*x+1] = pow(-1, x+y)*hr[y][x];
+    }
+    vertices[3*nx+1] = pow(-1, nx+y)*hr[y][0];
+}
+
+/*
+Creates an array that OpenGL can directly use - Y
+*/
+void Ocean::gl_vertex_array_y(const int x, double* const vertices) const {
+    for(int y=0 ; y<ny ; y++) {
+        vertices[3*y+1] = pow(-1, x+y)*hr[y][x];
+    }
     vertices[3*ny+1] = pow(-1, x+ny)*hr[0][x];
-    vertices[3*ny+2] = (1 + offset_y)*ly;
 }
